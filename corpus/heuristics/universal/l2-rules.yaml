@@ -1,0 +1,749 @@
+---
+# PFD Corpus — Layer 2 (Processing Fluency) Heuristic Rules
+# Task 11 of PFD Corpus MVS plan
+# Generated: 2026-03-21
+# Layer 2 asserts that visual systems which reduce cognitive parsing effort produce
+# measurably higher comprehension, trust, and conversion rates.
+
+rules:
+
+  - id: L2-TC-001
+    layer: l2
+    category: token_compliance
+    name: Color Palette Size
+    description: >
+      More than 6 distinct hue families in a single interface context increases
+      cognitive load by forcing the visual system to encode and track additional
+      categorical dimensions. Each hue family a viewer must hold in working
+      memory while parsing a page competes with content comprehension.
+    psychology: >
+      Reber & Schwarz (1999) demonstrated that stimuli requiring greater
+      perceptual effort are rated as less true, less likeable, and less credible
+      — even when the content is identical. Color multiplicity directly increases
+      perceptual parsing effort. Subsequent work by Alter & Oppenheimer (2009,
+      Cognition) confirmed the processing fluency–credibility link across visual
+      modalities. A palette exceeding 6 hue families produces a measurably
+      disfluent experience: the visual cortex cannot resolve a unified color
+      schema and defaults to effortful, serial color categorization rather than
+      automatic, parallel scene recognition.
+    detection:
+      method: >
+        Extract all computed color values (hex/rgb) from background-color, color,
+        border-color, and fill attributes across the rendered DOM. Convert each
+        value to HSL. Cluster by hue angle using a 30-degree bucket width (12
+        buckets total). Count non-empty buckets. Neutral hues (HSL saturation
+        < 10%) are excluded from the count and placed in a separate "neutral"
+        category.
+      condition: >
+        Flag if distinct non-neutral hue families > 6.
+        Severity escalates if > 8.
+    severity: medium
+    severity_logic: >
+      medium: non-neutral hue families > 6 and <= 8.
+      high: non-neutral hue families > 8.
+    applies_to:
+      - web
+      - mobile
+      - email
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      Data visualization interfaces (dashboards, charts) may exceed 6 hue
+      families when each hue encodes a distinct data series. In that case,
+      apply the rule only to UI chrome (navigation, cards, CTAs) and exclude
+      chart color scales from the count.
+    context_qualifiers:
+      - condition: e-commerce product listing pages with category color-coding
+        effect: >
+          Allow up to 8 hue families if each maps 1:1 to a labeled product
+          category visible on the page. Flag as informational rather than
+          error.
+      - condition: marketing landing pages with a single primary CTA
+        effect: >
+          Stricter threshold applies — flag at > 4 hue families. The
+          conversion function requires maximum visual focus on one action.
+      - condition: editorial / magazine-style layouts
+        effect: >
+          Allow up to 8 hue families if color variation is confined to article
+          thumbnails and the UI chrome uses a maximum of 3.
+    fix:
+      prescription: >
+        Audit the current palette and consolidate to a primary (1-2 hues),
+        secondary (1 hue), and accent (1 hue) system. Map all existing colors
+        to the nearest design system token. Replace off-token colors using the
+        token map. If a color has no token equivalent, either add it to the
+        token system formally or remove it.
+      design_system_aware: true
+      example: >
+        Tailwind: Restrict to 3-4 color keys in tailwind.config.js
+        (primary, secondary, accent, neutral). Purge any ad-hoc hex values
+        in component files. Use `bg-primary-500` not `bg-[#3B5BDB]`.
+
+        WordPress (full-site editor): In theme.json under
+        settings.color.palette, define no more than 6 named colors.
+        Disable custom color picker for editors:
+        settings.color.custom: false.
+
+        Shopify (Dawn/Sense themes): In config/settings_data.json, restrict
+        color_scheme entries to 3-4 schemes. Override ad-hoc inline styles
+        in section schema with `color_scheme` selects tied to the defined
+        palette only.
+    citations:
+      - >
+        Reber, R., & Schwarz, N. (1999). Effects of perceptual fluency on
+        judgments of truth. Consciousness and Cognition, 8(3), 338–342.
+        https://doi.org/10.1006/ccog.1999.0386
+      - >
+        Alter, A. L., & Oppenheimer, D. M. (2009). Uniting the tribes of
+        fluency to form a metacognitive nation. Personality and Social
+        Psychology Review, 13(3), 219–235.
+        https://doi.org/10.1177/1088868309341564
+    cross_references:
+      - L2-TC-002
+      - L1-VC-001
+    verification_status: canonical
+
+  - id: L2-TC-002
+    layer: l2
+    category: token_compliance
+    name: Near-Miss Color Deviation
+    description: >
+      Colors that fall within 5% perceptual distance of a design system token
+      but do not exactly match that token create a subtle but measurable
+      disfluency. The visual system detects the near-match, registers a
+      discrepancy, and expends resolution effort — even when the viewer cannot
+      consciously articulate the difference. This is the "uncanny valley" of
+      color systems.
+    psychology: >
+      Bujack et al. (2022, IEEE Transactions on Visualization and Computer
+      Graphics) demonstrated that human perceptual sensitivity to color
+      difference is non-linear: sensitivity is highest in the mid-range
+      lightness zone (L* 40–70 in CIELAB) and in hue transitions near the
+      blue-green boundary. Near-misses in these zones are detected
+      subconsciously but not reported consciously, producing a diffuse sense
+      of visual "wrongness" that degrades trust without an identifiable cause.
+      PFD Learning #16 (practitioner observation, 2026) codifies this as the
+      "token drift" failure mode: designs that look nearly right feel subtly
+      untrustworthy. The effect compounds when near-misses are distributed
+      across multiple components, creating perceptual noise at the system
+      level rather than the component level.
+    detection:
+      method: >
+        Extract all computed colors from the DOM as in L2-TC-001. Convert to
+        CIELAB (L*a*b*) color space. For each extracted color, compute Delta-E
+        2000 (dE2000) distance against every token in the detected or declared
+        design system palette. Flag a near-miss if: dE2000 distance to the
+        nearest token is > 0 and < 6 (perceptually just-noticeable to
+        clearly-noticeable difference range). Exact token matches (dE2000 = 0)
+        are clean. Colors with dE2000 >= 6 to all tokens are classified as
+        intentional departures (separate issue class).
+      condition: >
+        Flag if any color value produces a near-miss match (0 < dE2000 < 6)
+        against the nearest design system token.
+    severity: high
+    severity_logic: >
+      high: any near-miss color detected (0 < dE2000 < 6 to nearest token).
+      The severity is unconditionally high because near-miss colors indicate
+      a broken design system discipline with systemic trust implications,
+      not a single isolated choice.
+    applies_to:
+      - web
+      - mobile
+      - email
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      Programmatically-generated gradient steps are exempt if the terminal
+      colors of the gradient are exact token matches and intermediate steps
+      are computed via CSS or a design tool's gradient engine. Near-misses
+      in CSS gradient stops do not trigger this rule.
+    context_qualifiers:
+      - condition: third-party embed widgets (chat, review badges, maps)
+        effect: >
+          Colors originating from a third-party iframe or shadow-DOM
+          component are informational only — flag the widget as a potential
+          brand consistency risk but do not apply high severity since the
+          owner cannot control the color values.
+      - condition: user-generated content areas
+        effect: >
+          Exclude colors sourced from user-uploaded images or avatars. Apply
+          only to authored UI chrome.
+    fix:
+      prescription: >
+        Replace all near-miss values with the exact token they shadow. Do not
+        "split the difference" — pick the nearest token and use its exact
+        value. If the near-miss was intentional (e.g., a hover darken), define
+        a new token for that interaction state rather than using a one-off hex.
+        Audit the source: near-misses most often originate from (a) manual hex
+        entry in design tools, (b) copy-paste from external sources, or
+        (c) CSS opacity modifiers creating a perceived color that differs from
+        the base token. Fix the source, not just the symptom.
+      design_system_aware: true
+      example: >
+        Tailwind: If `bg-[#1D4FD8]` appears next to `bg-blue-600` (#2563EB),
+        these are a near-miss pair (dE2000 ≈ 4.2). Replace the ad-hoc value
+        with `bg-blue-600`. If the slight darkening is intentional for a hover
+        state, define it: `hover:bg-blue-700` (a token step down).
+
+        WordPress (theme.json): Audit settings.color.palette for duplicate or
+        near-duplicate entries. A common failure mode is "Primary Blue" (#2563EB)
+        and "Button Blue" (#1D4FD8) coexisting as separate palette entries.
+        Merge to one entry; use CSS hover states for interaction variants.
+
+        Shopify: Search all .liquid files for inline `style=` attributes
+        containing color values. Replace with CSS custom properties tied to
+        the theme color tokens defined in config/settings_schema.json.
+    citations:
+      - >
+        Bujack, R., Teti, E., Miller, B., Turton, T. L., & Samsel, F. (2022).
+        The non-riemannian nature of perceptual color space.
+        IEEE Transactions on Visualization and Computer Graphics, 28(1),
+        696–706. https://doi.org/10.1109/TVCG.2021.3114869
+      - >
+        Kovalik, S. (2026). PFD Learning #16: Token drift and the near-miss
+        trust penalty. Unpublished practitioner observation.
+    cross_references:
+      - L2-TC-001
+      - L1-VC-001
+    verification_status: provisional
+
+  - id: L2-TY-001
+    layer: l2
+    category: typography
+    name: Font Family Count
+    description: >
+      Using more than 2 distinct font families in a single interface increases
+      typographic parsing load. Each additional typeface introduces a new
+      visual grammar the reader must learn and hold simultaneously, reducing
+      reading fluency and degrading the coherence signal that signals
+      professional craft.
+    psychology: >
+      Processing fluency research (Reber, Winkielman & Schwarz, 2004,
+      Psychological Science) demonstrates that stimuli requiring additional
+      perceptual learning steps are rated as less pleasant and less credible.
+      Typography is a learned perceptual system: readers develop automatic
+      recognition patterns for typefaces they have encountered. Introducing
+      a third or fourth typeface within a single context forces the reader
+      to allocate working memory to style disambiguation rather than content
+      comprehension. Dyson & Haselgrove (2001, Journal of Research in Reading)
+      showed that typographic consistency is a primary contributor to reading
+      fluency — measured as words-per-minute at equivalent comprehension —
+      and that inconsistency reduces fluency by 8–12% even when readers cannot
+      name the source of difficulty.
+    detection:
+      method: >
+        Extract all computed font-family values from text-rendering elements
+        (p, h1-h6, span, li, td, label, button, a). Normalize by stripping
+        fallback stacks — count only the first declared family name per
+        declaration. Deduplicate. Count unique family names, excluding
+        system-ui, -apple-system, and BlinkMacSystemFont (which are OS
+        fallbacks, not design choices).
+      condition: >
+        Flag if unique font families >= 3.
+        Severity escalates if > 3.
+    severity: medium
+    severity_logic: >
+      medium: unique font families == 3.
+      high: unique font families > 3.
+    applies_to:
+      - web
+      - mobile
+      - email
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      A monospace family used exclusively for code blocks (pre, code elements)
+      does not count toward the family total if it is never applied to
+      prose or UI text. Add 1 to the tolerance: up to 3 families are
+      acceptable when the third is strictly a code/technical font.
+    context_qualifiers:
+      - condition: editorial / magazine layouts with deliberate typographic art direction
+        effect: >
+          Allow up to 3 families if the third is used exclusively for
+          display-size pull quotes (font-size >= 2.5rem) and nowhere else.
+          Flag as informational rather than error.
+      - condition: email templates
+        effect: >
+          Apply stricter threshold: > 1 web font family is high severity,
+          because email clients render web fonts inconsistently and a
+          multi-family system will degrade to system fonts unpredictably,
+          producing an uncontrolled visual output.
+      - condition: component libraries / design systems documentation sites
+        effect: >
+          Exempt the font used in code examples from the count, as above.
+          Documentation sites may also use a third family for the site's
+          own branding separate from the documented system — flag as
+          informational.
+    fix:
+      prescription: >
+        Reduce to a two-family system: one for headings/display text, one for
+        body/UI text. If a third family exists, audit every usage and migrate
+        each to the nearest match in the two-family system. Check for
+        accidental font loads: a third family sometimes appears because a
+        third-party script or widget injects its own font-face declarations.
+        Use browser DevTools Network tab filtered by "Font" to audit all
+        loaded typefaces.
+      design_system_aware: true
+      example: >
+        Tailwind: In tailwind.config.js, define exactly two keys under
+        theme.fontFamily — e.g., `sans` (body) and `display` (headings).
+        Never use arbitrary font values like `font-['SomeOtherFont']` in
+        templates. If a third font is detected, remove its @font-face or
+        Google Fonts import and replace usages.
+
+        WordPress (theme.json): settings.typography.fontFamilies should list
+        exactly 2 font families for non-code contexts. Set
+        settings.typography.customFontSize: false and
+        settings.typography.fontStyle: false to prevent editors from
+        introducing typographic drift.
+
+        Shopify: In theme.liquid, audit all `<link>` and `@import` statements
+        loading fonts. Ensure only 2 Google Fonts families are imported.
+        In the theme settings schema, expose only the 2 approved font family
+        pickers; remove any third font_picker settings.
+    citations:
+      - >
+        Reber, R., Winkielman, P., & Schwarz, N. (2004). Effects of perceptual
+        fluency on affective judgments. Psychological Science, 9(1), 45–48.
+        https://doi.org/10.1111/1467-9280.00008
+      - >
+        Dyson, M. C., & Haselgrove, M. (2001). The influence of reading speed
+        and line length on the effectiveness of reading from screen.
+        Journal of Research in Reading, 24(3), 289–316.
+        https://doi.org/10.1111/1467-9817.00150
+    cross_references:
+      - L2-SP-001
+      - L1-TC-002
+    verification_status: canonical
+
+  - id: L2-SP-001
+    layer: l2
+    category: spacing
+    name: Spacing Inconsistency
+    description: >
+      When more than 4 distinct spacing values are applied to the same
+      structural purpose (e.g., vertical gap between sections, internal card
+      padding, list item spacing), the layout loses its implicit rhythm.
+      Viewers rely on spatial repetition to build a mental model of the page
+      structure. Inconsistent spacing disrupts this model-building and forces
+      conscious re-evaluation of hierarchy at each structural transition.
+    psychology: >
+      Alter & Oppenheimer (2009, Cognition, 112(1), 111–115) established
+      that processing fluency operates at the level of pattern recognition:
+      stimuli that conform to a learned pattern are processed faster and rated
+      more positively. Spatial rhythm is a primary carrier of this pattern
+      signal in visual design — the visual system learns the "spacing grammar"
+      of a page within the first 2–3 scrolls and then uses it predictively.
+      Violations of that grammar produce a mild but cumulative disfluency
+      effect. Gestalt grouping research (Palmer, 1992) further demonstrates
+      that equal spacing is the primary proximity cue for grouping — spacing
+      inconsistency therefore directly degrades the viewer's ability to parse
+      which elements belong together.
+    detection:
+      method: >
+        Collect all computed padding-top, padding-bottom, margin-top, and
+        margin-bottom values from structural container elements (section,
+        article, div with a class containing "section", "container", "card",
+        "block", or "row"). Group collected values by their semantic purpose:
+        (a) section vertical rhythm (top/bottom padding on outermost containers),
+        (b) card internal padding (padding on card-like components),
+        (c) list/stack item gaps (margin-bottom on repeated list items or grid
+        children). For each group, compute the standard deviation of the
+        collected pixel values. Count the number of distinct values per group.
+      condition: >
+        Flag if distinct spacing values in any single purpose-group > 4.
+        Use standard deviation as a secondary signal: std_dev > 12px in any
+        group increases confidence of a flagged violation.
+    severity: medium
+    severity_logic: >
+      medium: distinct spacing values in any purpose-group > 4.
+      high: distinct spacing values in any purpose-group > 6, or std_dev > 24px.
+    applies_to:
+      - web
+      - mobile
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      Responsive breakpoint variations do not count as distinct values for
+      this rule. If padding-top is 4rem on desktop and 2rem on mobile for
+      the same element, count the desktop value only during desktop-viewport
+      analysis and the mobile value only during mobile-viewport analysis.
+      Each viewport is assessed independently.
+    context_qualifiers:
+      - condition: long-form editorial articles (blog posts, documentation)
+        effect: >
+          Paragraph-level spacing (margin-bottom on p elements) may use up
+          to 3 values to distinguish paragraph breaks, section breaks, and
+          callout spacing. This does not trigger the rule when confined to
+          article body content.
+      - condition: dashboards with multiple component densities
+        effect: >
+          Allow 2 distinct spacing systems operating in parallel (e.g.,
+          compact table rows at 8px padding and expanded card panels at 32px
+          padding), provided each system is internally consistent. Flag if
+          either system alone has > 4 distinct values.
+    fix:
+      prescription: >
+        Define a spacing scale of 4–6 steps (e.g., 4px, 8px, 16px, 24px,
+        32px, 64px) and map every spacing value to the nearest step. Eliminate
+        all one-off values. For the specific purpose-group that triggered the
+        violation, create a named spacing token (e.g., --spacing-section-y)
+        and apply it consistently to all elements in that group. Document which
+        scale steps are valid for which purposes in the design system.
+      design_system_aware: true
+      example: >
+        Tailwind: Use only the default spacing scale or a custom scale defined
+        in tailwind.config.js theme.spacing. Remove all arbitrary spacing
+        values like `py-[28px]` or `mt-[17px]`. For section rhythm, use a
+        consistent utility: `py-16` (4rem) for all top-level sections, `py-8`
+        (2rem) for nested content blocks.
+
+        WordPress (theme.json): Define settings.spacing.spacingSizes as a
+        fixed array of 5-6 named sizes. Set settings.spacing.customSpacingSize:
+        false to prevent editors from entering arbitrary pixel values in the
+        block editor.
+
+        Shopify: Centralize spacing in a CSS custom properties file
+        (base/variables.css or equivalent). Define --spacing-xs through
+        --spacing-2xl. Replace all inline margin/padding values in section
+        .liquid files with var(--spacing-*) references.
+    citations:
+      - >
+        Alter, A. L., & Oppenheimer, D. M. (2009). Uniting the tribes of
+        fluency to form a metacognitive nation. Personality and Social
+        Psychology Review, 13(3), 219–235.
+        https://doi.org/10.1177/1088868309341564
+      - >
+        Palmer, S. E. (1992). Common region: A new principle of perceptual
+        grouping. Cognitive Psychology, 24(3), 436–447.
+        https://doi.org/10.1016/0010-0285(92)90014-S
+    cross_references:
+      - L2-GR-001
+      - L2-TY-001
+    verification_status: canonical
+
+  - id: L2-GR-001
+    layer: l2
+    category: grid
+    name: Grid Consistency
+    description: >
+      When page sections use more than 3 distinct max-width container values,
+      the horizontal rhythm of the layout becomes irregular. Viewers use the
+      consistent left and right edges of content columns as visual rails that
+      guide the eye and signal structural integrity. Inconsistent max-widths
+      break these rails, forcing the eye to re-locate the content boundary
+      on each scroll.
+    psychology: >
+      Practitioner observation (2026-03-16) documents 14 observed cases across
+      client site audits where section max-width inconsistency correlated
+      with user comments describing the site as "messy," "unfinished," or
+      "hard to follow" — without those users being able to identify the
+      source of the perception. The perceptual mechanism is alignment-based
+      grouping (Gestalt alignment principle, Wertheimer 1923): the visual
+      system treats vertically-aligned edges as belonging to the same
+      organizational unit. When max-widths differ, the left edge of the
+      body text shifts between sections, breaking the alignment grouping and
+      signaling structural incoherence. This is a low-level, automatic
+      perception effect — it occurs before conscious evaluation of content.
+    detection:
+      method: >
+        Collect all computed max-width values from direct children of body,
+        main, or any element with role="main". Also collect from elements
+        with class names containing "container", "wrapper", "section",
+        "content", or "layout". Exclude max-width: none, max-width: 100%,
+        and max-width values on elements that are themselves children of a
+        flex or grid container (these inherit constraint from their parent).
+        Deduplicate. Count distinct numeric values.
+      condition: >
+        Flag if distinct max-width values > 3.
+    severity: medium
+    severity_logic: >
+      medium: distinct max-width values > 3 and <= 5.
+      high: distinct max-width values > 5.
+    applies_to:
+      - web
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      A site with a deliberately full-bleed hero section (max-width: 100vw)
+      plus a narrow reading column (e.g., 680px) plus a standard content
+      container (e.g., 1200px) is operating a 3-tier system that is
+      architecturally intentional. This is within tolerance. The rule fires
+      when a 4th distinct value appears, indicating an ad-hoc addition
+      rather than a designed system.
+    context_qualifiers:
+      - condition: landing pages with alternating full-bleed and contained sections
+        effect: >
+          2 values are standard (full-bleed + contained). A third value for
+          a narrow testimonial column is common and acceptable. Flag only
+          at a 4th distinct value.
+      - condition: documentation sites with sidebar navigation
+        effect: >
+          The sidebar column, the content column, and the page wrapper may
+          each have a distinct max-width as part of a columnar layout system.
+          Apply the rule to the content column only, not to layout-level
+          container elements.
+    fix:
+      prescription: >
+        Define a 2-tier container system: a full-width tier (max-width: 100%)
+        for visual sections, and a content tier (one canonical value, e.g.,
+        1200px or 1280px) for all readable content. If a narrow reading
+        column is needed, add a third tier as a named token (e.g., --container-prose:
+        680px) and use it consistently. Delete all one-off max-width values
+        that don't map to one of the 2–3 defined tiers.
+      design_system_aware: true
+      example: >
+        Tailwind: Define exactly 2-3 container sizes in tailwind.config.js
+        theme.container or as custom utilities. Use `max-w-screen-xl`
+        (1280px) as the primary content container everywhere. If a prose
+        column is needed, use `max-w-prose` (65ch) consistently. Never use
+        `max-w-[1100px]` or other arbitrary container widths.
+
+        WordPress (theme.json): settings.layout.contentSize and
+        settings.layout.wideSize define the two canonical container widths.
+        Do not define additional width constraints in individual block styles.
+        Use the "inner blocks use content width" option on Group blocks to
+        inherit the layout system rather than setting a new max-width.
+
+        Shopify: In layout/theme.liquid, define a single `.page-width` class
+        with one max-width value used universally. If you need a narrow
+        variant, define `.page-width--narrow` as a modifier with a second
+        canonical value. Audit all section .liquid files for inline
+        `style="max-width:..."` overrides and replace with the class system.
+    citations:
+      - >
+        Wertheimer, M. (1923). Untersuchungen zur Lehre von der Gestalt, II.
+        Psychologische Forschung, 4, 301–350.
+        https://doi.org/10.1007/BF00410640
+      - >
+        Kovalik, S. (2026). Practitioner observation, 2026-03-16: Grid rail
+        breaking and structural coherence perception across 14 client
+        site audits. Unpublished.
+    cross_references:
+      - L2-SP-001
+      - L2-BT-001
+    verification_status: provisional
+
+  - id: L2-BT-001
+    layer: l2
+    category: button_style
+    name: Button Style Consistency
+    description: >
+      When more than 2 visually distinct button styles are used for the same
+      action type (e.g., multiple "primary CTA" buttons that differ in
+      background color, border treatment, or border-radius), the viewer's
+      learned affordance mapping for that action type breaks down. Each
+      stylistic variation forces a micro-evaluation: is this button the same
+      type as the one I saw before, or a different kind of action?
+    psychology: >
+      Re-evaluation cost is a direct processing fluency penalty. When the
+      visual system encounters a shape or pattern it expects to recognize
+      automatically, it processes it in parallel (pre-attentive processing,
+      Treisman & Gelade 1980, Cognitive Psychology). When the expected
+      pattern differs from the stored template, the system switches to serial,
+      attentive processing — a measurably slower and more effortful mode.
+      Button style inconsistency reliably triggers this switch. The cost is
+      small per instance (~100–200ms per button, estimated from visual search
+      literature) but accumulates across a page and across sessions, creating
+      a chronic low-grade disfluency that degrades the perception of the
+      interface as "professional" and "trustworthy." Consistency of interactive
+      affordances is also the primary mechanism by which users build accurate
+      mental models of what is clickable (Norman, 2013, The Design of
+      Everyday Things, revised ed.).
+    detection:
+      method: >
+        Select all button and a[role="button"] elements, plus a elements with
+        class names containing "btn", "button", "cta", or "action". For each,
+        extract: background-color (computed), border (shorthand or individual
+        sides), border-radius (computed), color (computed), font-weight, and
+        padding. Classify each element by its semantic action type using
+        aria-label, text content, or class hints (e.g., "primary", "submit",
+        "buy", "sign up" → primary; "learn more", "view", "see" → secondary;
+        "cancel", "dismiss" → tertiary). Within each action-type group, compute
+        the number of visually distinct styles by clustering on the extracted
+        properties. Two buttons are the same style if all extracted properties
+        match within a 5% tolerance.
+      condition: >
+        Flag if visually distinct styles within any single action-type group > 2.
+    severity: high
+    severity_logic: >
+      high: any action-type group has > 2 visually distinct button styles.
+      The severity is unconditionally high because button inconsistency
+      directly affects conversion: the primary CTA is the terminal action
+      of the conversion funnel, and ambiguity at the terminal node is a
+      critical failure.
+    applies_to:
+      - web
+      - mobile
+      - email
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      Filled vs. outlined variants of the same button style are the expected
+      primary/secondary distinction and do not count as 2 distinct styles
+      for the same action type — they are the canonical 2-style system.
+      This rule fires when a third visual style appears for a single action
+      type, or when the same action type (e.g., "primary CTA") is rendered
+      with inconsistent filled styles across pages or sections.
+    context_qualifiers:
+      - condition: A/B test implementations
+        effect: >
+          Flag as informational if a data-testid or data-variant attribute
+          is present indicating an intentional experiment. Document the
+          variant as a test, not a production inconsistency.
+      - condition: authenticated vs. unauthenticated states
+        effect: >
+          A "Sign Up" CTA and a "Dashboard" CTA may legitimately differ in
+          style to signal a state change. Treat these as separate action types
+          (acquisition vs. navigation) rather than the same type with
+          inconsistent styling.
+    fix:
+      prescription: >
+        Define a button variant system with exactly 3 roles: primary (highest
+        visual weight, filled, brand color), secondary (medium weight, outlined
+        or subdued), and tertiary/ghost (lowest weight, text-only or minimal
+        border). Every button in the interface must map to one of these three
+        roles. Within each role, the visual style must be identical across all
+        instances. Audit by action type: every "buy now" button is primary;
+        every "learn more" is secondary; every "cancel" is ghost. Eliminate
+        any button that does not fit this taxonomy by either reclassifying it
+        or redesigning it to match the nearest role.
+      design_system_aware: true
+      example: >
+        Tailwind: Create 3 button component classes using @apply in a base
+        CSS file: `.btn-primary`, `.btn-secondary`, `.btn-ghost`. Never apply
+        button styles inline via utility classes on the element — always use
+        the component class. In React/Vue components, accept a `variant` prop
+        with 3 allowed values and map it to the class. Any variant not in the
+        map renders `.btn-secondary` as the safe default.
+
+        WordPress (Gutenberg): Define 3 button styles under Appearance →
+        Editor → Styles → Blocks → Button. Set default button style to
+        "primary." Train editors that "secondary" exists for in-body links
+        and "ghost" for modal dismissals. Disable custom color on buttons:
+        settings.color.button: false in theme.json.
+
+        Shopify (Dawn theme): In sections/header.liquid and snippets/button.liquid,
+        enforce a `button_style` schema setting with 3 options: primary,
+        secondary, ghost. Replace all direct button styling in section files
+        with `{% render 'button', style: section.settings.button_style %}`.
+    citations:
+      - >
+        Treisman, A. M., & Gelade, G. (1980). A feature-integration theory
+        of attention. Cognitive Psychology, 12(1), 97–136.
+        https://doi.org/10.1016/0010-0285(80)90005-5
+      - >
+        Norman, D. A. (2013). The Design of Everyday Things (Revised and
+        Expanded Edition). Basic Books.
+    cross_references:
+      - L2-VS-001
+      - L2-TC-001
+      - L3-CTA-001
+    verification_status: canonical
+
+  - id: L2-VS-001
+    layer: l2
+    category: visual_style
+    name: Border Radius Consistency
+    description: >
+      Using more than 3 distinct border-radius values across interactive
+      elements (buttons, cards, inputs, modals) creates a subtle incoherence
+      in the visual language. Border radius is a primary carrier of
+      "personality" in a design system — it signals whether a product is
+      sharp/technical, rounded/friendly, or pill/playful. Inconsistent
+      radius values send conflicting personality signals and undermine
+      the perceptual unity of the interface.
+    psychology: >
+      Gestalt similarity (Wertheimer, 1923, Psychologische Forschung) holds
+      that elements sharing visual properties are perceived as belonging to
+      the same group or system. Border radius is a shape property that
+      participates in similarity grouping: all buttons with the same radius
+      are perceived as "buttons"; a button with a different radius is
+      perceived as potentially a different kind of element. This is a low-
+      severity issue because the grouping signal is weaker than color or
+      typography, but it is non-zero: Kim & Müller (2011, Attention,
+      Perception, & Psychophysics) demonstrated that shape similarity is a
+      reliable pre-attentive grouping cue, and that dissimilarity produces
+      a measurable (though small) attentional capture effect. In aggregate,
+      radius inconsistency contributes to a diffuse "amateur" perception
+      without a clearly identifiable cause.
+    detection:
+      method: >
+        Extract all computed border-radius values (or the four individual
+        corners if they differ) from interactive elements: button,
+        input, select, textarea, [role="button"], and elements with class
+        names containing "card", "panel", "modal", "badge", "tag",
+        or "chip". Normalize shorthand values (e.g., "4px 4px 4px 4px" →
+        "4px"). Exclude border-radius: 0 and border-radius: 50% (circle),
+        which are intentional and standard. Deduplicate. Count distinct
+        non-zero, non-50% values.
+      condition: >
+        Flag if distinct border-radius values (excluding 0 and 50%) > 3.
+    severity: low
+    severity_logic: >
+      low: distinct border-radius values > 3.
+      The severity is unconditionally low because this is a polish/coherence
+      issue rather than a conversion or comprehension issue. It should be
+      fixed but does not require immediate remediation.
+    applies_to:
+      - web
+      - mobile
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      A 2-tier radius system is expected and clean: one radius for "small
+      elements" (badges, tags, inputs — e.g., 4px) and one for "large
+      elements" (cards, modals, panels — e.g., 12px), with pill (9999px)
+      as a permitted third value for CTAs or tag chips. This 3-value system
+      (small, large, pill) is within tolerance and does not trigger the rule.
+      The rule fires at a 4th distinct value.
+    context_qualifiers:
+      - condition: design systems explicitly documenting a radius scale
+        effect: >
+          If the page or component is implementing a documented radius scale
+          (e.g., Radix UI, shadcn/ui, Material Design) with > 3 values by
+          design, flag as informational only. The radius scale is intentional
+          and the violation is an adoption issue, not a design system issue.
+      - condition: legacy / migrating interfaces
+        effect: >
+          If the site is mid-migration (detectable by mixed class naming
+          conventions), flag as medium rather than low — the inconsistency
+          is more noticeable when old and new patterns coexist on the same page.
+    fix:
+      prescription: >
+        Define a 2-3 value radius scale as design system tokens:
+        --radius-sm (for inputs, badges, small chips),
+        --radius-md (for cards, panels, modals),
+        --radius-pill (for CTA buttons, toggle chips) = 9999px.
+        Apply these tokens universally. Replace all one-off border-radius
+        values with the nearest token. If an element has a unique radius
+        for visual reasons (e.g., a rounded avatar), either add
+        --radius-avatar to the scale formally or reclassify it as
+        --radius-pill.
+      design_system_aware: true
+      example: >
+        Tailwind: Use `rounded-sm` (2px), `rounded-lg` (8px), and
+        `rounded-full` (9999px) as the 3 canonical radius utilities.
+        Remove all `rounded-[Xpx]` arbitrary values. In tailwind.config.js,
+        define custom borderRadius entries only for these 3 steps if the
+        defaults don't match the design system values.
+
+        WordPress (theme.json): settings.border.radius defines a single
+        global border radius. For a multi-tier system, define CSS custom
+        properties in theme.css (--wp--custom--border-radius-sm, -md, -pill)
+        and reference them in block styles. Set
+        settings.border.customColor: false to prevent per-block overrides.
+
+        Shopify (Dawn theme): Define CSS custom properties in base/variables.css:
+        `--border-radius-base: 4px; --border-radius-card: 12px;
+        --border-radius-pill: 9999px;`. Replace all inline `border-radius`
+        declarations in component CSS files with `var(--border-radius-*)`.
+        Audit theme settings for any "corner radius" sliders and replace
+        with a select offering the 3 approved values.
+    citations:
+      - >
+        Wertheimer, M. (1923). Untersuchungen zur Lehre von der Gestalt, II.
+        Psychologische Forschung, 4, 301–350.
+        https://doi.org/10.1007/BF00410640
+      - >
+        Kim, M.-S., & Müller, H. J. (2011). Feature- and conjunction-based
+        grouping in visual search: A comparison of attentional capture effects.
+        Attention, Perception, & Psychophysics, 73(7), 2256–2277.
+        https://doi.org/10.3758/s13414-011-0171-x
+    cross_references:
+      - L2-BT-001
+      - L2-TC-001
+    verification_status: canonical

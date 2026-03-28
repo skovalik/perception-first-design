@@ -1,0 +1,591 @@
+# Foundation (L0) Heuristic Rules
+# Layer: foundation
+# Scope: Universal — applies across web, mobile, email
+# Last updated: 2026-03-21
+
+rules:
+
+  - id: F-CL-001
+    layer: foundation
+    category: cognitive_load
+    name: Element Count Ceiling
+    description: >
+      More than 50 interactive elements on a single view overloads working memory and degrades
+      decision quality. Each actionable element competes for attentional resources and forces
+      serial processing that exhausts cognitive capacity before conversion actions occur.
+    psychology: |
+      Study: Cowan, N. (2010). The magical mystery four: How is working memory capacity limited,
+      and why? Current Directions in Psychological Science, 19(1), 51-57.
+      Mechanism: Working memory holds 4 ± 1 chunks simultaneously; interactive elements each
+      demand a slot to evaluate affordance, relevance, and action cost. Beyond ~50 elements
+      the evaluation queue exceeds session-level capacity and users either satisfice or abandon.
+      Also: Hick, W. E. (1952). On the rate of gain of information. Quarterly Journal of
+      Experimental Psychology, 4(1), 11-26. Mechanism: Choice reaction time increases
+      logarithmically with the number of alternatives — doubling options adds roughly constant
+      latency cost, compounding across a dense interface to produce measurable task-time inflation.
+      Implication: Interfaces must reduce interactive surface area to the minimum required for
+      the current task state. Elements not needed at this moment should be hidden or deferred.
+    detection:
+      method: dom_analysis
+      condition: >
+        count(querySelectorAll('a, button, input, select, textarea,
+        [role="button"], [role="link"], [role="checkbox"], [role="radio"],
+        [tabindex]:not([tabindex="-1"])')) > 50
+    severity: high
+    severity_logic: >
+      critical if count > 150 (catastrophic overload, likely broken IA);
+      high if count > 80 (well above capacity ceiling);
+      medium if count > 50 (exceeds threshold);
+      low if count > 35 on mobile-only viewport (mobile context raises sensitivity).
+    applies_to:
+      - web
+      - mobile
+    language_scope: latin-ltr
+    deviation_tolerance_override: false
+    context_qualifiers:
+      - condition: Tool is a professional IDE, design tool, or data-dense dashboard used by experts
+        effect: Raise threshold to 120 interactive elements; expert users build spatial memory maps that amortize the per-element cognitive cost.
+      - condition: View is a paginated list or infinite scroll feed where elements are visually repetitive
+        effect: Repetitive elements share a single learned schema; count unique interaction patterns rather than raw elements.
+    fix:
+      prescription: >
+        Audit all interactive elements and group by task relevance. Move secondary and tertiary
+        actions behind progressive disclosure: overflow menus, drawers, expandable rows, or
+        separate views. Prioritize a single primary CTA per view state. Suppress elements that
+        are not actionable in the user's current context (e.g., disabled or future-state actions).
+      design_system_aware: true
+      example: |
+        Tailwind: Replace inline action clusters with a <DropdownMenu> component.
+          Before: <button>Edit</button><button>Duplicate</button><button>Archive</button><button>Delete</button>
+          After: <DropdownMenu trigger={<button>Actions</button>} items={[...]} />
+
+        WordPress: Use accordion-based settings panels (wp-accordion or Gutenberg collapse blocks)
+        to hide secondary configuration fields behind a "Advanced" toggle.
+
+        Shopify: On product pages, move variant selectors that have zero inventory to a
+        "Notify me when available" modal rather than rendering them inline.
+    citations:
+      - >
+        Cowan, N. (2010). The magical mystery four: How is working memory capacity limited,
+        and why? Current Directions in Psychological Science, 19(1), 51–57.
+        https://doi.org/10.1177/0963721409359277
+      - >
+        Hick, W. E. (1952). On the rate of gain of information. Quarterly Journal of
+        Experimental Psychology, 4(1), 11–26. https://doi.org/10.1080/17470215208416600
+    cross_references:
+      - F-CL-006
+      - F-CL-005
+    verification_status: robust
+
+
+  - id: F-CL-002
+    layer: foundation
+    category: cognitive_load
+    name: Font Family Proliferation
+    description: >
+      More than 3 distinct font families in a single view forces the visual system to build
+      separate decoding schemas for each typeface, increasing perceptual load and fragmenting
+      the perceived coherence of the interface.
+    psychology: |
+      Study: Alter, A. L., & Oppenheimer, D. M. (2009). Uniting the tribes of fluency to form
+      a metacognitive nation. Personality and Social Psychology Review, 13(3), 219-235.
+      Mechanism: Processing fluency — the ease with which stimuli are perceived and interpreted
+      — functions as a proxy signal for truth, quality, and trustworthiness. Each additional
+      typeface introduces a distinct visual rhythm the reader must calibrate to, reducing fluency.
+      Reduced fluency increases perceived cognitive difficulty and lowers willingness to engage
+      with the content.
+      Study: Zachrisson, B. (1965). Studies in the Legibility of Printed Text. Almqvist & Wiksell.
+      Mechanism: Mixed typographic environments (multiple families, inconsistent weights) force
+      bottom-up letter recognition rather than top-down word-shape recognition, measurably
+      slowing reading speed and comprehension.
+      Implication: A typographic system should use at most 2 families (display + body) with a
+      third reserved for monospace/code. Anything beyond this creates visual noise with no
+      compensating cognitive benefit.
+    detection:
+      method: css_analysis
+      condition: >
+        collect all computed font-family values for rendered text nodes;
+        normalize by stripping quotes and fallback stacks to first family name;
+        count unique normalized family names > 3
+    severity: high
+    severity_logic: >
+      high if unique font families > 5 (systematic typographic breakdown);
+      medium if unique font families > 3 (exceeds best-practice ceiling);
+      low if 3 families present but third is exclusively monospace/code context.
+    applies_to:
+      - web
+      - mobile
+      - email
+    language_scope: latin-ltr
+    deviation_tolerance_override: false
+    context_qualifiers:
+      - condition: Page is a typography specimen, font foundry showcase, or explicit typographic demo
+        effect: Rule does not apply — typographic variety is the product content, not incidental interface noise.
+      - condition: Third family is exclusively applied to code blocks, keyboard shortcuts, or data tables
+        effect: Reduce severity by one level; monospace in code context serves a distinct semantic function.
+    fix:
+      prescription: >
+        Establish a two-family type scale: one display/heading family and one body family.
+        Optionally add a monospace family scoped exclusively to code and data contexts.
+        Audit the stylesheet for any font-face imports or font-family declarations that fall
+        outside this system and remove them. Ensure design tokens enforce the type scale.
+      design_system_aware: true
+      example: |
+        Tailwind: Define font families in tailwind.config.js:
+          fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Playfair Display', 'serif'],
+          mono: ['JetBrains Mono', 'monospace'] }
+        Apply exclusively: body uses font-sans, headings use font-display, code uses font-mono.
+        Flag any hardcoded font-family in component CSS as a lint violation.
+
+        WordPress: Restrict font loading in functions.php to exactly 2 Google Fonts handles.
+        Remove any per-block or per-widget font overrides in theme.json.
+
+        Shopify: In settings_schema.json, expose only 2 font pickers (heading_font, body_font).
+        Remove any theme section that introduces its own font_picker setting.
+    citations:
+      - >
+        Alter, A. L., & Oppenheimer, D. M. (2009). Uniting the tribes of fluency to form a
+        metacognitive nation. Personality and Social Psychology Review, 13(3), 219–235.
+        https://doi.org/10.1177/1088868309341564
+      - >
+        Zachrisson, B. (1965). Studies in the Legibility of Printed Text. Stockholm:
+        Almqvist & Wiksell.
+    cross_references:
+      - F-CL-001
+    verification_status: robust
+
+
+  - id: F-CL-003
+    layer: foundation
+    category: cognitive_load
+    name: Responsive Viewport Meta Tag
+    description: >
+      Absence of a correctly configured viewport meta tag causes mobile browsers to render
+      at desktop width and scale down, producing illegible text, unusable tap targets, and
+      horizontal scrolling that completely blocks task completion on mobile devices.
+    psychology: |
+      Study: Google/AnswerLab. (2012). What Users Want Most From Mobile Sites Today.
+      Mechanism: When viewport meta is absent, mobile WebKit and Blink engines default to a
+      980px layout viewport, then scale the rendered page to fit the physical screen.
+      Text rendered at 16px CSS becomes approximately 6-7px physical — well below the
+      4.5mm minimum tap target size specified in ISO 9241-9 and below the legibility
+      threshold for normal reading conditions.
+      Study: Fitt, P. M. (1954). The information capacity of the human motor system in
+      controlling the amplitude of movement. Journal of Experimental Psychology, 47(6), 381–391.
+      Mechanism: Fitts's Law quantifies that movement time to a target scales with target
+      size. Scaled-down tap targets on viewportless mobile pages increase tap error rates
+      and task abandonment in proportion to the scaling factor.
+      Implication: The viewport meta tag is a zero-cost prerequisite for any mobile usability.
+      Its absence negates all other design decisions for mobile users.
+    detection:
+      method: dom_analysis
+      condition: >
+        querySelector('meta[name="viewport"]') === null
+        OR
+        querySelector('meta[name="viewport"]').content does NOT match
+        /width=device-width/i
+    severity: critical
+    severity_logic: >
+      critical if viewport meta is absent entirely;
+      critical if present but content does not include width=device-width;
+      high if width=device-width present but initial-scale is set to a value other than 1.0
+      (causes zoomed-in or zoomed-out initial render);
+      low if user-scalable=no is set (accessibility concern but layout may still render correctly).
+    applies_to:
+      - web
+      - mobile
+    language_scope: latin-ltr
+    deviation_tolerance_override: false
+    context_qualifiers:
+      - condition: Page is explicitly an email HTML template rendered inside an email client
+        effect: Email clients control viewport behavior via their own rendering engine; this rule does not apply to email-only HTML.
+      - condition: Page targets exclusively desktop kiosk or embedded WebView with controlled viewport
+        effect: Reduce to medium; confirm the deployment context actually controls the viewport externally.
+    fix:
+      prescription: >
+        Add <meta name="viewport" content="width=device-width, initial-scale=1.0"> inside
+        the <head> element, as early as possible (before any stylesheets). Do not set
+        user-scalable=no — that violates WCAG 1.4.4 (Resize Text, Level AA). Do not set
+        maximum-scale below 5 as it interferes with browser zoom for low-vision users.
+      design_system_aware: true
+      example: |
+        Tailwind (any HTML base template):
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            ...
+          </head>
+
+        WordPress: Verify your active theme's header.php or header template part contains
+        the viewport meta. Many older themes omit it. Add it immediately after <head>
+        if missing — do NOT rely on plugins to inject it.
+
+        Shopify: In your theme's layout/theme.liquid, confirm the viewport meta is present
+        in the <head> section. Shopify's default Dawn theme includes it; custom themes
+        sometimes strip it during migration.
+    citations:
+      - >
+        Google/AnswerLab. (2012). What Users Want Most From Mobile Sites Today. Google Think Insights.
+        Retrieved from https://www.thinkwithgoogle.com/consumer-insights/consumer-trends/what-users-want-most-from-mobile-sites-today/
+      - >
+        Fitts, P. M. (1954). The information capacity of the human motor system in controlling
+        the amplitude of movement. Journal of Experimental Psychology, 47(6), 381–391.
+        https://doi.org/10.1037/h0055392
+      - >
+        W3C. (2018). WCAG 2.1 Success Criterion 1.4.4: Resize Text (Level AA).
+        https://www.w3.org/TR/WCAG21/#resize-text
+    cross_references: []
+    verification_status: robust
+
+
+  - id: F-CL-004
+    layer: foundation
+    category: cognitive_load
+    name: Above-Fold Content Density
+    description: >
+      More than 7 distinct content blocks visible in the first viewport height creates an
+      overwhelming first impression that prevents users from identifying the primary message
+      or action, increasing bounce rates before any scroll occurs.
+    psychology: |
+      Study: Cowan, N. (2010). The magical mystery four: How is working memory capacity limited,
+      and why? Current Directions in Psychological Science, 19(1), 51–57.
+      Mechanism: The first viewport is processed as a single attentional episode. Working memory
+      can hold approximately 4 ± 1 independent chunks. When more than 7 distinct content
+      blocks compete simultaneously, users cannot form a coherent mental model of the page
+      structure and default to the most visually salient element or exit.
+      Study: Nielsen, J., & Loranger, H. (2006). Prioritizing Web Usability. New Riders.
+      Mechanism: Eye-tracking research shows that users form a page impression within 500ms
+      of load. Pages with high above-fold density show a dispersed gaze pattern with no
+      fixation anchoring — the visual system cannot identify a dominant entry point.
+      Implication: The above-fold region must communicate one primary proposition with
+      supporting context, not attempt to surface all available content simultaneously.
+    detection:
+      method: heuristic
+      condition: >
+        collect all elements that are: (a) visible (not display:none, visibility:hidden,
+        or opacity:0), (b) have a distinct visual role (header/nav, hero, value-prop block,
+        feature row, testimonial, CTA section, footer-band), (c) top edge is within
+        window.innerHeight of viewport top;
+        count distinct visual blocks > 7
+    severity: medium
+    severity_logic: >
+      high if > 12 distinct content blocks above fold (severe fragmentation);
+      medium if > 7 distinct content blocks above fold (exceeds working memory ceiling);
+      low if exactly 7 and at least one block is a minimal nav bar with no content weight.
+    applies_to:
+      - web
+      - mobile
+    language_scope: latin-ltr
+    deviation_tolerance_override: false
+    context_qualifiers:
+      - condition: Page is a news homepage or editorial feed where multi-story scanning is the explicit user goal
+        effect: Raise threshold to 12 blocks; news-reading has a trained scanning schema that amortizes block-count cost.
+      - condition: Mobile viewport (< 768px) where blocks stack vertically and fold is much shorter
+        effect: Raise sensitivity — reduce threshold to 4 distinct blocks on mobile, as the fold shows far less vertical space.
+    fix:
+      prescription: >
+        Restructure the above-fold region to contain: (1) navigation, (2) a single hero block
+        with primary headline + subhead + one CTA. Everything else should begin below the fold.
+        If brand urgency requires multiple above-fold messages, use a rotating hero or tabbed
+        value proposition — not simultaneous stacked blocks.
+      design_system_aware: true
+      example: |
+        Tailwind: Use h-screen on the hero section to force a single full-viewport above-fold
+        block. Subsequent sections begin at scroll position > 100vh.
+          <section class="h-screen flex flex-col justify-center items-center">
+            <!-- single hero content only -->
+          </section>
+          <section class="py-24"> <!-- starts below fold --> </section>
+
+        WordPress: In page builder (Elementor/Gutenberg), set the hero section to
+        "min-height: 100vh" and ensure no additional sections begin within that space.
+        Use the block-level spacing controls to push section 2 below the fold.
+
+        Shopify: In the theme customizer, limit the homepage to: announcement bar +
+        header + one hero section visible on load. Move feature sections, collections,
+        and testimonials below the natural fold line.
+    citations:
+      - >
+        Cowan, N. (2010). The magical mystery four: How is working memory capacity limited,
+        and why? Current Directions in Psychological Science, 19(1), 51–57.
+        https://doi.org/10.1177/0963721409359277
+      - >
+        Nielsen, J., & Loranger, H. (2006). Prioritizing Web Usability. Berkeley, CA: New Riders.
+    cross_references:
+      - F-CL-001
+      - F-PD-001
+    verification_status: softer
+
+
+  - id: F-CL-005
+    layer: foundation
+    category: cognitive_load
+    name: Form Field Count
+    description: >
+      Displaying more than 7 visible form fields simultaneously without progressive disclosure
+      triggers cognitive overload and form abandonment, as users evaluate the total completion
+      cost before committing to any input.
+    psychology: |
+      Study: Cowan, N. (2010). The magical mystery four: How is working memory capacity limited,
+      and why? Current Directions in Psychological Science, 19(1), 51–57.
+      Mechanism: Each visible form field represents a decision: What does this ask? What do I
+      enter? Is it required? Is it risky to answer? Users mentally simulate completing all
+      visible fields before starting. Beyond 7 fields, this pre-evaluation cost exceeds the
+      motivation threshold for a significant portion of users.
+      Study: Baymard Institute. (2020). Form Field Usability: Avoid Multi-Column Layouts.
+      Baymard Institute Research Reports.
+      Mechanism: Baymard's large-scale checkout usability research (40,000+ user test hours)
+      consistently shows that visible field count is the strongest predictor of checkout
+      abandonment among layout variables. Reducing a 14-field checkout to 7 fields (by
+      removing optional fields and deferring address lookup) reduced abandonment by 20%.
+      Study: Wroblewski, L. (2008). Web Form Design: Filling in the Blanks. Rosenfeld Media.
+      Mechanism: Users anchor on "how much is left" from the first visual scan. Long forms
+      create an immediate negative completion estimate that suppresses start-rate.
+      Implication: Forms must expose only the fields needed to complete the current step.
+      Optional fields should be hidden behind "Add optional info" toggles.
+    detection:
+      method: dom_analysis
+      condition: >
+        within a single <form> element or semantically grouped form container:
+        count(querySelectorAll('input:not([type="hidden"]):not([type="submit"]):not([type="reset"]),
+        select, textarea').filter(el => el.offsetParent !== null)) > 7
+    severity: high
+    severity_logic: >
+      high if visible field count > 12 (severe overload; checkout-class abandonment expected);
+      medium if visible field count > 7 (exceeds working memory ceiling);
+      low if exactly 7–8 fields but form includes a clear step indicator showing progression.
+    applies_to:
+      - web
+      - mobile
+      - email
+    language_scope: latin-ltr
+    deviation_tolerance_override: false
+    context_qualifiers:
+      - condition: Form is a medical intake, legal, or compliance form where completeness is legally mandated
+        effect: Raise threshold to 12 fields; legal completeness requirements override UX optimization. Use step indicators and section headers to reduce perceived length.
+      - condition: Form uses multi-step wizard UI with progress indicator and each step has ≤ 4 fields
+        effect: Rule applies per-step, not to total field count. Each step must independently comply.
+      - condition: Form is rendered in an email client
+        effect: Email forms are almost always single-field (email capture); any multi-field form in email is a significant UX risk. Reduce threshold to 3 fields in email context.
+    fix:
+      prescription: >
+        Audit all fields and classify as: (a) required for core task, (b) helpful but optional,
+        (c) nice-to-have or analytics-serving. Remove class (c) entirely. Move class (b) behind
+        an "Add details" progressive disclosure toggle. If required field count still exceeds 7,
+        implement a multi-step form with a progress indicator and ≤ 4 fields per step.
+      design_system_aware: true
+      example: |
+        Tailwind: Implement a multi-step form with a progress bar component.
+          Step 1 (3 fields): Name, Email, Company
+          Step 2 (3 fields): Phone, Use case, Team size
+          Progress: <div class="flex gap-2"><div class="h-1 flex-1 bg-blue-600 rounded" /><div class="h-1 flex-1 bg-gray-200 rounded" /></div>
+
+        WordPress: In Gravity Forms or WPForms, use the multi-page form feature. Set page
+        breaks after every 4 fields. Enable the progress bar widget. Mark truly optional
+        fields as conditional logic — hidden by default, shown on "Add more details" click.
+
+        Shopify: In checkout customization (Shopify Plus or checkout.liquid), reorder fields
+        to match the required sequence and use Shopify's native address autofill to replace
+        5 separate address fields with a single autocomplete input.
+    citations:
+      - >
+        Cowan, N. (2010). The magical mystery four: How is working memory capacity limited,
+        and why? Current Directions in Psychological Science, 19(1), 51–57.
+        https://doi.org/10.1177/0963721409359277
+      - >
+        Baymard Institute. (2020). Form Field Usability Research. Baymard Institute.
+        https://baymard.com/research/checkout-usability
+      - >
+        Wroblewski, L. (2008). Web Form Design: Filling in the Blanks. New York: Rosenfeld Media.
+    cross_references:
+      - F-CL-001
+      - F-PD-001
+    verification_status: robust
+
+
+  - id: F-CL-006
+    layer: foundation
+    category: cognitive_load
+    name: Navigation Depth
+    description: >
+      More than 7 top-level navigation items forces users to evaluate an excessive choice set
+      on every page load, slowing wayfinding and reducing the perceived clarity of the site's
+      information architecture.
+    psychology: |
+      Study: Hick, W. E. (1952). On the rate of gain of information. Quarterly Journal of
+      Experimental Psychology, 4(1), 11–26.
+      Mechanism: Hick's Law states that decision time T = b * log2(n + 1), where n is the
+      number of equally probable choices. Navigation item selection is not equally probable
+      (users have intent), but the law provides a floor model. At 7+ items, the logarithmic
+      cost becomes perceptible as hesitation and scanning behavior rather than direct
+      target-seeking.
+      Study: Miller, G. A. (1956). The magical number seven, plus or minus two: Some limits
+      on our capacity for processing information. Psychological Review, 63(2), 81–97.
+      Mechanism: Miller's chunking model predicts that lists of 7 ± 2 items sit at the
+      boundary of subitizing vs. serial scanning. Beyond this boundary, users switch from
+      parallel assessment (fast) to serial scan (slow), significantly increasing time-to-click.
+      Study: Kalbach, J. (2007). Designing Web Navigation. O'Reilly Media.
+      Mechanism: Information architecture usability testing consistently shows that navigation
+      menus with > 7 top-level items produce significantly higher "couldn't find it" failure
+      rates than menus with 5–7 items, independent of whether the target item was present.
+      Implication: Navigation must be ruthlessly prioritized to the top 5–7 destinations.
+      Secondary destinations belong in footer, sitemap, or contextual in-page links.
+    detection:
+      method: dom_analysis
+      condition: >
+        primary_nav = querySelector('nav[role="navigation"], header nav, [aria-label*="main"], [aria-label*="primary"]');
+        if primary_nav:
+          direct_children = primary_nav.querySelectorAll(':scope > ul > li, :scope > a, :scope > [role="menuitem"]');
+          count(direct_children) > 7
+    severity: medium
+    severity_logic: >
+      high if top-level nav items > 12 (IA breakdown; users cannot form a site model);
+      medium if top-level nav items > 7 (exceeds parallel-processing ceiling);
+      low if exactly 7–8 items but one item is a utility link (Login, Search, Cart) that
+      users do not evaluate as a content destination.
+    applies_to:
+      - web
+      - mobile
+    language_scope: latin-ltr
+    deviation_tolerance_override: false
+    context_qualifiers:
+      - condition: Site is a large e-commerce store where category navigation is the primary product discovery path
+        effect: Raise threshold to 10 top-level items; product category menus have a different cognitive model than site navigation — users scan for category labels, not page names. Mega-menu patterns with visual grouping further amortize the cost.
+      - condition: Navigation is a footer sitemap or secondary utility nav, not primary wayfinding
+        effect: Rule does not apply to footer navigation; exhaustive footers are a known and accepted UX pattern.
+    fix:
+      prescription: >
+        Audit all top-level navigation items and rank by: (a) user task frequency (analytics),
+        (b) business conversion priority. Keep the top 5–7. Move lower-priority items to a
+        secondary nav, footer, or "More" dropdown. Use visual weight (active states, icon
+        pairing) on the 1–2 highest-priority items to guide eye entry.
+      design_system_aware: true
+      example: |
+        Tailwind: Limit the <ul> inside <nav> to 6 <li> items plus one utility item.
+          Consolidate: Features | Pricing | Blog | About | Docs → Features | Pricing | Blog | [More ▾]
+          The [More ▾] dropdown catches lower-frequency destinations.
+
+        WordPress: In Appearance > Menus, restructure the primary menu to have ≤ 7 items.
+        Move Pages with low traffic (About, Legal, Press) to a footer menu. Use a custom
+        Walker_Nav_Menu to cap primary menu rendering at 7 items programmatically.
+
+        Shopify: In the navigation admin, limit the main menu to 6 collection links + Cart/Account.
+        Move blog, about, and policies to footer navigation. Use the header Mega Menu section
+        for stores where subcategories are the navigation model.
+    citations:
+      - >
+        Hick, W. E. (1952). On the rate of gain of information. Quarterly Journal of
+        Experimental Psychology, 4(1), 11–26. https://doi.org/10.1080/17470215208416600
+      - >
+        Miller, G. A. (1956). The magical number seven, plus or minus two: Some limits on
+        our capacity for processing information. Psychological Review, 63(2), 81–97.
+        https://doi.org/10.1037/h0043158
+      - >
+        Kalbach, J. (2007). Designing Web Navigation. Sebastopol, CA: O'Reilly Media.
+    cross_references:
+      - F-CL-001
+    verification_status: robust
+
+
+  - id: F-PD-001
+    layer: foundation
+    category: progressive_disclosure
+    name: Progressive Disclosure Absence
+    description: >
+      A page exceeding 2000 words with no structural disclosure mechanisms (sections, tabs,
+      accordions, or clear H2-level chunking) presents an undifferentiated content mass that
+      overwhelms intrinsic motivation to read and prevents users from locating relevant
+      subsections.
+    psychology: |
+      Study: Sweller, J. (1988). Cognitive load during problem solving: Effects on learning.
+      Cognitive Science, 12(2), 257–285.
+      Mechanism: Cognitive Load Theory distinguishes intrinsic load (inherent content
+      complexity) from extraneous load (imposed by poor presentation). A wall of undivided
+      text maximizes extraneous load by forcing readers to maintain a mental map of position,
+      progress, and relevance without any external scaffolding. This extraneous load crowds
+      out working memory available for actual comprehension (intrinsic load).
+      Study: Krug, S. (2000). Don't Make Me Think. New Riders.
+      Mechanism: Eye-tracking and task-completion studies show that users scan rather than
+      read web content. Without visual anchors (headers, bold callouts, bullet breaks),
+      scanning produces no useful signal — users cannot locate relevant sections and either
+      read linearly (high time cost) or abandon (high bounce rate).
+      Study: Nielsen, J. (1997). How Users Read on the Web. Nielsen Norman Group.
+      Mechanism: 79% of users scan web pages rather than reading word-for-word. Scannable
+      text (subheadings, short paragraphs, bullet lists) achieves 47% higher usability scores
+      than dense prose in controlled studies.
+      Implication: Any content exceeding ~1000 words must be structurally disclosed — either
+      through visible section headers, tabbed navigation, or accordion-style chunking that
+      lets users assess and skip to relevant content without linear traversal.
+    detection:
+      method: content_analysis
+      condition: >
+        page_text = document.body.innerText or equivalent stripped text;
+        word_count = page_text.split(/\s+/).length;
+        structural_elements = querySelectorAll(
+          'h2, h3, [role="tab"], [role="tabpanel"],
+          details, summary, .accordion, [data-accordion],
+          [aria-expanded]'
+        ).length;
+        TRIGGER if word_count > 2000 AND structural_elements < 3
+    severity: medium
+    severity_logic: >
+      high if word_count > 4000 and structural_elements < 2 (dense wall of text);
+      medium if word_count > 2000 and structural_elements < 3 (insufficient chunking);
+      low if word_count > 1500 and only one H2 present (borderline case, monitor).
+    applies_to:
+      - web
+      - mobile
+    language_scope: latin-ltr
+    deviation_tolerance_override: false
+    context_qualifiers:
+      - condition: Page is a long-form essay, literary content, or journalistic article where linear reading is the explicit format
+        effect: Reduce to low severity; long-form prose has an established reading contract. Still recommend a table of contents or section anchors at > 3000 words.
+      - condition: Page is legal documentation (terms, privacy policy) where exhaustive disclosure is required
+        effect: Reduce to low severity; users do not expect or require scannability in legal documents. Anchored section headers are still recommended best practice.
+      - condition: Page uses a sticky table of contents or reading progress indicator
+        effect: Reduce severity by one level; external navigation scaffolding partially compensates for absence of inline structural elements.
+    fix:
+      prescription: >
+        Add H2-level section headers at logical topic breaks (every 300–500 words as a rough
+        guide). For very long content (> 3000 words), implement a sticky table of contents
+        with anchor links. For reference content (FAQs, documentation), convert to accordion
+        or tabbed interface so users can collapse sections they don't need. Ensure each
+        structural element has meaningful, descriptive text — not generic labels like
+        "Section 1" — so scan-reading users can evaluate relevance without opening.
+      design_system_aware: true
+      example: |
+        Tailwind: Structure long content with semantic heading hierarchy and a sticky TOC.
+          <aside class="sticky top-8 hidden xl:block">
+            <nav class="space-y-1 text-sm">
+              <a href="#section-1" class="block text-gray-600 hover:text-gray-900">Section Name</a>
+              ...
+            </nav>
+          </aside>
+          <article class="prose max-w-prose">
+            <h2 id="section-1">First Major Topic</h2>
+            <p>...</p>
+            <h2 id="section-2">Second Major Topic</h2>
+            ...
+          </article>
+
+        WordPress: Enable Gutenberg's Table of Contents block for posts > 1500 words.
+        Use the Heading block (H2/H3) to create structural anchors. For FAQ content,
+        use the Accordion block pattern rather than inline Q&A prose.
+
+        Shopify: For long product descriptions, use the Tab section component to separate
+        Description, Specifications, and Shipping/Returns into distinct tabs. This reduces
+        visible word count per view while preserving total content available.
+    citations:
+      - >
+        Sweller, J. (1988). Cognitive load during problem solving: Effects on learning.
+        Cognitive Science, 12(2), 257–285. https://doi.org/10.1207/s15516709cog1202_4
+      - >
+        Krug, S. (2000). Don't Make Me Think: A Common Sense Approach to Web Usability.
+        Berkeley, CA: New Riders.
+      - >
+        Nielsen, J. (1997, October 1). How Users Read on the Web. Nielsen Norman Group.
+        https://www.nngroup.com/articles/how-users-read-on-the-web/
+    cross_references:
+      - F-CL-004
+      - F-CL-005
+    verification_status: robust

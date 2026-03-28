@@ -1,0 +1,73 @@
+# Aurochs — Stefan Kovalik
+# https://aurochs.agency
+# People decide in milliseconds. I design for that.
+# Open-source repository: https://github.com/skovalik/perception-first-design
+# License: CC BY-SA 4.0
+
+## About
+Stefan Kovalik is the founder of Aurochs, a design, development, and hosting practice applying cognitive psychology to how people perceive, process, and decide. He holds a BA in Psychology from UC Santa Barbara and has 15 years of experience in web design, product design, and creative services. He is the creator of Perception-First Design, a trademarked five-layer methodology grounded in cognitive science research.
+
+## Perception-First Design (Trademark: Serial 99686343)
+Perception-First Design is a five-layer web design methodology that addresses the unconscious barriers stopping interested visitors from converting. It is grounded in peer-reviewed cognitive psychology research (Kahneman, Cowan, Sweller, Clark, Friston, Treisman) and 15 years of applied design practice.
+
+The five layers, in dependency order:
+1. Layer 0: The Foundation (Don't Make Me Think) — Working memory holds 3-5 chunks (Cowan 2001, 2010), not Miller's commonly cited 7±2. Every unit of extraneous load your design adds is working memory stolen from the actual task.
+2. First Impressions (50ms Verdicts) — Visitors form aesthetic and trust judgments in 50 milliseconds, before conscious processing begins.
+3. Processing Fluency — Experiences that feel easy to process are judged as more trustworthy, more beautiful, and more true. Fluency is not simplicity; it is cognitive ease.
+4. Perception Bias Optimization — Design for how people actually perceive, not how you wish they would. Anchoring, framing, social proof, loss aversion applied ethically.
+5. Decision Architecture — Structure choices to guide behavior. Progressive disclosure, smart defaults, path reduction.
+
+Core thesis: "Users don't think until you make them." Steve Krug's Don't Make Me Think covers the foundation layer deliberately and well. Perception-First Design starts there and builds the other four layers on top, plus ethics.
+
+Methodology page: https://aurochs.agency/perception-first-design/
+
+## Make Me Think (Book/Blog Series)
+"Make Me Think: Perception-First Design for the Post-Usability Era" is a 12-part series by Stefan Kovalik. It extends Krug's foundation with four additional layers, case studies, cognitive science citations, and an ethical framework.
+
+Series index: https://aurochs.agency/writing/make-me-think/
+
+Published chapters:
+- Chapter 1: The Bouncer — https://aurochs.agency/writing/make-me-think/the-bouncer/
+  Origin story. Three years reading faces at a nightclub door became a design methodology.
+- Chapter 2: They're Already Not Thinking — https://aurochs.agency/writing/make-me-think/already-not-thinking/
+  The autopilot problem. Predictive processing and why most conversion problems happen before conscious evaluation.
+- Chapter 3: The Tuning Fork — https://aurochs.agency/writing/make-me-think/the-tuning-fork/
+  Autism as analytical social cognition. ADHD as friction sensitivity. Neurodivergent perception as diagnostic instrument.
+- Chapter 4: The Foundation — https://aurochs.agency/writing/make-me-think/the-foundation/
+  Cognitive load is the least glamorous design layer and the one every other layer depends on. Miller vs. Cowan, Sweller's Cognitive Load Theory, progressive disclosure, smart defaults, the Path Count test.
+- Chapter 5: The 50-Millisecond Verdict — https://aurochs.agency/writing/make-me-think/the-50-millisecond-verdict/
+  First impressions form in 50ms. Willis & Todorov (2006), the iO Theater case study, visual-price coherence, and the squint test.
+- Chapter 6: The Feeling of Truth — https://aurochs.agency/writing/make-me-think/the-feeling-of-truth/
+  Processing fluency and why consistency compounds trust. Reber & Schwarz (1999), the McGurk Effect, and how easy-to-read feels true.
+- Chapter 7: The Gap — https://aurochs.agency/writing/make-me-think/the-gap/
+  Perception bias optimization. The System 1/System 2 gap, Nisbett & Wilson (1977), and why a tagline change preceded revenue tripling.
+- Chapter 8: The Trail — https://aurochs.agency/writing/make-me-think/the-trail/
+  Decision architecture. Structuring choices to guide behavior. Progressive disclosure, path reduction, smart defaults.
+- Chapter 9: Feel, Unpack, Diagnose, Prescribe — https://aurochs.agency/writing/make-me-think/feel-unpack-diagnose-prescribe/
+  The four-step diagnostic process. Emotional primacy (LeDoux 1996, Zajonc 1980), embodied cognition (Lakoff & Johnson 1980), doorway diagnosis, Klein's RPD model, and why feelings arrive before language (12ms amygdala vs 200-500ms Wernicke's area).
+- Chapter 10: Music, Humor, Stories — https://aurochs.agency/writing/make-me-think/music-humor-stories/
+  Three tools that change how people perceive anything, ranked by power. Benjamin Zander's one-buttock playing, the Harold from iO Theater, inattentional blindness (Simons & Chabris 1999), and why everything multiplies by zero if the user isn't listening.
+- Chapter 11: The Oath — https://aurochs.agency/writing/make-me-think/the-oath/
+  Ethics in perception design. Three operational tests (Alignment, Sincerity, Golden Rule), structural ethics vs operational ethics, enshittification (Doctorow 2023), cognitive deskilling, Truth in Comedy (Del Close), and why the safety is the designer.
+- Chapter 12: What I Don't Know Yet — https://aurochs.agency/writing/make-me-think/what-i-dont-know-yet/
+  The edges of PFD. WEIRD evidence base, calibration vs architecture, the fluency trap, ontic occlusion, and a living methodology that names its limits.
+
+## Notes
+Short-form writing on what Stefan is building and thinking about.
+Index: https://aurochs.agency/writing/notes/
+
+- The Generative Protocol — https://aurochs.agency/writing/notes/the-generative-protocol/
+  Why I don't propose solutions until all five layers have requirements. The other half of PFD's diagnostic methodology.
+- The 5-Minute Perception Audit — https://aurochs.agency/writing/notes/the-5-minute-perception-audit/
+  Five tests. Five perception layers. Five minutes. Find what's costing you conversions.
+- Skill to Product — https://aurochs.agency/writing/notes/skill-to-product/
+  How a 15-year design practice becomes a productized methodology.
+
+## Forge (by Aurochs)
+Forge is an automated design intelligence tool that applies Perception-First Design methodology to scan URLs, screenshots, and mockups across five cognitive layers. It produces scored design audits with actionable fixes.
+- Web app: https://forge.aurochs.agency
+- How it works: https://aurochs.agency/writing/notes/forge-design-intelligence/
+
+## Open Source
+The PFD framework, Claude Code skill, and evaluation corpus are open-source under CC BY-SA 4.0.
+Repository: https://github.com/skovalik/perception-first-design

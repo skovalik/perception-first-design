@@ -1,0 +1,427 @@
+# PFD Heuristics — Layer 4: Decision Architecture
+# Universal rules applicable across platforms and contexts.
+# Language scope: latin-ltr only.
+# Do NOT hand-edit citation fields — keep exact author/year/title formatting.
+
+rules:
+
+  - id: L4-CT-001
+    layer: l4
+    category: cta
+    name: CTA Clarity — Single Dominant Action on Conversion Pages
+    description: >
+      Conversion pages that lack a single visually dominant call-to-action, or that
+      present multiple CTAs with equal visual prominence, fail to direct user intent.
+      When the decision architecture presents no clear primary path, users apply
+      cognitive effort to resolve the ambiguity — increasing drop-off and reducing
+      conversion rates. Every conversion page must have exactly one primary CTA that
+      is visually and hierarchically unambiguous.
+    psychology: >
+      Thaler and Sunstein (2008) established that default options and choice
+      architecture powerfully steer behavior without restricting freedom. When no
+      dominant option is pre-selected or visually prioritized, users experience
+      choice overload (Iyengar & Lepper, 2000) and are more likely to defer action
+      entirely. The absence of a clear primary CTA is functionally equivalent to
+      presenting an undifferentiated choice set — it removes the architect's thumb
+      from the scale, leaving conversion to chance. On high-stakes conversion pages,
+      this violates the core principle that good choice architecture makes the desired
+      action the path of least resistance.
+    detection:
+      method: >
+        Identify conversion pages (checkout, signup, pricing, landing pages, contact
+        forms). On each, enumerate all interactive elements styled as buttons or
+        anchor-buttons. Assess visual prominence via color contrast delta against
+        page background, element size (px area), and positional weight (above-fold
+        vs. below-fold, left-to-right reading order placement).
+      condition: >
+        Flag if: (a) zero CTA elements are present on a confirmed conversion page, OR
+        (b) two or more CTA elements exist within the same viewport-height block with
+        a visual prominence delta of less than 30% between them (size, color
+        saturation, or contrast score).
+    severity: critical
+    severity_logic: >
+      Critical on confirmed conversion pages (checkout, signup, pricing, contact
+      form, landing page). Downgrade to high on pages with soft conversion goals
+      (newsletter opt-in, content download). Not applicable to editorial or
+      informational pages with no conversion intent.
+    applies_to:
+      - web
+      - mobile
+      - email
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      Tolerate dual-CTA patterns ONLY when one is a primary action (filled, high
+      contrast) and the other is a ghost/outline secondary action at ≥40% reduced
+      visual weight. Example: "Get Started" (filled primary) + "See demo" (ghost
+      secondary). This is a decision architecture feature, not a violation.
+    context_qualifiers:
+      - condition: E-commerce product detail page with "Add to Cart" + "Buy Now"
+        effect: >
+          Acceptable dual-CTA only if "Buy Now" is visually dominant and "Add to
+          Cart" is secondary-styled. If equal weight, flag as violation.
+      - condition: SaaS pricing page with per-plan CTAs
+        effect: >
+          Each pricing tier has its own CTA — treat each tier block as its own
+          conversion unit. Assess prominence within the tier block, not across all
+          tiers simultaneously.
+      - condition: Email with multiple product links
+        effect: >
+          Flag if no single link receives primary button treatment. Plain-text-style
+          links throughout = no decision architecture = violation.
+    fix:
+      prescription: >
+        Designate exactly one element as the primary CTA per conversion unit. Apply
+        full brand primary color fill with sufficient contrast (≥4.5:1 against
+        background). All other actions on the same screen must be visually subordinate
+        via ghost/outline style, reduced size, or placement below the primary.
+      design_system_aware: true
+      example: >
+        Tailwind: Primary — `<button class="bg-blue-600 text-white font-semibold
+        px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">Get Started
+        </button>`. Secondary — `<button class="border border-blue-600 text-blue-600
+        font-semibold px-6 py-3 rounded-lg hover:bg-blue-50 transition-colors">
+        See Demo</button>`. Ensure primary button renders first in DOM order and
+        appears above the fold.
+        WordPress (Gutenberg): Use a Buttons block with one filled button (primary
+        color set in theme.json) and one outline button. Do not use equal-weight
+        button pairs from the default block styles.
+        Shopify (Dawn): In `sections/featured-product.liquid`, ensure `.btn--primary`
+        class is applied to the Add to Cart button only. Do not apply `.btn--primary`
+        to wishlist or share buttons in the same section.
+    citations:
+      - >
+        Thaler, R. H., & Sunstein, C. R. (2008). Nudge: Improving decisions about
+        health, wealth, and happiness. Yale University Press.
+      - >
+        Iyengar, S. S., & Lepper, M. R. (2000). When choice is demotivating: Can one
+        desire too much of a good thing? Journal of Personality and Social Psychology,
+        79(6), 995–1006. https://doi.org/10.1037/0022-3514.79.6.995
+    cross_references:
+      - L2-VH-001  # Visual hierarchy — prominence scoring
+      - L3-CL-001  # Cognitive load — decision fatigue
+    verification_status: draft
+
+
+  - id: L4-CT-002
+    layer: l4
+    category: cta
+    name: CTA Label Specificity — Eliminate Generic Action Text
+    description: >
+      CTA labels that use generic text ("Click here", "Submit", "Learn more",
+      "Continue", "Go") provide no information about what happens next. Users
+      evaluate whether to act based on the expected value of the action — if
+      the label carries no scent of the destination or outcome, the expected
+      value calculation cannot be completed, and users are more likely to skip
+      the action. Specific, outcome-oriented labels convert at measurably higher
+      rates than generic alternatives.
+    psychology: >
+      Pirolli and Card (1999) developed Information Foraging Theory, demonstrating
+      that users navigate information environments like animals foraging for food —
+      following "information scent" (cues that signal the value and relevance of
+      the next step). A CTA label is the single highest-density scent signal on a
+      page: it must convey what the user will get or do next. Generic labels
+      ("Click here", "Submit") carry zero scent — they communicate only the
+      mechanics of interaction, not the outcome. Users with low motivation or
+      high cognitive load will not click a zero-scent label because they cannot
+      justify the action to themselves. Specific labels ("Download the free guide",
+      "Start my free trial", "See pricing") provide enough scent to complete the
+      expected-value calculation and trigger action.
+    detection:
+      method: >
+        Extract all interactive element labels (button text, anchor text styled as
+        buttons, form submit values) from the page. Normalize to lowercase, strip
+        punctuation. Compare against the generic-label list.
+      condition: >
+        Flag if any CTA element text matches or is a substring of the generic-label
+        list: ["click here", "click", "submit", "go", "continue", "learn more",
+        "read more", "find out more", "more info", "more information", "ok", "okay",
+        "yes", "no", "next", "send", "enter"]. Partial matches count (e.g., "click
+        here to learn more" contains "click here").
+    severity: medium
+    severity_logic: >
+      Medium on primary CTAs. Low on secondary or destructive actions where
+      specificity is less critical (e.g., "Cancel" is acceptable — it is specific
+      about the outcome). Elevate to high if a generic label appears on the single
+      primary CTA of a conversion page.
+    applies_to:
+      - web
+      - mobile
+      - email
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      "Cancel" and "Close" are exempt — these are standard affordance labels where
+      convention reduces cognitive load. Form field submit buttons within a clearly
+      labeled form context may tolerate "Submit" if the form title provides full
+      outcome context (e.g., form titled "Request a Quote" with a "Submit" button
+      is borderline acceptable). Flag as advisory, not violation, in that case.
+    context_qualifiers:
+      - condition: Search interface with a search button
+        effect: >
+          A magnifying glass icon or "Search" label is acceptable — this is a
+          universal convention with zero ambiguity. Do not flag.
+      - condition: Pagination controls ("Next", "Previous")
+        effect: >
+          Acceptable in pagination context where positional meaning is clear.
+          Do not flag unless the pagination label is the primary conversion CTA.
+      - condition: Mobile app with icon-only buttons
+        effect: >
+          Apply to visible text labels only. Icon-only buttons are governed by
+          separate accessibility heuristics (L4-AX series).
+    fix:
+      prescription: >
+        Replace generic labels with outcome-oriented, first-person or action-specific
+        text. Pattern: [verb] + [what the user gets or does]. Keep to 2–5 words.
+        Avoid starting with "I" (reads as brand-centric, not user-centric in most
+        contexts). Test specificity by asking: "Does this label tell the user what
+        happens next?"
+      design_system_aware: true
+      example: >
+        Replace "Submit" → "Send my message" or "Get my free quote".
+        Replace "Learn more" → "See how it works" or "Read the case study".
+        Replace "Click here" → "Download the checklist" or "Start free trial".
+        Replace "Continue" → "Continue to payment" or "Set up my account".
+        Tailwind: No class changes needed — this is a copy change. Ensure the label
+        fits within the button's min-width without truncation at 375px.
+        WordPress (Gutenberg): Edit button block text directly. If using a
+        reusable block, update the source block to propagate the change.
+        Shopify (Dawn): In `locales/en.default.json`, update the relevant
+        translation key (e.g., `"add_to_cart": "Add to cart"` is acceptable;
+        `"checkout": "Check out"` is acceptable; generic keys like `"continue"`
+        should be overridden at the section level with specific copy).
+    citations:
+      - >
+        Pirolli, P., & Card, S. (1999). Information foraging. Psychological Review,
+        106(4), 643–675. https://doi.org/10.1037/0033-295X.106.4.643
+    cross_references:
+      - L4-CT-001  # CTA clarity — primary action designation
+      - L1-CP-001  # Copy patterns — action-oriented language
+    verification_status: draft
+
+
+  - id: L4-NV-001
+    layer: l4
+    category: navigation
+    name: Navigation Trail Clarity — Breadcrumbs on Deep Interior Pages
+    description: >
+      Interior pages more than two levels deep in a site hierarchy that lack
+      breadcrumbs or a positional indicator leave users without a wayfinding
+      scaffold. When users cannot determine where they are relative to the whole,
+      they must either maintain a mental model of the site structure (cognitive
+      overhead) or abandon the page. Breadcrumbs reduce navigation cognitive load
+      and lower the cost of exploration — users are more willing to go deep if
+      they know they can orient and backtrack cheaply.
+    psychology: >
+      Pirolli and Card (1999) established that information foragers use environmental
+      cues to track their current position relative to the information landscape.
+      Losing positional awareness increases the cost of continued navigation —
+      users become uncertain whether they are approaching or receding from their
+      goal, and may abandon the trail entirely. Breadcrumbs function as a positional
+      signal in the information scent model: they display the path taken, confirm
+      the current location's relevance, and make the cost of backtracking explicit
+      and low. On sites with flat or simple structures this signal is redundant;
+      on sites with hierarchical depth it is load-bearing for exploration behavior.
+    detection:
+      method: >
+        Determine page depth by parsing URL path segments or site hierarchy map.
+        For each page at depth >2 (i.e., three or more path segments, e.g.,
+        /category/subcategory/product), check for a breadcrumb element: a
+        structured list of ancestor page links, typically rendered as
+        `<nav aria-label="breadcrumb">` or a series of links separated by a
+        delimiter character (/, >, »). Also accept a persistent left-rail
+        navigation with active-state highlighting as a positional substitute.
+      condition: >
+        Flag if: page depth is >2 levels AND no breadcrumb element or equivalent
+        positional indicator is present.
+    severity: low
+    severity_logic: >
+      Low on sites with ≤10 total pages (shallow structure makes breadcrumbs
+      redundant). Medium on sites with >10 pages and hierarchical structure
+      (e-commerce categories, documentation, blog with categories, knowledge bases).
+      High on e-commerce product detail pages where path to category is a primary
+      navigation pattern. Not applicable to single-page apps, landing pages, or
+      checkout flows where linear navigation is intentional.
+    applies_to:
+      - web
+      - mobile
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      Acceptable substitutes for breadcrumbs: (a) a persistent sidebar navigation
+      with active-state highlighting that shows the full hierarchy, (b) a
+      "Back to [parent category]" link immediately above the page title, (c) a
+      sticky header that displays the current section name. Any of these satisfies
+      the positional clarity requirement and should not be flagged.
+    context_qualifiers:
+      - condition: Single-page application with URL routing
+        effect: >
+          Apply if URL depth is >2 and back-navigation is not trivially available
+          via browser affordances. SPA navigation patterns vary — assess whether
+          a user can determine their location without breadcrumbs.
+      - condition: E-commerce product detail page (category > subcategory > product)
+        effect: >
+          Elevate severity to high. Breadcrumbs on PDPs are a direct conversion
+          support feature — they allow price-comparison shoppers to return to the
+          category listing without losing context, reducing abandonment.
+      - condition: Documentation site with multi-level section nesting
+        effect: >
+          Elevate severity to medium-high. Developers and technical users in docs
+          are particularly reliant on positional awareness when navigating between
+          related reference pages.
+      - condition: Mobile viewport (<768px)
+        effect: >
+          Breadcrumbs may be collapsed to show only the immediate parent link
+          (e.g., "← Products"). Full breadcrumb trail at mobile width is
+          acceptable but truncation to parent-only is not a violation.
+    fix:
+      prescription: >
+        Add a breadcrumb navigation element to all interior pages at depth >2.
+        Position it above the page title (H1), below the primary navigation bar.
+        Render as a horizontal ordered list of ancestor page links with the current
+        page as the terminal non-linked item. Use schema.org BreadcrumbList markup
+        for SEO benefit.
+      design_system_aware: true
+      example: >
+        HTML/Tailwind: `<nav aria-label="Breadcrumb" class="text-sm text-gray-500
+        mb-4"><ol class="flex items-center gap-2"><li><a href="/" class="hover:
+        text-gray-900 transition-colors">Home</a></li><li aria-hidden="true">
+        /</li><li><a href="/category/" class="hover:text-gray-900 transition-colors">
+        Category</a></li><li aria-hidden="true">/</li><li class="text-gray-900
+        font-medium" aria-current="page">Current Page</li></ol></nav>`.
+        WordPress: Enable breadcrumbs via Yoast SEO (Settings → General →
+        Breadcrumbs → Enable) and add `<?php yoast_breadcrumb('<nav class="breadcrumb
+        text-sm">','</nav>'); ?>` to the relevant template file (single.php,
+        archive.php, page.php). Add JSON-LD BreadcrumbList markup via Yoast's
+        structured data output — no additional code needed.
+        Shopify (Dawn): The Dawn theme includes a breadcrumb snippet. In
+        `sections/main-product.liquid`, uncomment or add
+        `{%- render 'breadcrumbs' -%}` above the product title. Ensure the
+        `breadcrumbs.liquid` snippet uses schema.org markup (Dawn includes this
+        by default in version ≥9.0).
+    citations:
+      - >
+        Pirolli, P., & Card, S. (1999). Information foraging. Psychological Review,
+        106(4), 643–675. https://doi.org/10.1037/0033-295X.106.4.643
+    cross_references:
+      - L4-CT-001  # CTA clarity — conversion page context
+      - L3-CL-002  # Cognitive load — navigation overhead
+    verification_status: draft
+
+
+  - id: L4-EX-001
+    layer: l4
+    category: exit_intent
+    name: Exit Intent Density — Outbound Link Overload on Conversion Pages
+    description: >
+      Conversion pages that contain more than three outbound links (links to
+      external domains) per section create multiple decision trail off-ramps.
+      Each outbound link represents an opportunity for the user to leave the
+      conversion funnel — they shift attention, introduce new information that
+      may contradict the conversion case, and increase the cognitive surface area
+      of the decision. On pages where the singular goal is conversion, outbound
+      links are architectural exits that work against the designer's intent.
+    psychology: >
+      Pirolli and Card (1999) describe information foraging as a process of
+      following trails of information scent toward goals. Each link on a page
+      is a potential trail branch — a decision point where the user must evaluate
+      whether this branch leads toward or away from their current goal. On a
+      conversion page, the designer has established the goal (complete the action).
+      Every outbound link introduces a competing trail: it suggests that relevant
+      information exists elsewhere, inviting the user to defer the conversion
+      decision until they have evaluated the external source. High link density
+      on conversion pages is therefore a decision architecture failure: it
+      distributes the user's attention across multiple competing trails rather
+      than focusing it on the single intended action. Even links that appear
+      supportive (e.g., third-party trust badges, press mentions) carry exit
+      risk if they are live hyperlinks rather than static trust signals.
+    detection:
+      method: >
+        Identify conversion pages (checkout, signup, pricing, lead capture, landing
+        pages). For each page, segment into sections (defined by semantic HTML
+        sections, divs with section-level classes, or visually distinct content
+        blocks). For each section, count anchor elements (`<a href="...">`) where
+        the href domain differs from the page's domain (outbound links). Exclude
+        links that open in a new tab only if they are trust badges or press logos
+        with `rel="noopener noreferrer"` and no visible label text.
+      condition: >
+        Flag if any section on a conversion page contains >3 outbound links.
+        Flag as advisory if the page total exceeds 5 outbound links regardless
+        of section distribution.
+    severity: medium
+    severity_logic: >
+      Medium on conversion pages with quantifiable conversion goals (checkout,
+      signup, lead form). Low on informational pages, blog posts, and resource
+      pages where outbound links serve content credibility. High if outbound links
+      appear within or immediately adjacent to the primary CTA section
+      (above-the-fold or CTA block). Not applicable to resource pages, blog posts,
+      or any page whose explicit purpose is to provide external references.
+    applies_to:
+      - web
+      - mobile
+      - email
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      Trust badges (SSL seal, payment processor logos, BBB, etc.) are exempt if
+      rendered as static images without a live href, or if the href is to a
+      verification page that opens in a new tab with `target="_blank"
+      rel="noopener noreferrer"`. Press logo sections ("As seen in") are exempt
+      under the same condition. Social proof links to third-party review platforms
+      (Trustpilot, G2) should be evaluated: if they appear above the fold near
+      the primary CTA, apply the rule; if below the fold in a dedicated social
+      proof section, treat as low severity.
+    context_qualifiers:
+      - condition: SaaS pricing page with a "Compare alternatives" section
+        effect: >
+          Competitor comparison links are high exit-intent risk even if framed
+          favorably. Flag any section with competitor links as a violation regardless
+          of count. Decision architecture principle: do not build exits into the
+          comparison decision.
+      - condition: E-commerce checkout page
+        effect: >
+          Any outbound link on a checkout page is a violation regardless of count.
+          Checkout is the highest-conversion-intent moment — zero exits should be
+          the architectural rule.
+      - condition: Landing page with press/media logos
+        effect: >
+          If press logos link to articles (common pattern), count them as outbound
+          links. Acceptable if they are in a dedicated press section below the fold
+          and open in a new tab. Flag if above the fold or within one scroll
+          position of the primary CTA.
+      - condition: Email newsletter with multiple product links
+        effect: >
+          Outbound links in email are the desired action, not exits. Apply only if
+          email has a single conversion goal (e.g., a promotional email with one
+          offer) and outbound links distract from that goal. Do not apply to
+          digest-style or multi-article newsletters.
+    fix:
+      prescription: >
+        Audit all outbound links on conversion pages. Remove or convert live links
+        to static trust signals (unlinked logos, static badge images). If external
+        links serve a credibility function, move them to a section below the primary
+        CTA and ensure they open in a new tab. For checkout pages, remove all
+        outbound links entirely. For landing pages, cap outbound links per section
+        at ≤3 and ensure none appear within the same viewport as the primary CTA.
+      design_system_aware: true
+      example: >
+        Tailwind — Convert a live press link to a static trust badge:
+        Before: `<a href="https://techcrunch.com/..." class="press-logo">
+        <img src="techcrunch.svg" alt="TechCrunch"></a>`.
+        After: `<span class="press-logo opacity-60"><img src="techcrunch.svg"
+        alt="As seen in TechCrunch"></span>`. Remove the anchor wrapper; the
+        logo becomes a static trust signal with no exit risk.
+        WordPress (WooCommerce checkout): In `checkout/form-checkout.php` or
+        via the `woocommerce_checkout_before_order_review` hook, audit any
+        custom content injected into the checkout page. Remove all external
+        links. Ensure no active plugins are injecting outbound links into the
+        checkout template (common with upsell plugins).
+        Shopify (Dawn): In `sections/main-cart-footer.liquid` and
+        `sections/checkout.liquid` (if customizable on your Shopify plan), audit
+        for outbound links. In the cart page, press logos or payment badge sections
+        should use static `<img>` tags without wrapping anchors.
+    citations:
+      - >
+        Pirolli, P., & Card, S. (1999). Information foraging. Psychological Review,
+        106(4), 643–675. https://doi.org/10.1037/0033-295X.106.4.643
+    cross_references:
+      - L4-CT-001  # CTA clarity — single primary action context
+      - L4-NV-001  # Navigation trail — link density and wayfinding
+      - L2-AT-001  # Attention — focal point competition
+    verification_status: draft

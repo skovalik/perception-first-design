@@ -1,0 +1,379 @@
+---
+# PFD Corpus — L3 Perception Bias Heuristic Rules
+# Layer 3: Perception Bias — Examines signals that exploit or misalign with how humans
+# interpret social cues, framing, loss, and competitive positioning.
+# MVS Task 12 | Created: 2026-03-21
+
+rules:
+
+  - id: L3-SP-001
+    layer: l3
+    category: social_proof
+    name: Social Proof Presence
+    description: >
+      A conversion-oriented page carries no social proof signal — no testimonials,
+      reviews, star ratings, user counts, logos, case studies, or trust indicators.
+      Absence of social proof on pages where a visitor is being asked to commit an
+      action (purchase, sign-up, contact) measurably suppresses conversion because
+      humans default to observing others' behavior when uncertain about a decision.
+    psychology: >
+      Cialdini (2001) identifies social proof as one of six core principles of
+      influence: under uncertainty, people look to the behavior and judgments of
+      others as a proxy for correct action. The effect is strongest when the
+      referent group is perceived as similar to the observer (Festinger, 1954,
+      social comparison theory). Conversion pages that present a novel commitment
+      (buy, sign up, contact) are by definition high-uncertainty contexts; the
+      absence of social proof forces the visitor to resolve that uncertainty
+      entirely through their own judgment, increasing cognitive load and exit rate.
+      Confirmatory evidence: Spiegel Research Center (2017) found that displaying
+      reviews increases conversion by 270% for lower-priced products and 380% for
+      higher-priced products.
+    detection:
+      method: content_scan
+      condition: >
+        Page goal is classified as conversion (product page, pricing page, landing
+        page, contact page, checkout page, sign-up page). Scan DOM/content for
+        presence of at least one social proof signal from the following set:
+        testimonial blocks, review widgets, aggregate star ratings, user/customer
+        count strings (e.g., "10,000+ customers", "trusted by"), logo grids of
+        recognizable brands, case study links, press mention badges, security/trust
+        seals from recognized third parties (BBB, SSL cert badges, payment logos).
+        Rule fires if zero signals are detected on a page with conversion goal.
+    severity: high
+    severity_logic: >
+      High on conversion pages only. On purely informational pages (blog posts,
+      documentation, about pages) the absence of social proof is not a defect —
+      it is expected. Severity is bounded to contexts where a commitment action
+      is being requested. Downgrade to low if page_goal is informational or
+      navigational.
+    applies_to:
+      - web
+      - mobile
+      - email
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      Override to low-severity (flag only, do not score) when page_goal context
+      qualifier resolves to informational. Override to medium-severity when product
+      is early-stage / pre-launch and social proof genuinely does not yet exist —
+      in that case flag as "social proof debt" rather than active violation.
+    context_qualifiers:
+      - condition: page_goal = conversion
+        effect: >
+          Full severity applies. Flag as active violation. Recommend immediate
+          addition of at least one social proof element above the fold or adjacent
+          to the primary CTA.
+      - condition: page_goal = informational
+        effect: >
+          Severity drops to low. Flag as observation only. Social proof is
+          contextually optional; its absence does not impair conversion on
+          pages where no commitment is requested.
+      - condition: product_stage = pre-launch
+        effect: >
+          Downgrade to medium severity. Flag as "social proof debt." Recommend
+          placeholder strategy: waitlist count, beta user quotes, founder
+          credibility signals, or press coverage if available.
+      - condition: industry = high_trust_required (finance, healthcare, legal)
+        effect: >
+          Escalate to critical. Trust signals in high-stakes industries are not
+          optional — their absence actively signals risk to the visitor.
+    fix:
+      prescription: >
+        Add a minimum of one social proof element adjacent to or above the primary
+        CTA. Prioritize specificity over quantity: a single attributed testimonial
+        with name, role, and outcome outperforms a generic "5-star" badge.
+        Placement: immediately below hero CTA, within the pricing section, or
+        inline with the form on contact/sign-up pages.
+      design_system_aware: true
+      example:
+        tailwind: >
+          Add a testimonial component between the hero section and the primary CTA.
+          Example: a flex row with avatar (rounded-full w-10 h-10), quote text
+          (text-sm text-gray-600 italic), and attribution (text-xs font-medium
+          text-gray-900). Wrap in a bg-gray-50 rounded-lg p-4 container.
+          For star ratings: use filled SVG stars (not emoji), display aggregate
+          score as text alongside count (e.g., "4.9 · 312 reviews").
+        wordpress: >
+          Use a Testimonials widget in the page builder (Elementor/Divi) or install
+          a dedicated plugin (Strong Testimonials, WP Customer Reviews). For
+          WooCommerce product pages, ensure WooCommerce Reviews are enabled in
+          Settings → Products → Reviews and that the review tab is visible above
+          the fold via CSS reorder if needed.
+        shopify: >
+          Enable product reviews via the Shopify Reviews app or Judge.me. On the
+          product page template, add the reviews section above the fold using
+          theme section settings. For landing pages built with page builders,
+          add a testimonial section block with headshot, quote, and star rating
+          attributes.
+    citations:
+      - >
+        Cialdini, R. B. (2001). Influence: Science and practice (4th ed.).
+        Allyn & Bacon. (Chapter 4: Social Proof.)
+      - >
+        Festinger, L. (1954). A theory of social comparison processes.
+        Human Relations, 7(2), 117–140. https://doi.org/10.1177/001872675400700202
+      - >
+        Spiegel Research Center. (2017). How online reviews influence sales.
+        Northwestern University Medill School. Retrieved from
+        https://spiegel.medill.northwestern.edu/online-reviews/
+    cross_references:
+      - l2-rules.yaml#L2-CL-001  # Cognitive load — trust signals reduce decision friction
+      - l4-rules.yaml#L4-DA-001  # Decision architecture — social proof as commitment anchor
+    verification_status: draft
+
+
+  - id: L3-FR-001
+    layer: l3
+    category: framing
+    name: Urgency and Scarcity Signal Audit
+    description: >
+      Page contains urgency or scarcity signals (countdown timers, "only X left in
+      stock", "offer ends tonight", "limited spots", time-bounded discount copy).
+      This rule does not auto-flag these signals as violations. It routes them to
+      Tier 2 human judgment review because urgency/scarcity signals occupy a
+      spectrum from legitimate loss-aversion framing (the product genuinely is
+      scarce) to manufactured pressure (dark pattern). The audit exists to surface
+      these signals for ethics review rather than suppress them wholesale.
+    psychology: >
+      Kahneman & Tversky (1979) demonstrated in Prospect Theory that losses loom
+      approximately twice as large as equivalent gains in human decision-making
+      (loss aversion coefficient λ ≈ 2.25). Urgency and scarcity signals exploit
+      this asymmetry by framing inaction as loss ("miss the deal") rather than
+      action as gain ("get the deal"). The effect is real and potent — but it is
+      ethically neutral only when the scarcity or deadline is genuine. Artificial
+      scarcity (countdown timers that reset, perpetually "low stock" indicators)
+      constitutes a dark pattern by inducing loss aversion under false pretenses,
+      which degrades user trust and brand reputation over repeated exposure
+      (Brignull, 2010; Gray et al., 2018). The audit flag exists to distinguish
+      legitimate use from manipulation.
+    detection:
+      method: content_scan
+      condition: >
+        Scan page text and DOM for urgency/scarcity patterns from the following
+        signal set: countdown timer elements (timer, clock, seconds-counter),
+        stock-count strings matching patterns such as "only [N] left", "X remaining",
+        "[N] in stock"; time-limited language matching patterns such as "ends
+        [today/tonight/Sunday/soon]", "limited time", "expires", "flash sale",
+        "last chance", "hurry"; artificial social proof pressure such as
+        "[N] people viewing this now", "[N] bought in last 24 hours".
+        Rule fires on any match. Routes to Tier 2 review queue — not auto-violation.
+    severity: low
+    severity_logic: >
+      Low auto-severity because the presence of urgency/scarcity is not inherently
+      a defect. Severity is assigned by the Tier 2 reviewer after evaluating
+      authenticity: (1) Is the scarcity real and verifiable? (2) Does the countdown
+      reset on page reload? (3) Is the "low stock" count accurate or static?
+      If the signal is determined to be manufactured, reviewer may escalate to
+      high severity under L3-FR-001-DARK pattern designation. If the signal is
+      genuine, reviewer may resolve as compliant with a note.
+    applies_to:
+      - web
+      - mobile
+      - email
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      Do not auto-override severity. Tier 2 reviewer controls severity assignment
+      after authenticity evaluation. If pipeline is running in automated-only mode
+      (no human reviewer available), flag with severity: review_required and
+      hold the report section pending human resolution.
+    context_qualifiers:
+      - condition: scarcity_is_genuine = true
+        effect: >
+          Resolve as compliant. Genuine scarcity (real inventory limits, real
+          event deadlines, real cohort caps) is ethically sound use of loss
+          aversion framing. Document the authenticity signal (e.g., "inventory
+          feed confirms stock count").
+      - condition: countdown_resets_on_reload = true
+        effect: >
+          Escalate to high severity. Resetting countdown timers are a documented
+          dark pattern (Brignull's "trick questions" / "roach motel" taxonomy).
+          Flag as L3-FR-001-DARK and recommend immediate removal.
+      - condition: stock_count_is_static = true
+        effect: >
+          Escalate to high severity. Static "only 3 left" copy that does not
+          reflect real inventory is deceptive. Flag as L3-FR-001-DARK.
+      - condition: channel = email
+        effect: >
+          Apply additional scrutiny. Email urgency signals (subject line countdown,
+          "offer expires in 2 hours") are high-frequency dark pattern vectors.
+          Flag for Tier 2 regardless of apparent authenticity given difficulty
+          of verification.
+    fix:
+      prescription: >
+        For genuine urgency/scarcity: retain the signal but add a transparency
+        anchor — a brief, specific statement of why the scarcity exists
+        ("We cap each cohort at 20 to maintain quality"). This converts pressure
+        into explanation, which satisfies loss aversion while maintaining trust.
+        For manufactured signals: remove entirely. Replace with value-framing
+        (what the user gains) rather than loss-framing (what they miss). If a
+        price discount is offered, communicate the reason ("launch pricing") not
+        the deadline alone.
+      design_system_aware: true
+      example:
+        tailwind: >
+          For a legitimate cohort cap: add a subtle inline note below the CTA
+          button using text-sm text-amber-700 bg-amber-50 rounded px-2 py-1.
+          Example: "Cohort limited to 20 members — 14 spots remaining."
+          Do NOT use animated countdown timers unless the deadline is real and
+          server-verified. If using a countdown, bind it to a server timestamp,
+          not a client-side reset timer.
+        wordpress: >
+          WooCommerce stock display: ensure "Low stock threshold" in
+          Settings → Products is set to a real business threshold, not
+          artificially low. Remove any plugins that display fake "X people
+          viewing" signals (e.g., FOMO plugins with simulated activity).
+        shopify: >
+          Use Shopify's native inventory tracking to power stock count display.
+          Do not use third-party "urgency" apps that generate synthetic countdown
+          timers or fake viewer counts. If using a sale end date, ensure it is
+          coded against a real date variable, not reset on each page visit.
+    citations:
+      - >
+        Kahneman, D., & Tversky, A. (1979). Prospect theory: An analysis of
+        decision under risk. Econometrica, 47(2), 263–291.
+        https://doi.org/10.2307/1914185
+      - >
+        Brignull, H. (2010). Dark patterns: Dirty tricks designers use to make
+        people do things. 90 Percent of Everything. Retrieved from
+        https://www.90percentofeverything.com/2010/07/08/dark-patterns/
+      - >
+        Gray, C. M., Kou, Y., Battles, B., Hoggatt, J., & Toombs, A. L. (2018).
+        The dark (patterns) side of UX design. In Proceedings of the 2018 CHI
+        Conference on Human Factors in Computing Systems (pp. 1–14). ACM.
+        https://doi.org/10.1145/3173574.3174108
+    cross_references:
+      - l3-rules.yaml#L3-CM-001  # Competitive comparison can stack with urgency pressure
+      - ethics/fluency-trap-detection.md  # FORWARD POINTER — file not yet created in MVS
+    verification_status: draft
+
+
+  - id: L3-CM-001
+    layer: l3
+    category: comparison
+    name: Competitor Comparison Copy
+    description: >
+      Page copy makes superiority claims relative to unnamed competitors ("unlike
+      others", "better than the rest", "the only solution that...") or names
+      specific competitors without providing verifiable comparative evidence.
+      These patterns trigger defensive cognitive processing in the reader — the
+      claim itself prompts the reader to interrogate its legitimacy rather than
+      accept it, which is the opposite of the intended effect. This rule flags
+      for Tier 2 judgment, not auto-violation, because comparison copy can be
+      executed well with evidence, but is almost always executed poorly without it.
+    psychology: >
+      Comparison claims activate System 2 (analytical) processing rather than
+      the desired System 1 (automatic/fluency) pathway (Kahneman, 2011). When a
+      brand makes an explicit superiority claim, readers apply a skepticism filter
+      — the claim is treated as a hypothesis to be tested rather than a fact to be
+      absorbed. This is the opposite of processing fluency, which seeks to make
+      understanding effortless. Defensive positioning also triggers reactance
+      (Brehm, 1966): explicit attempts to persuade can produce resistance and
+      boomerang effects, particularly when the reader perceives the persuasion
+      attempt as manipulative or unsupported. Additionally, naming competitors
+      directs attention and cognitive resources toward the competitor — the
+      mere mention of a rival brand activates its memory representation and
+      associated attributes (Keller, 1993), which can unintentionally strengthen
+      competitor salience in the reader's mind.
+    detection:
+      method: content_scan
+      condition: >
+        Scan page text for comparison signal patterns from the following set:
+        unnamed competitor references: "unlike other [products/tools/agencies]",
+        "better than the rest", "the only [X] that...", "most [adjective] on the
+        market", "unlike traditional [X]", "while others [fail at X]";
+        named competitor references: direct mention of competitor brand names
+        adjacent to claim language ("vs [Competitor]", "[Competitor] can't...",
+        "switch from [Competitor]");
+        unsupported superlatives: "#1 [category]", "best-in-class", "industry-leading"
+        without a citation or third-party source.
+        Rule fires on any match. Routes to Tier 2 review queue — not auto-violation.
+    severity: low
+    severity_logic: >
+      Low auto-severity. Comparison copy exists on a spectrum: a well-executed
+      comparison page with real feature matrices and third-party review citations
+      is a legitimate conversion tool (G2, Capterra, Trustpilot evidence is
+      credible). The defect is unsupported comparison, not comparison itself.
+      Tier 2 reviewer escalates to medium if no evidence is present adjacent to
+      the claim, or to high if the claim is demonstrably false or names a
+      competitor without factual backing.
+    applies_to:
+      - web
+      - mobile
+      - email
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      Downgrade to observation-only (no severity score) when the comparison claim
+      is immediately followed by verifiable evidence: a feature comparison table
+      with source citations, third-party review aggregate links, or a
+      methodology note explaining the basis of the claim. In that case, flag as
+      compliant-with-evidence.
+    context_qualifiers:
+      - condition: claim_has_adjacent_evidence = true
+        effect: >
+          Resolve as compliant-with-evidence. Evidence types that satisfy:
+          feature comparison table with source, third-party review score with
+          link (G2, Capterra, Trustpilot), independent audit or benchmark citation,
+          customer quote specifically referencing the comparison.
+      - condition: competitor_is_named AND no_evidence_present = true
+        effect: >
+          Escalate to medium severity. Naming a competitor without evidence
+          creates legal exposure (comparative advertising standards) and
+          activates competitor salience in the reader's memory. Recommend
+          removing the named reference or backing it with verifiable data.
+      - condition: superlative_claim AND no_third_party_source = true
+        effect: >
+          Escalate to medium severity. Unsupported superlatives ("best-in-class",
+          "#1 solution") are perceived as marketing noise by experienced buyers
+          and reduce credibility rather than increase it.
+      - condition: context = comparison_landing_page
+        effect: >
+          Lower scrutiny threshold. Dedicated comparison pages (e.g., "/vs-competitor")
+          are expected to contain comparison copy. Apply evidence standard strictly
+          but do not flag the presence of comparison copy itself as unusual.
+    fix:
+      prescription: >
+        Replace assertion-based comparison with evidence-based comparison.
+        Option 1 — remove the comparison framing entirely and replace with
+        specific outcome claims ("We reduced checkout time by 40% for X clients"
+        vs "unlike competitors who..."). Option 2 — keep the comparison but
+        add a feature matrix table with checkmarks, a G2/Capterra score block,
+        and a methodology footnote. Option 3 — replace unnamed competitor
+        references with specific use-case differentiation framing
+        ("Built for [specific workflow], not [general category]").
+      design_system_aware: true
+      example:
+        tailwind: >
+          Replace inline comparison text with a comparison table component:
+          three-column table (Feature | Our Product | Category Standard) using
+          table-auto w-full text-sm. Use CheckIcon (Heroicons, solid, text-green-500)
+          for supported features and XMarkIcon (text-red-400) for absent ones.
+          Add a footnote row with text-xs text-gray-400 citing the source
+          (e.g., "Based on G2 category averages, Q1 2026"). Do not use emoji
+          checkmarks — use SVG icons only (per pre-delivery checklist).
+        wordpress: >
+          Use a Table block (Gutenberg) or TablePress plugin for comparison tables.
+          Add a source citation as a paragraph block below the table using
+          a small text style. Avoid adding competitor names to page titles or
+          H1s — this passes PageRank-adjacent signals to the competitor and
+          may create legal review requirements depending on jurisdiction.
+        shopify: >
+          On product pages, replace generic superiority copy in the description
+          with specific outcome claims tied to the product's actual attributes.
+          If running a dedicated comparison landing page, use a custom section
+          with a structured comparison table. Ensure any competitor names used
+          in metafields or page content have been reviewed by the brand owner
+          for trademark compliance.
+    citations:
+      - >
+        Kahneman, D. (2011). Thinking, fast and slow. Farrar, Straus and Giroux.
+        (Chapter 2: Attention and Effort; Chapter 12: The Science of Availability.)
+      - >
+        Brehm, J. W. (1966). A theory of psychological reactance.
+        Academic Press.
+      - >
+        Keller, K. L. (1993). Conceptualizing, measuring, and managing
+        customer-based brand equity. Journal of Marketing, 57(1), 1–22.
+        https://doi.org/10.1177/002224299305700101
+    cross_references:
+      - l2-rules.yaml#L2-FL-001  # Processing fluency — System 2 activation degrades fluency
+      - l3-rules.yaml#L3-FR-001  # Urgency signals can stack with comparison pressure
+    verification_status: draft

@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use Perception-First Design in your work, please cite it."
+title: "Perception-First Design"
+version: "3.4"
+date-released: "2026-03-04"
+license: "CC-BY-SA-4.0"
+type: "dataset"
+authors:
+  - family-names: "Kovalik"
+    given-names: "Stefan"
+    affiliation: "Aurochs"
+    website: "https://aurochs.agency"
+repository-code: "https://github.com/skovalik/perception-first-design"
+url: "https://aurochs.agency/perception-first-design/"
+abstract: >
+  A five-layer web design methodology grounded in cognitive psychology. Applies
+  predictive processing, cognitive load theory, processing fluency, perception
+  bias optimization, and decision architecture to how people perceive, process,
+  and decide. 77 peer-reviewed citations from 3 non-overlapping literatures.
+  15 years of applied practice. Includes a Claude Code plugin for automated
+  evaluation and a YAML heuristic rule corpus.
+keywords:
+  - perception-first-design
+  - cognitive-psychology
+  - web-design
+  - ux
+  - processing-fluency
+  - decision-architecture
+  - design-methodology
+  - neurodivergent-design
+  - adhd
+  - cognitive-load

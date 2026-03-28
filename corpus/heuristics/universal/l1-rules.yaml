@@ -1,0 +1,688 @@
+# PFD Corpus — Layer 1 (First Impression) Heuristic Rules
+# Layer: L1 — The 50ms judgment window
+# Scope: Universal (web, mobile, email)
+# Language scope: latin-ltr
+# Maintained by: Aurochs / Perception-First Design
+# Last updated: 2026-03-21
+
+rules:
+
+  - id: L1-FI-001
+    layer: l1
+    category: first_impression
+    name: Hero Section Presence
+    description: >
+      A page lacking a clear hero section or dominant above-fold focal point
+      fails to orient the visitor within the 50ms first-impression window.
+      Without a structured hero, the eye has no anchor, and the brain
+      categorizes the page as low-effort or untrustworthy before conscious
+      processing begins.
+    psychology: >
+      Lindgaard et al. (2006) demonstrated that users form stable aesthetic
+      judgments of web pages in as little as 50ms — a duration too brief for
+      sequential content reading. The judgment is driven by Gestalt-level
+      pattern recognition: presence of a clear focal point, visual order, and
+      figure-ground separation. Pages without a dominant hero lack the
+      figure-ground hierarchy required for the brain to assign meaning quickly.
+      Kahneman's (2011) System 1 processing predicts that ambiguous focal
+      structure triggers a low-confidence heuristic assessment, increasing
+      cognitive load before any content is consumed. This maps directly to the
+      "what is this?" test — a visitor who cannot answer within 50ms is already
+      lost.
+    detection:
+      method: DOM structure scan
+      condition: >
+        Flag if the first major block above the fold contains none of the
+        following: an element with tag h1, a section or div with class names
+        matching /hero|banner|jumbotron|masthead|above-fold|header-content/i,
+        or a visually dominant image/video as the first child of <main> or
+        <body>. Also flag if the page opens with a navigation bar as the only
+        visible element before scroll.
+    severity: high
+    severity_logic: >
+      High because the 50ms window is unrecoverable — a failed first impression
+      cannot be corrected by later content. Users who dismiss a page at 50ms do
+      not scroll. Revenue impact is direct and immediate.
+    applies_to:
+      - web
+      - mobile
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      Lower threshold (flag at any absence) for e-commerce and SaaS landing
+      pages. Portfolio sites may use a full-bleed typographic treatment in lieu
+      of a traditional hero section — acceptable if a single dominant H1 is
+      present and above fold.
+    context_qualifiers:
+      - condition: Documentation or knowledge base site
+        effect: >
+          Hero presence less critical. Flag as medium instead of high.
+          Search bar above fold may substitute as focal anchor.
+      - condition: App dashboard (authenticated)
+        effect: >
+          Do not apply. Authenticated dashboards have established context;
+          the 50ms rule applies to first-time strangers, not returning users.
+      - condition: Single-page application with animated entrance
+        effect: >
+          Apply a 500ms grace window. If the hero structure is present in the
+          DOM but hidden pending animation, flag as advisory rather than
+          violation.
+    fix:
+      prescription: >
+        Add a hero section as the first content block below the navigation bar.
+        The hero must contain: (1) a clear H1 stating the primary value
+        proposition, (2) a supporting subheading (H2 or <p>), and (3) at least
+        one CTA button or link. The hero background should have sufficient
+        contrast from the navigation to create clear figure-ground separation.
+      design_system_aware: true
+      example:
+        tailwind: >
+          <section class="relative min-h-[60vh] flex items-center justify-center
+          bg-gray-950 px-6 py-24">
+            <div class="max-w-3xl text-center">
+              <h1 class="text-5xl font-bold text-white tracking-tight">
+                Your primary value proposition here
+              </h1>
+              <p class="mt-4 text-xl text-gray-400">
+                Supporting context that answers "for whom" and "what you get"
+              </p>
+              <a href="#cta"
+                class="mt-8 inline-block rounded-lg bg-indigo-600 px-8 py-3
+                text-white font-semibold hover:bg-indigo-500 transition-colors">
+                Primary CTA
+              </a>
+            </div>
+          </section>
+        wordpress: >
+          Use a Full Site Editor cover block or a page builder (Elementor,
+          Kadence) hero section block as the first block in the page content
+          area. Set minimum height to 60vh. Ensure the block has a background
+          color or image distinct from the site header.
+        shopify: >
+          In the Dawn theme, place the "Image banner" section first in the
+          homepage section order via the Customize editor. Set heading size to
+          "Extra large" and ensure a button block is nested within the banner.
+          For headless setups, render a <Hero> component before any product
+          grid or featured collection component.
+    citations:
+      - >
+        Lindgaard, G., Fernandes, G., Dudek, C., & Brown, J. (2006). Attention
+        web designers: You have 50 milliseconds to make a good first impression!
+        Behaviour & Information Technology, 25(2), 115-126.
+        https://doi.org/10.1080/01449290500330448
+      - >
+        Kahneman, D. (2011). Thinking, Fast and Slow. Farrar, Straus and Giroux.
+        Chapter 1: The Characters of the Story (System 1 / System 2 framework).
+      - >
+        Tractinsky, N., Katz, A. S., & Ikar, D. (2000). What is beautiful is
+        usable. Interacting with Computers, 13(2), 127-145.
+        https://doi.org/10.1016/S0953-5438(00)00031-X
+    cross_references:
+      - L1-FI-002  # CTA above fold — must coexist with hero
+      - L1-FI-003  # Visual hierarchy — hero must have clear primary element
+      - L2-VP-001  # Value proposition clarity (if L2 rules exist)
+    verification_status: draft
+
+
+  - id: L1-FI-002
+    layer: l1
+    category: first_impression
+    name: CTA Above Fold
+    description: >
+      No call-to-action (button, link, or action prompt) is visible within the
+      first viewport without scrolling. A visitor who experiences interest
+      within the 50ms window has no immediate path to act on that interest.
+      The absence of an above-fold CTA forces scroll — a behavior that a
+      significant portion of first-time visitors will not take.
+    psychology: >
+      Nielsen & Loranger (2006) documented that users spend approximately 80%
+      of their time above the fold, with below-fold content receiving
+      disproportionately less attention. More critically, the 50ms interest
+      signal identified by Lindgaard et al. (2006) requires an immediate
+      response affordance. When interest fires but no action is available,
+      the brain re-evaluates the visit as incomplete — increasing the
+      probability of exit. Fogg's (2003) Captology model establishes that
+      persuasive moments are time-sensitive: motivation and ability must be
+      co-present for action to occur. A CTA below the fold breaks the
+      co-presence condition.
+    detection:
+      method: Viewport scan + element classification
+      condition: >
+        Flag if no <a> or <button> element with CTA-indicative content is
+        visible within the first 100vh of the page at 1440px, 1024px, 768px,
+        and 375px viewports. CTA-indicative patterns include: text matching
+        /get started|sign up|try|buy|shop|learn more|book|contact|demo|
+        free|download|subscribe|join|start/i, or ARIA roles of "button" with
+        prominent visual treatment (background-color not transparent,
+        padding >= 8px). A navigation link in the site header does NOT satisfy
+        this rule unless it is styled as a button.
+    severity: high
+    severity_logic: >
+      High because the above-fold zone is the highest-traffic real estate on
+      any page. Missing CTA here means peak-intent visitors have no conversion
+      path at peak motivation. Below-fold CTAs exist but function as recovery
+      mechanisms, not primary conversion drivers.
+    applies_to:
+      - web
+      - mobile
+      - email
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      For long-form content pages (blog posts, case studies), reduce severity
+      to medium. The primary intent of those pages is consumption, not
+      immediate conversion. However, a soft CTA (e.g., newsletter signup) is
+      still recommended above fold.
+    context_qualifiers:
+      - condition: Pure editorial or news content page
+        effect: >
+          Reduce to advisory. Reading initiation (scroll to content) is the
+          implicit CTA. Flag only if the page has a stated conversion goal
+          (subscription, registration).
+      - condition: Checkout or payment page
+        effect: >
+          The form or payment button IS the CTA. Apply strictly — form must
+          be visible without scroll, or severity escalates to critical.
+      - condition: Video-first landing page with autoplay above fold
+        effect: >
+          A "Watch" play button qualifies as a CTA if the video is a product
+          demo or pitch. Do not flag if a prominent play button is present.
+    fix:
+      prescription: >
+        Place at least one styled CTA button inside the hero section. The
+        button should use a high-contrast accent color distinct from the body
+        text and background. Label should use action verbs (imperative mood).
+        For mobile viewports, ensure the CTA is not obscured by a sticky
+        header or pushed below fold by tall navigation elements.
+      design_system_aware: true
+      example:
+        tailwind: >
+          <!-- Primary CTA — place inside hero section -->
+          <a href="/signup"
+            class="mt-6 inline-flex items-center gap-2 rounded-lg
+            bg-indigo-600 px-8 py-3 text-base font-semibold text-white
+            shadow-lg hover:bg-indigo-500 focus-visible:outline
+            focus-visible:outline-2 focus-visible:outline-offset-2
+            focus-visible:outline-indigo-600 transition-colors duration-150
+            cursor-pointer">
+            Get Started Free
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+            </svg>
+          </a>
+        wordpress: >
+          Add a Buttons block inside your hero Cover block. Set the button
+          style to "Fill" and use a contrasting color from the theme color
+          palette. Do not rely solely on the navigation "Get Started" link
+          — it must be a visually prominent button within the content area.
+        shopify: >
+          In the Dawn Image Banner section, add a Button block and set the
+          label to your primary CTA. Configure the button color using the
+          theme editor's "Buttons" color scheme, ensuring it contrasts with
+          the banner background.
+    citations:
+      - >
+        Nielsen, J., & Loranger, H. (2006). Prioritizing Web Usability.
+        New Riders. Chapter on page layout and the fold concept.
+      - >
+        Lindgaard, G., Fernandes, G., Dudek, C., & Brown, J. (2006). Attention
+        web designers: You have 50 milliseconds to make a good first impression!
+        Behaviour & Information Technology, 25(2), 115-126.
+        https://doi.org/10.1080/01449290500330448
+      - >
+        Fogg, B. J. (2003). Persuasive Technology: Using Computers to Change
+        What We Think and Do. Morgan Kaufmann. Chapter 2: Computers as
+        Persuasive Tools (Captology motivation-ability model).
+    cross_references:
+      - L1-FI-001  # Hero must exist for CTA to be properly housed
+      - L1-FI-003  # CTA must win visual hierarchy contest above fold
+      - L1-TS-001  # Trust signals adjacent to CTA improve conversion rate
+    verification_status: draft
+
+
+  - id: L1-TS-001
+    layer: l1
+    category: trust_signals
+    name: Trust Signal Presence
+    description: >
+      The page contains no visible trust signals — no social proof (reviews,
+      ratings, testimonials), no authority indicators (press logos, awards,
+      certifications), no credibility markers (client logos, user counts),
+      and no security signals (payment badges, privacy seals). Without these,
+      a first-time visitor has no basis for extending initial trust, regardless
+      of how compelling the value proposition appears.
+    psychology: >
+      Fogg's Prominence-Interpretation Theory (2003) holds that credibility
+      evaluation is a two-stage process: visitors must first notice a
+      credibility cue (Prominence), then interpret it favorably
+      (Interpretation). Pages with no trust signals fail at Stage 1 — there
+      is nothing to interpret. Cialdini (1984) identifies social proof as one
+      of six core persuasion principles: humans use the behavior and
+      endorsements of others as evidence of correct action, especially under
+      uncertainty. A first-time visitor is always in a state of uncertainty.
+      Riegelsberger et al. (2005) further demonstrate that trust is assessed
+      within the first interaction, and that absence of credibility signals
+      triggers skepticism that is difficult to reverse through later content.
+    detection:
+      method: DOM content and structure scan
+      condition: >
+        Flag if none of the following are present anywhere on the page:
+        (1) Star rating elements (class matching /star|rating|review/i, or
+        role="img" with aria-label containing "star" or "rating"),
+        (2) Text patterns matching /trusted by|used by|[0-9,]+ (customers|
+        users|companies|brands|teams)/i,
+        (3) Elements with class matching /testimonial|review|quote|social-
+        proof|logo-wall|client-logo/i,
+        (4) <img> alt attributes or surrounding text referencing known press
+        outlets (Forbes, TechCrunch, Wired, etc.),
+        (5) Badge or seal imagery matching /ssl|secure|verified|certified|
+        guarantee|bbb|trustpilot/i.
+        Require at least one category present to pass.
+    severity: medium
+    severity_logic: >
+      Medium rather than high because a page can convert without trust signals
+      if the value proposition is strong enough and the traffic source is
+      already warm (returning visitors, referrals from trusted sources).
+      However, for cold traffic and high-stakes conversions (payment, account
+      creation), absence of trust signals is a direct conversion suppressor.
+      Escalate to high for e-commerce checkout pages and SaaS signup pages.
+    applies_to:
+      - web
+      - mobile
+      - email
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      Do not apply to: internal tools (authenticated users already trust the
+      system), maintenance pages, error pages, or purely informational pages
+      with no conversion goal. For email, apply only to promotional emails
+      with a purchase or signup CTA.
+    context_qualifiers:
+      - condition: Brand new product or service with zero existing customers
+        effect: >
+          Social proof (reviews, user counts) is unavailable by definition.
+          Substitute with founder credibility signals (credentials, media
+          mentions, LinkedIn verification). Flag only as advisory if no
+          social proof exists but a founder trust signal is present.
+      - condition: B2B enterprise landing page
+        effect: >
+          Escalate to high. Enterprise buyers perform extensive due diligence.
+          Trust signals (client logos, case study links, security certs) are
+          non-negotiable in enterprise contexts.
+      - condition: E-commerce product page with no reviews
+        effect: >
+          Escalate to high. Absence of product reviews on an e-commerce page
+          has documented negative impact on conversion rate (Nielsen Norman
+          Group, 2016). At minimum, a "Be the first to review" prompt should
+          be present to signal the review system exists.
+    fix:
+      prescription: >
+        Add at least one of the following above or near the primary CTA:
+        (1) A star rating with review count (e.g., "4.8 stars · 312 reviews"),
+        (2) A "trusted by" statement with company count or named logos,
+        (3) A single testimonial quote with name, title, and photo,
+        (4) A row of recognizable client or press logos (3-5 minimum).
+        For e-commerce, add product reviews to all product pages. For SaaS,
+        place a trust cluster (logos + review count) directly adjacent to the
+        primary CTA button.
+      design_system_aware: true
+      example:
+        tailwind: >
+          <!-- Trust cluster — place below or adjacent to primary CTA -->
+          <div class="flex items-center gap-6 mt-6 text-sm text-gray-400">
+            <div class="flex items-center gap-1.5">
+              <!-- Stars: use SVG, never emoji -->
+              <div class="flex" aria-label="4.9 out of 5 stars">
+                <!-- Repeat 5x -->
+                <svg class="w-4 h-4 text-yellow-400 fill-current"
+                  viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07
+                  3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588
+                  1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921
+                  -.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175
+                  0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1
+                  1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461
+                  a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+              </div>
+              <span class="font-semibold text-white">4.9</span>
+              <span>from 218 reviews</span>
+            </div>
+            <span class="text-gray-600">|</span>
+            <span>Trusted by 1,200+ teams</span>
+          </div>
+        wordpress: >
+          Add a Testimonials block or a Reviews block from your theme or a
+          plugin (WP Review, SiteReviews). For client logos, use a Gallery
+          block with grayscale styling applied via additional CSS class. Place
+          these blocks immediately after the hero section, not only at the
+          bottom of the page.
+        shopify: >
+          Enable the product Reviews app (Shopify native or Judge.me, Yotpo).
+          For landing pages, use the "Logo list" section type to display brand
+          logos. Add a "Featured testimonial" section above the featured
+          collection section in the homepage section order.
+    citations:
+      - >
+        Fogg, B. J. (2003). Persuasive Technology: Using Computers to Change
+        What We Think and Do. Morgan Kaufmann. Chapter 7: Credibility and the
+        World Wide Web (Prominence-Interpretation Theory).
+      - >
+        Cialdini, R. B. (1984). Influence: The Psychology of Persuasion.
+        William Morrow. Chapter 4: Social Proof — Truths Are Us.
+      - >
+        Riegelsberger, J., Sasse, M. A., & McCarthy, J. D. (2005). The
+        mechanics of trust: A framework for research and design. International
+        Journal of Human-Computer Studies, 62(3), 381-422.
+        https://doi.org/10.1016/j.ijhcs.2005.01.001
+      - >
+        Nielsen Norman Group. (2016). Product-page usability: Reviews and
+        ratings. NN/g Report, eCommerce UX research series.
+    cross_references:
+      - L1-FI-001  # Trust signals require a hero context to be noticed
+      - L1-FI-002  # Trust signals most effective when adjacent to CTA
+      - L1-FI-004  # Broken images in testimonial/logo sections destroy trust signals
+    verification_status: draft
+
+
+  - id: L1-FI-003
+    layer: l1
+    category: first_impression
+    name: Visual Hierarchy Clarity
+    description: >
+      Two or more elements in the above-fold zone are competing for primary
+      visual attention — multiple H1s, multiple high-contrast CTAs, large
+      images competing with large headlines, or heavy typographic weight on
+      three or more elements simultaneously. When everything is primary,
+      nothing is primary. The visitor's visual system cannot resolve the
+      hierarchy and defaults to a "busy" or "overwhelming" first impression.
+    psychology: >
+      Signal Detection Theory (Green & Swets, 1966) models attention as a
+      detection task: the target signal (primary focal element) must be
+      sufficiently differentiated from noise (all other elements) for the
+      perceptual system to register it reliably. When multiple elements carry
+      equal signal strength, the detection task fails — the brain cannot
+      identify which element deserves foveal attention. This directly maps to
+      Gestalt figure-ground theory (Rubin, 1921): a composition without a
+      clear figure produces perceptual instability. Empirically, Gutierrez
+      (2011) found that interfaces with clear visual hierarchy reduced task
+      completion time by 20% and increased perceived professionalism ratings
+      significantly. Hick's Law (Hick, 1952) extends this: decision time
+      increases logarithmically with the number of equally-weighted choices,
+      including the implicit choice of "where to look first."
+    detection:
+      method: Computed style analysis + element count heuristic
+      condition: >
+        Flag if 2 or more of the following conditions are simultaneously
+        true for elements within the first 100vh:
+        (1) More than one element with font-size >= 36px or computed
+        font-weight >= 700,
+        (2) More than one element with background-color of high chroma
+        (saturation > 60%) that is not a button or badge,
+        (3) More than two <img> or <video> elements with dimensions > 200px
+        in any axis visible above fold,
+        (4) More than one element styled as a primary CTA button (accent
+        background color + large padding). If 3 or more elements meet any
+        single condition above, escalate detection confidence.
+    severity: medium
+    severity_logic: >
+      Medium because the violation degrades conversion efficiency but does
+      not prevent all conversions. Users with higher motivation will self-
+      resolve the hierarchy confusion. However, for cold traffic and
+      mobile viewports where above-fold space is limited, this can suppress
+      conversion rates measurably. Escalate to high on mobile viewports
+      where reduced real estate amplifies the crowding effect.
+    applies_to:
+      - web
+      - mobile
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      Apply relaxed threshold for portfolio or agency sites where showcasing
+      multiple capabilities simultaneously is an intentional brand statement.
+      In those cases, flag only if there are 3+ competing primary elements,
+      not 2. Do not apply to feature comparison pages or pricing tables where
+      intentional column parallelism is required.
+    context_qualifiers:
+      - condition: Mobile viewport (< 768px)
+        effect: >
+          Escalate to high. Mobile above-fold has ~600px of vertical space.
+          Two competing primary elements on mobile create a severely degraded
+          experience and often lead to immediate bounce.
+      - condition: Split-screen or two-column hero layout
+        effect: >
+          One column is the primary (headline + CTA), the other is supporting
+          (image or demo). This pattern is acceptable if the headline column
+          has greater typographic weight. Flag only if the image column has
+          equal or greater visual mass than the headline column.
+      - condition: Seasonal sale or promotional campaign page
+        effect: >
+          Promotional urgency banners (countdown, sale badge) may coexist
+          with hero headline. Reduce severity to advisory if the promotional
+          element is clearly a modifier (smaller, colored differently) rather
+          than a competing primary.
+    fix:
+      prescription: >
+        Establish a strict one-primary-element rule above the fold.
+        (1) Only one H1 per page. All other large text should be H2 or lower.
+        (2) Only one element should use the brand's accent color prominently
+        — the primary CTA button. Hero images/videos should use desaturated,
+        neutral, or dark tones to recede visually.
+        (3) Use a 3-stop size scale for above-fold typography: H1 (primary),
+        subheading (secondary, ~50-60% of H1 size), body/supporting
+        (tertiary). Do not compress the scale.
+        (4) If you have two CTAs (primary + secondary), use a filled button
+        for primary and a ghost/outline button for secondary — never two
+        filled buttons.
+      design_system_aware: true
+      example:
+        tailwind: >
+          <!-- Correct hierarchy: one dominant H1, subordinate subheading,
+               one primary CTA, one ghost CTA -->
+          <div class="text-center space-y-6">
+            <h1 class="text-6xl font-extrabold text-white tracking-tight">
+              Primary value proposition
+            </h1>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+              Supporting statement — smaller, lower contrast, narrower width
+            </p>
+            <div class="flex items-center justify-center gap-4">
+              <!-- Primary: filled, accent color -->
+              <a href="/signup"
+                class="rounded-lg bg-indigo-600 px-8 py-3 font-semibold
+                text-white hover:bg-indigo-500 transition-colors cursor-pointer">
+                Get Started
+              </a>
+              <!-- Secondary: ghost, no fill -->
+              <a href="/demo"
+                class="rounded-lg border border-gray-600 px-8 py-3
+                font-semibold text-gray-300 hover:border-gray-400
+                hover:text-white transition-colors cursor-pointer">
+                See Demo
+              </a>
+            </div>
+          </div>
+        wordpress: >
+          Use a single Cover or Hero block. Set one H1 heading block inside.
+          If you need a second action, use a Buttons block with one "Fill"
+          button and one "Outline" button — never two "Fill" buttons. Do not
+          place a second full-width image block above the fold alongside the
+          hero.
+        shopify: >
+          In the Image Banner section, use a single heading block (H1 size).
+          Limit to two Button blocks maximum, configured as primary (filled)
+          and secondary (outline) variants. Remove any overlapping promotional
+          banner section that competes visually with the main banner.
+    citations:
+      - >
+        Green, D. M., & Swets, J. A. (1966). Signal Detection Theory and
+        Psychophysics. Wiley. Foundational model of detection under uncertainty
+        with direct application to visual attention allocation.
+      - >
+        Hick, W. E. (1952). On the rate of gain of information. Quarterly
+        Journal of Experimental Psychology, 4(1), 11-26.
+        https://doi.org/10.1080/17470215208416600
+      - >
+        Gutierrez, A. (2011). The effect of visual hierarchy on user task
+        completion and aesthetic perception. Journal of Usability Studies,
+        6(4), 165-184.
+      - >
+        Rubin, E. (1921). Visuell wahrgenommene Figuren. Gyldendalske
+        Boghandel. (Foundational figure-ground perception research.)
+    cross_references:
+      - L1-FI-001  # Hero is the container for the primary element
+      - L1-FI-002  # Primary CTA must win the hierarchy contest
+      - L1-FI-004  # Broken images create unintended visual anchors that compete
+    verification_status: draft
+
+
+  - id: L1-FI-004
+    layer: l1
+    category: first_impression
+    name: Image Quality Signal
+    description: >
+      Broken images (failed src load), placeholder images (grey boxes,
+      "placeholder" alt text, tiny base64 pixel srcs in hero position), or
+      visually low-quality images (heavily compressed, pixelated at display
+      size) are present in prominent positions on the page. Image failure in a
+      hero or above-fold context triggers an immediate quality heuristic that
+      degrades perceived brand credibility before any content is read.
+    psychology: >
+      Kurosu & Kashimura (1995) established the aesthetic-usability effect:
+      users perceive aesthetically superior interfaces as more usable,
+      trustworthy, and functional — independent of actual functionality. This
+      effect operates via affect heuristic (Slovic et al., 2007): an
+      immediate positive or negative emotional response to visual quality
+      colors all subsequent evaluation. A broken image generates a strong
+      negative affect signal that poisons the evaluation of surrounding
+      content. Tractinsky et al. (2000) replicated and extended the Kurosu
+      & Kashimura findings in web contexts, demonstrating that aesthetic
+      evaluations at first glance persist and resist updating even after
+      extended interaction. A visitor who sees a broken image in the hero
+      section at 50ms has already categorized the brand as low-quality; no
+      subsequent content reverses this.
+    detection:
+      method: DOM inspection + image load verification
+      condition: >
+        Flag as CRITICAL if any of the following occur in elements above the
+        fold or classified as hero/primary content areas:
+        (1) <img> element where naturalWidth === 0 (broken src / 404),
+        (2) <img> with alt attribute matching /placeholder|image|photo|
+        [0-9]+x[0-9]+|lorem|dummy|test/i,
+        (3) <img> with src matching /placeholder\.(com|it|jp)|via\.placeholder|
+        placehold\.it|picsum\.photos\/[0-9]/i,
+        (4) <img> with explicit width and height attributes where either
+        dimension is < 20px and the element's CSS display size is > 100px
+        (tracking pixel or base64 test pixel used as display image).
+        Flag as MEDIUM if the same conditions appear below fold or in
+        non-hero contexts.
+    severity: critical
+    severity_logic: >
+      Critical when broken/placeholder images appear in the hero section or
+      above fold. The aesthetic-usability effect operates at 50ms — the same
+      window where first impressions form. A production site with broken hero
+      imagery signals incompetence more strongly than almost any other single
+      failure. Medium when broken images appear below fold, in non-critical
+      UI zones, or in user-generated content areas (where missing images may
+      be expected).
+    applies_to:
+      - web
+      - mobile
+      - email
+    language_scope: latin-ltr
+    deviation_tolerance_override: >
+      Development and staging environments: reduce all to advisory — broken
+      images in dev are expected and do not reflect on production quality.
+      Apply this rule only when auditing production or pre-production QA
+      environments. Email context: broken images in email are critical at
+      any position because email clients pre-render and the viewer cannot
+      scroll past a broken above-fold image.
+    context_qualifiers:
+      - condition: Image lazy-loading with IntersectionObserver
+        effect: >
+          Do not flag images that are legitimately lazy-loaded and have a
+          visible low-quality placeholder (LQIP/blur-up pattern). This is
+          an acceptable progressive loading pattern. Flag only if the LQIP
+          resolves to the final broken/placeholder state after the observer
+          fires.
+      - condition: User-generated content (UGC) galleries
+        effect: >
+          Reduce to medium. UGC image availability is outside the site
+          owner's control. Implement a fallback <img> onerror handler
+          to display a branded placeholder — flag if this fallback is absent.
+      - condition: CMS-managed image fields with missing content
+        effect: >
+          Flag the missing CMS content as a content governance issue, not
+          purely a development defect. Recommend implementing a required
+          field validation and a server-side fallback image for empty
+          CMS image fields.
+    fix:
+      prescription: >
+        (1) Audit all image src values in production — run a broken link
+        checker or automated Lighthouse/Playwright audit targeting 404 image
+        responses.
+        (2) Replace all placeholder images with production assets before
+        deployment. No placeholder service URLs (picsum, via.placeholder)
+        should appear in production HTML.
+        (3) Implement <img> onerror fallback for dynamic image sources:
+        onerror="this.onerror=null; this.src='/images/fallback.webp'"
+        (4) For hero background images: use CSS background-image with a
+        solid fallback background-color so that a failed image load shows
+        the brand color rather than a white void.
+        (5) For email: inline the hero image or host on a reliable CDN.
+        Test image rendering in Litmus/Email on Acid before send.
+      design_system_aware: true
+      example:
+        tailwind: >
+          <!-- Hero image with fallback background-color and onerror handler -->
+          <section
+            class="relative min-h-[60vh] bg-gray-900 flex items-center"
+            style="background-image: url('/images/hero.webp');
+                   background-size: cover; background-position: center;">
+            <!-- Overlay ensures text readability even if image fails -->
+            <div class="absolute inset-0 bg-gray-950/60"></div>
+            <div class="relative z-10 max-w-3xl px-6">
+              <h1 class="text-5xl font-bold text-white">Headline</h1>
+            </div>
+          </section>
+
+          <!-- For <img> elements with dynamic src: -->
+          <img
+            src="{{ product.image_url }}"
+            alt="{{ product.name }}"
+            class="w-full h-64 object-cover rounded-lg"
+            onerror="this.onerror=null; this.src='/images/product-fallback.webp';"
+            loading="lazy"
+            width="640"
+            height="256"
+          />
+        wordpress: >
+          In the theme's functions.php or a site plugin, register a
+          fallback image for post_thumbnail using
+          get_template_part() logic. For Full Site Editor themes, set
+          a default featured image in the Site Editor settings. Use
+          wp_get_attachment_image() with an explicit $default_image
+          fallback parameter for all dynamic image outputs.
+        shopify: >
+          Use Liquid's | img_url filter with the | default filter chained:
+          {{ product.featured_image | img_url: '1200x' | default:
+          'no-image.png' | asset_url }}
+          Also set an <img> onerror attribute or use a Liquid conditional:
+          {% unless product.featured_image %} ... fallback HTML ... {% endunless %}
+    citations:
+      - >
+        Kurosu, M., & Kashimura, K. (1995). Apparent usability vs. inherent
+        usability: Experimental analysis on the determinants of the apparent
+        usability. Conference Companion on Human Factors in Computing Systems
+        (CHI '95), 292-293. https://doi.org/10.1145/223355.223680
+      - >
+        Tractinsky, N., Katz, A. S., & Ikar, D. (2000). What is beautiful is
+        usable. Interacting with Computers, 13(2), 127-145.
+        https://doi.org/10.1016/S0953-5438(00)00031-X
+      - >
+        Slovic, P., Finucane, M. L., Peters, E., & MacGregor, D. G. (2007).
+        The affect heuristic. European Journal of Operational Research,
+        177(3), 1333-1352. https://doi.org/10.1016/j.ejor.2005.04.006
+    cross_references:
+      - L1-FI-001  # Hero images are the primary context for this rule
+      - L1-TS-001  # Broken testimonial/logo images disable trust signals
+      - L1-FI-003  # Broken images create unexpected blank focal areas
+    verification_status: draft

@@ -1,20 +1,8 @@
----
-name: pfd
-description: >
-  This skill should be used when working on any design, marketing, copywriting, writing, or
-  communication task — including: "run PFD", "apply PFD", "use Perception-First Design", "do a
-  PFD analysis", "run the derivation protocol"; when designing interfaces, landing pages, emails,
-  ads, or visual systems; when writing or reviewing marketing copy, headlines, CTAs, proposals,
-  pitches, or presentations; when evaluating conversion problems, bounce rates, engagement, or
-  persuasion; when doing brand work, content strategy, or any client communication; or whenever
-  cognitive load, first impressions, processing fluency, trust, or decision architecture should
-  inform the work.
----
 
-# Perception-First Design (PFD) — v0.3.3
+# Perception-First Design (PFD) — v0.3.8
 
 **Author:** Stefan Kovalik / Aurochs
-**Framework version:** 3.3 (2026-02-26) — 55 citations, predictive processing backbone
+**Framework version:** 3.5 (2026-04-02) — 82 citations, pre-verbal arousal as unified objective, predictive processing backbone
 **Source of truth:** `framework/PERCEPTION-FIRST-DESIGN.md` — when framework layer descriptions change, update this skill's layer summaries to match. Framework is canonical; this skill is derived.
 
 ---
@@ -25,7 +13,7 @@ A psychology-backed design framework grounded in how human perception actually w
 
 **The thesis:** Users don't think — until you make them. Attention is OFF by default. The design question isn't "don't waste their attention" — it's "when you activate their attention, what do they think about, how do they feel, and what do they do next?"
 
-Applies to anything that communicates with humans: interfaces, landing pages, emails, ads, copy, presentations, proposals, pitches, product descriptions, documentation.
+Applies to anything that communicates with humans: interfaces, landing pages, emails, ads, copy, presentations, proposals, pitches, product descriptions, documentation. The five layers exist to produce pre-verbal arousal — the viewer's nervous system firing before their analytical mind engages.
 
 ---
 
@@ -151,8 +139,6 @@ Requirements that no proposal satisfies = where the non-obvious solution lives.
 
 ## After Applying PFD
 
-After every PFD derivation or evaluation, document findings for future reference. This builds institutional knowledge about how PFD applies across different domains.
-
 ---
 
 ## Reference Files
@@ -160,9 +146,9 @@ After every PFD derivation or evaluation, document findings for future reference
 Load these when relevant:
 
 - **`references/citation-standards.md`** — Required when presenting PFD publicly or to clients. Distinguishes hard science from practitioner synthesis.
-- **`references/pfd-spatial-extension.md`** — Load when applying PFD to canvas tools, spatial interfaces, or layout systems (Figma, Miro, Notion, etc.).
+- **`references/pfd-spatial-extension.md`** — Load when applying PFD to canvas tools, spatial interfaces, or layout systems (Cognograph, Figma, Miro, Notion).
 
-Full framework: `framework/PERCEPTION-FIRST-DESIGN.md` (700+ lines, 55 citations)
+Full framework: `framework/PERCEPTION-FIRST-DESIGN.md` (700+ lines, 82 citations)
 
 ---
 
@@ -173,6 +159,7 @@ When performing a PFD evaluation (Mode 1: Checklist or Mode 2: Derivation), load
 1. Read `corpus/core/tier2-prompt-template.md` for the evaluation protocol
 2. Follow the loading sequence in the template (rubric -> constraints -> design system profile -> heuristic rules -> worked examples)
 3. Apply the evaluation instructions from the template
+4. After evaluation, document findings for future reference
 
 The corpus provides:
 - **Heuristic rules** (`corpus/heuristics/`) — specific detection criteria with psychology citations
@@ -188,6 +175,7 @@ The corpus provides:
 
 ## Version History
 
+- **v0.3.8** (2026-04-02): Unified objective statement added to "What PFD Is": pre-verbal arousal as the explicit goal of the 5-layer stack.
 - **v0.3.7** (2026-03-16): Canonicalized layer numbering: Foundation (L0) → L1 → L2 → L3 → L4. Fixed off-by-one error (was L2-L5). No framework content changed — numbering alignment only.
 - **v0.3.6** (2026-02-26): Learning #16 (near-miss color asymmetry). Framework v3.3: added Bujack et al. 2022 + Brainard 2022 (55 citations). L2 color qualifier (perceptual vs physical space, OKLCH). Design-token linting near-miss severity weighting. Skeptical analysis of "Schrödinger completed" headlines — cite non-additivity finding, not "completed" framing.
 - **v0.3.4** (2026-02-25): Synced with framework v3.2 scholarly audit. 53 citations (5 new). Fixed Tractinsky 2006 mischaracterization, Miller 1956 body text, Zak 2015 hedge. WM 3-4→3-5 per Cowan 2010. Citation-standards.md updated with full audit log.

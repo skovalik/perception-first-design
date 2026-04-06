@@ -1,5 +1,17 @@
 # Changelog
 
+## v3.5 — 2026-04-02
+
+### Added
+- Pre-verbal arousal formalized as the unified objective of the 5-layer stack
+- "What the stack produces" block in The Framework section
+- 5 new citations: Damasio (1994), LeDoux (1996), Lavie (1995), Servajean (2024), Joffily & Coricelli (2013)
+- Prediction error cascade logic grounding the dependency stack order
+
+### Changed
+- Citation count: 77 → 82
+- Version header updated to 3.5
+
 ## v3.4 (2026-03-04)
 
 - 77 citations: 55 perception science + 22 ADHD cognitive neuroscience

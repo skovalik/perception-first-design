@@ -62,3 +62,12 @@ PFD's credibility depends on honest sourcing. Load this file when presenting PFD
 - van Laer et al. (2014) — Narrative transportation meta-analysis, 132 effect sizes
 - Braddock & Dillard (2016) — Narrative persuasion meta-analysis
 - Mierop et al. (2020) — Intranasal oxytocin systematic review, ~90% false positive rate
+
+### v3.5 Additions (2026-04-02)
+
+**5 citations added** (77 → 82 total):
+- **Damasio, A. (1994)** — Somatic marker hypothesis. Body generates emotional signals biasing decisions before conscious deliberation. Iowa Gambling Task demonstrates pre-conscious affect influencing choice. → Layer: L3 / pre-verbal arousal mechanism. **Cite as theoretical framework** — foundational but debate continues on mechanism specificity.
+- **LeDoux, J. (1996)** — Amygdala "low road" ~12ms vs. cortical "high road" 200–300ms. Neural architecture explaining why emotional response precedes conscious evaluation. → Layer: L1 / pre-verbal arousal mechanism. **Cite as theoretical framework** — timing estimates vary by study; core asymmetry is robust.
+- **Lavie, N. (1995)** — Perceptual load theory. Higher perceptual load in focal task eliminates distracter processing by exhausting attentional capacity. Lower-level demands eliminate higher-level attentional capacity. → Layer: L0 / dependency stack mechanism. Hard science — replicated across modalities.
+- **Servajean, V. (2024)** — Fluency = prediction error amplitude. Fluent processing IS low prediction error — not a separate phenomenon layered on top of prediction. Unifies processing fluency with predictive processing frameworks. → Layer: L2 / predictive processing backbone. **Cite as theoretical framework** — recent, needs replication watch.
+- **Joffily, M. & Coricelli, G. (2013)** — Emotional valence = rate of change of free energy. Positive affect arises from error reduction; negative affect from error increase. Each layer resolving errors produces positive affect compounding upward through the stack. → Cascade mechanism. **Cite as theoretical framework** — integrates active inference with affective science; influential but not settled law.

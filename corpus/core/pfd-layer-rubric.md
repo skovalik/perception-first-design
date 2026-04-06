@@ -1,5 +1,9 @@
 # PFD Layer Rubric — Evaluation Reference
 
+## Purpose
+
+The five layers exist to produce a single result: pre-verbal arousal. When all layers work, the viewer's nervous system fires before their analytical mind engages — they feel the outcome before they evaluate the offer.
+
 ## Scoring Guide
 
 Each layer scores 0-100. Use the FULL range. A score of 20 is appropriate for sites with severe violations. A score of 90+ requires exceptional execution with zero significant violations and specific evidence cited.

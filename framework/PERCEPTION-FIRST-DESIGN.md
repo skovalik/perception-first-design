@@ -1,7 +1,7 @@
 # Perception-First Design&trade;: The Complete Framework
 
 **Author:** Stefan Kovalik
-**Version:** 3.4 (2026-03-04) — 77 citations (55 perception + 22 ADHD cognitive neuroscience), predictive processing backbone, ontic occlusion + open questions.
+**Version:** 3.5 (2026-04-02) — 82 citations, pre-verbal arousal as unified objective, predictive processing backbone, ontic occlusion + open questions.
 **Purpose:** Source document for book, talks, consulting, workshops, and certification.
 **License:** CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
 © 2024–2026 Stefan Kovalik / Aurochs. "Perception-First Design" is a trademark (Serial 99686343).
@@ -143,6 +143,46 @@ But think of it less as a stack and more as a composition. You're conducting an 
 This maps to how the brain actually processes visual information — from the eyes through successive stages of visual processing, with each stage constrained by the bandwidth of the stage below it. Graphemes before letters before words before sentences before paragraphs before meaning. You can't process the message if you can't process the words.
 
 In predictive processing terms (Clark, 2013; Hohwy, 2013): when a design matches the brain's predictions at every layer, processing is fluid and unconscious — autopilot. When a layer fails, it generates prediction error that demands conscious attention. Good design means each layer confirms predictions so the brain's resources flow toward the decisions that matter, not toward deciphering the interface.
+
+**What the stack produces.** When all five layers work, cognitive load clear, first impression activated, processing fluent, biases aligned, trail resolved, the viewer's nervous system fires before their analytical mind engages. I call this **pre-verbal arousal**. They feel the outcome before they evaluate the offer.
+
+VHS didn't advertise videocassette specs. They showed a family filming a birthday party. The viewer felt the warmth of preserving that moment before they thought about the product.
+
+Apple's iPod silhouette campaigns showed a single body dancing against a flat color field. No face. No specs. No social context. Just the felt freedom of moving to your own music.
+
+Oreo ran their resealable pouch spot as the sound of the package opening and a family drifting into the kitchen. Three different felt states (family warmth, individual freedom, the pull of togetherness), same mechanism. The product was the rationalization for a feeling that had already arrived.
+
+IKEA's "Lamp" ad catches the mechanism in the act. A desk lamp gets replaced, carried to the curb, left in the rain. You feel sorry for it. Then the narrator: "Many of you feel bad for this lamp. That is because you are crazy. It has no feelings. And the new one is much better."
+
+Your body generated empathy for an object before your analytical mind could remind you it's a lamp. Pre-verbal arousal, exposed.
+
+The psychology behind this is not new. Damasio's somatic marker hypothesis (1994) showed that the body generates emotional signals that bias decisions before conscious deliberation. His Iowa Gambling Task showed participants developing anticipatory physiological responses to bad options *before they could consciously articulate which options were bad*.
+
+LeDoux (1996) mapped the neural pathway: the amygdala's "low road" delivers emotional responses in ~12ms while the cortical "high road" takes 200-300ms. The feeling arrives first. Always.
+
+What PFD adds is the engineering. Damasio tells you *that* pre-verbal responses drive decisions. Reber, Schwarz and Winkielman (2004) tell you *that* easy processing feels true. Clark (2013) tells you *that* prediction errors consume attention.
+
+None of them tell you which design layer failed, or in what order to fix it.
+
+Each layer clears a specific perceptual gate so the pre-verbal signal passes through unimpeded:
+
+- **L0** clears cognitive bandwidth. Without it, the signal drowns in noise.
+- **L1** delivers the activation in the first 50ms. The go/no-go gate.
+- **L2** sustains fluency so processing stays below conscious threshold. The signal keeps flowing.
+- **L3** aligns the signal with the viewer's existing emotional frames. No resistance, no mismatch.
+- **L4** resolves the conducted experience into action. The signal arrives at its destination.
+
+When a layer fails, it generates prediction error that consumes attentional bandwidth needed by the layers above it. This isn't metaphor.
+
+Lavie's perceptual load theory (1995) showed that lower-level processing demands literally eliminate higher-level processing capacity. Servajean (2024) established that processing fluency is mathematically equivalent to prediction error amplitude. Fluent processing IS low prediction error.
+
+Joffily and Coricelli (2013) formalized emotional valence as the rate of change of free energy: each layer resolving its prediction errors produces positive affect that compounds upward through the stack.
+
+The diagnostic starts with Feel, the pre-verbal read, because that's where the brain starts. If the stack is working, the Feel step produces immediate arousal: the viewer leans in before they know why.
+
+If the stack is broken, the Feel step catches it before any analytical tool could. You diagnose perception with perception, not with spreadsheets.
+
+The individual mechanisms aren't new. The assembly is: a dependency-ordered diagnostic framework grounded in prediction error cascade logic, unified by the objective of producing pre-verbal arousal.
 
 **A note on the research base:** The empirical benchmarks throughout this framework — timing thresholds, working memory parameters, fluency and priming effects — were measured primarily on WEIRD samples (Western, Educated, Industrialized, Rich, Democratic; Henrich, Heine & Norenzayan, 2010). The underlying cognitive architecture is expected to generalize across populations; specific parameter values may vary. PFD is a practitioner synthesis, not an experimental program — the citations establish the mechanisms; the 15-year applied record tests them.
 
@@ -628,10 +668,13 @@ That's the mindset shift. Everyone's been designing their whole lives — choosi
 | Sweller, J. | 1988 | Cognitive Load Theory (intrinsic vs. extraneous) | L0 |
 | Johnson et al. | 1991 | Neonatal face preference | L1 |
 | Sloboda, J. | 1991 | Musical features trigger involuntary physical responses | Comm. |
+| Damasio, A. | 1994 | Somatic marker hypothesis — body generates emotional signals biasing decisions before conscious deliberation; Iowa Gambling Task (*Descartes' Error*) | Core |
 | Friestad & Wright | 1994 | Persuasion Knowledge Model — users object to perceived insincerity | Ethics |
 | Friedman, Kahn & Borning | 2002 | Value Sensitive Design — systematic study of values embedded in technology design | Ethics |
 | Knobel & Bowker | 2011 | "Values in Design" — how values are actively inscribed through design decisions (*CACM*) | Ethics |
+| Lavie, N. | 1995 | Perceptual load theory — lower-level processing demands eliminate higher-level processing capacity (*Journal of Experimental Psychology*) | L0, Core |
 | Kurosu & Kashimura | 1995 | Aesthetic-usability effect (26 ATM UIs, 252 participants) | L1, Bonus |
+| LeDoux, J. | 1996 | Amygdala "low road" delivers emotional responses in ~12ms; cortical "high road" takes 200-300ms (*The Emotional Brain*) | L1, Core |
 | Salthouse, T. | 1996 | Processing speed declines continuously from early adulthood | L0 |
 | Tractinsky, N. | 1997 | Aesthetic-usability cross-cultural replication | L1 |
 | Sweller, van Merrienboer & Paas | 1998 | Formalized CLT taxonomy | L0 |
@@ -664,6 +707,7 @@ That's the mindset shift. Everyone's been designing their whole lives — choosi
 | Clark, A. | 2013 | Predictive processing — brains match sensory input to top-down predictions | Core |
 | Hohwy, J. | 2013 | *The Predictive Mind* — accessible philosophical treatment | Core |
 | Reinecke et al. | 2013 | Visual evaluation at 17ms — even faster than Lindgaard's 50ms threshold (Google Research) | L1 |
+| Joffily, M. & Coricelli, G. | 2013 | Emotional valence = rate of change of free energy; decreasing free energy = positive affect (*PLoS Computational Biology*) | Core |
 | Koelsch, S. | 2014 | Music modulates subcortical emotion structures rapidly, potentially prior to conscious evaluation (*Nature Reviews Neuroscience*) | Comm. |
 | van Laer et al. | 2014 | Narrative transportation meta-analysis — 132 effect sizes confirming story-driven belief change | Comm. |
 | Zak, P. | 2015 | Dramatic narrative arcs trigger cortisol + oxytocin (neurochemical mechanism undemonstrated — see Mierop 2020) | Comm. |
@@ -675,6 +719,7 @@ That's the mindset shift. Everyone's been designing their whole lives — choosi
 | Bujack, Teti, Miller, Turton & Rogers | 2022 | Perceptual color space is non-Riemannian — large color differences perceived as less than sum of small differences ("diminishing returns"). Aggregate online data; Brainard (2022) flags individual-level aggregation concern (*PNAS*) | L2 |
 | Brainard, D. | 2022 | "Proximity Matters" — PNAS commentary on Bujack. Flags: achromatic geodesic assumed not tested; aggregate data may mask individual Riemannian behavior; online collection methodologically weak for color science | L2, Note |
 | Maier et al. | 2022 | Nudge effects near-zero after correcting for publication bias (PNAS commentary/re-analysis) | L4 |
+| Servajean, P. | 2024 | Processing fluency = prediction error amplitude; fluency heuristic = inference about causes of prediction errors (*Topics in Cognitive Science*) | L2, Core |
 
 ### ADHD Cognitive Neuroscience & Related
 

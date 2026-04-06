@@ -1,7 +1,16 @@
 # Perception-First Design
 
-A 5-layer web design methodology grounded in cognitive psychology.
-77 peer-reviewed citations. 15 years applied. Open framework.
+You're looking at a page that isn't converting and you can't figure out why.
+
+The copy is fine. The product is good. Analytics says traffic is there. Your designer says it looks great. But visitors land, glance, and leave. The ones who stay don't buy. Nobody can tell you what's wrong because nobody is looking at the right layer.
+
+That's the problem this solves.
+
+---
+
+**Perception-First Design is a 5-layer diagnostic framework grounded in cognitive psychology. It tells you which perceptual layer is failing, in what order to fix it, and why the fix works — before you touch a single pixel.**
+
+82 peer-reviewed citations. 15 years applied. Open framework.
 
 Created by Stefan Kovalik / [Aurochs](https://aurochs.agency)
 
@@ -9,151 +18,129 @@ Created by Stefan Kovalik / [Aurochs](https://aurochs.agency)
 
 ---
 
-## The Thesis
+## What Changes When You Have This
 
-**Users don't think, until you make them.**
+You look at a page and you see the layers. Not the colors, not the layout, not the copy — the perceptual gates between a visitor and a conversion.
 
-The brain runs on prediction. When reality matches expectation, processing is automatic and unconscious (Clark 2013, Friston 2010). When reality violates expectation, conscious attention fires.
+You see that the hero is fine but the Foundation is broken — too many competing elements burning working memory before the visitor even reaches the headline. You see that L2 is leaking trust through inconsistent spacing that the designer didn't notice but the viewer's nervous system did. You see that the testimonials exist but aren't visually prominent enough to register in L1's 50ms window, so they're functionally invisible.
 
-Most design advice stops at "don't waste their limited attention." The real problem is that effortful attention is dormant by default, and you have to design the activation.
+You stop guessing. You stop A/B testing random changes. You fix L0 first because Lavie (1995) proved that lower-level processing demands literally eliminate higher-level processing capacity. Then L1. Then L2. Each fix compounds upward through the stack because each layer resolving its prediction errors produces positive affect that builds toward the thing every conversion actually runs on:
 
-Krug's *Don't Make Me Think* covered the foundation layer deliberately and well. This framework starts there and builds the other four: five layers, each grounded in peer-reviewed cognitive science, each dependent on the one below it.
+**Pre-verbal arousal.** The viewer's nervous system fires before their analytical mind engages. They feel the outcome before they evaluate the offer. That's not a metaphor. Damasio (1994) showed the body generating emotional signals that bias decisions before conscious deliberation. LeDoux (1996) mapped the pathway: emotional response in 12ms, conscious evaluation in 200-300ms. The feeling arrives first. Always.
 
-## The Five Layers
-
-| Layer | Constraint | Key Citation |
-|---|---|---|
-| The Foundation (L0) | Working memory: 3-5 chunks | Cowan 2001, 2010 |
-| First Impression (L1) | 50ms visual verdict | Lindgaard et al. 2006 |
-| Processing Fluency (L2) | Easy to process = feels true | Reber & Schwarz 1999 |
-| Perception Bias (L3) | Users autopilot, rationalize after | Nisbett & Wilson 1977 |
-| Decision Architecture (L4) | Structure shapes choice | Thaler & Sunstein 2008 |
-
-Fix bottom-up. Upstream failures block everything downstream.
-
-Full framework: [framework/PERCEPTION-FIRST-DESIGN.md](framework/PERCEPTION-FIRST-DESIGN.md)
-
-## ADHD and the Curb-Cut Effect
-
-I designed this framework with autism and ADHD as diagnostic instruments. The cognitive constraints I design around are constraints every user has. Mine are just louder.
-
-A page that overloads an ADHD user's working memory is overloading everyone's; the ADHD user just notices first. Same principle as curb cuts: built for the constrained case, better for everyone.
-
-Full write-up: [framework/ADHD-CURB-CUT.md](framework/ADHD-CURB-CUT.md)
-
-## Quick Start: The 5-Minute Perception Audit
-
-Five tests you can run on any website right now:
-
-1. **Squint test.** Blur your eyes. Can you still see the visual hierarchy?
-2. **5-second test.** Show someone for 5 seconds. What do they remember?
-3. **Path count.** How many clicks to the primary action?
-4. **Consistency check.** Same fonts, colors, spacing everywhere?
-5. **The gut check.** Would you buy from this site? The feeling arrives before the reason.
-
-## Use PFD in Claude Code
-
-```bash
-# Clone the repo
-git clone https://github.com/skovalik/perception-first-design.git
-
-# Point Claude Code at the skill directory
-# (add to your project's .claude/ or install as a skill)
-
-# Audit a live site
-/pfd-audit https://example.com
-
-# Run PFD on a design decision
-/pfd "Should we use a modal or inline expansion for the pricing FAQ?"
-
-# Run PFD on a strategy question
-/pfd "We're losing mobile users at checkout. What's failing?"
-
-# Load PFD as the lens for an iterative work session
-# (works with persona loops, subagent workflows, or any structured session)
-/pfd "Run the derivation protocol on our onboarding flow"
-```
-
-**Mode 1: Evaluation.** Walk an existing design through the 5 layers. Each layer validates or flags. Works on URLs, screenshots, mockups, or HTML files.
-
-**Mode 2: Derivation.** Work bottom-up through the 5 layers on any design problem, decision, or question. Each layer produces a hard requirement. The solution emerges from accumulated constraints, not intuition. This is the mode that generates answers you wouldn't have reached by instinct.
-
-### PFD in Ralph Loops
-
-I built a system called Ralph Loop: iterative convergence sessions where five analytical lenses (methodology, sales, operations, technical architecture, UX research) each evaluate the same problem independently. PFD's 5 layers cut across all of them as the shared quality gate.
-
-Each lens scores independently. One checks cognitive load and scannability. Another checks if the methodology is sound. Another asks if it sells. Another asks if it ships sustainably. PFD keeps all five grounded in how people actually process information. The loop continues until all five converge (typically 95+/100 average across 3-4 iterations). That convergence is the signal that something is ready.
-
-PFD is not a one-shot audit in this context. It's the methodology running in the background across every iteration. Layout choices, copy direction, pricing structure, onboarding flows, navigation architecture. The skill loads the framework. The corpus loads the rules. The derivation protocol runs when the question is "what should this be?" instead of "what's wrong with this?"
-
-Ralph Loop + PFD is how I built the Aurochs site, the product workspace plans, and the PFD corpus itself. The methodology evaluated the methodology.
-
-## The Evaluation Corpus
-
-The `corpus/` directory contains 26 heuristic rules across 5 layers, 7 worked examples at different score ranges, and 3 design system profiles (Tailwind, WordPress, Shopify). Same engine that powers [Forge](https://forge.aurochs.agency).
-
-> The framework is open. The calibration is earned.
->
-> This repo contains the evaluation engine. Forge adds the correction layer, accumulated learnings, and 15 years of practitioner calibration.
-
-**What you'll need to build yourself:** The corpus gives you the instrument. Accurate scoring requires a correction layer: your own before/after pairs from running evaluations, reviewing the output, and recording where the system got it wrong. Without corrections, LLM-driven heuristic evaluation has roughly an 80% false-positive rate (Baymard Institute finding). With even a dozen corrections loaded as few-shot examples, accuracy improves dramatically. Run `/pfd-audit`, review the output critically, save your corrections. That's how the calibration builds.
-
-## The Generative Protocol
-
-PFD is not just an audit tool. Mode 2 is a generative process for deriving design decisions from cognitive constraints.
-
-Six steps: state the problem, work each layer bottom-up (constraint, violation, requirement), accumulate R1-R5, derive what satisfies all five simultaneously. Rule Zero: do not propose any solution until all 5 layers are analyzed. Each layer constrains what's possible, and by L4 the right answer is the only one that survived all five filters.
-
-This applies to any design decision: layout choices, copy direction, pricing page structure, onboarding flows, navigation architecture, brand positioning. If humans perceive it, PFD has something to say about it.
-
-Full protocol: [framework/PERCEPTION-FIRST-DESIGN.md](framework/PERCEPTION-FIRST-DESIGN.md)
-
-## Evidence Standards
-
-PFD distinguishes claim types:
-
-- **Established science:** Cowan 2001, Lindgaard 2006, Reber & Schwarz 1999
-- **Theoretical frameworks:** Clark 2013, Friston 2010
-- **Strong practitioner synthesis:** The 5-layer dependency stack
-- **Convergent inference:** ADHD-AI collaboration patterns
-
-Full standards: [skill/skills/pfd/references/citation-standards.md](skill/skills/pfd/references/citation-standards.md)
-
-## Case Studies
+Every design methodology tells you WHAT to fix. This one tells you WHICH LAYER, in WHAT ORDER, and WHY — grounded in the same prediction error cascade logic the brain actually runs on.
 
 **Simply Smart Home.** Revenue tripled. I repositioned "digital photo frames" as smart home decor. That perception shift opened Disney licensing, Costco pallet placement, and Walmart shelf space.
 
 **iO Theater.** Online ticket sales went from 50% to 75%. Same shows, same theater, same audiences. Different perception of the buying experience.
 
-**Vacuum Sealers Unlimited.** Revenue 4x over ten years. No redesign. Incremental optimization, compounding trust. I put enough lipstick on the pig to persuade people on the fence.
+**Vacuum Sealers Unlimited.** Revenue 4x over ten years. No redesign. Incremental optimization, compounding trust.
+
+Same products. Different perception.
+
+---
+
+## The Five Layers
+
+Fix bottom-up. Upstream failures block everything downstream.
+
+| Layer | Gate | What Breaks If It Fails |
+|---|---|---|
+| **Foundation (L0)** | Working memory: 3-5 chunks | Visitor leaves before processing anything. Bandwidth consumed by noise. |
+| **First Impression (L1)** | 50ms visual verdict | Attention never activates. Everything downstream multiplies by zero. |
+| **Processing Fluency (L2)** | Easy to process = feels true | Trust erodes subconsciously. The visitor can't explain why they don't believe you. |
+| **Perception Bias (L3)** | Users autopilot, rationalize after | You're designing for what users SAY instead of what they DO. The gap is where conversions die. |
+| **Decision Architecture (L4)** | Structure shapes choice | The trail is broken. Interested visitors can't find the path to action. |
+
+Full framework (700+ lines, 82 citations): [framework/PERCEPTION-FIRST-DESIGN.md](framework/PERCEPTION-FIRST-DESIGN.md)
+
+---
+
+## Try It
+
+```bash
+git clone https://github.com/skovalik/perception-first-design.git
+```
+
+### In Claude Code
+
+```bash
+# Audit a live site — full 5-layer perception analysis
+/pfd-audit https://example.com
+
+# Derive a design solution from cognitive constraints
+/pfd "Should we use a modal or inline expansion for the pricing FAQ?"
+
+# Diagnose a conversion problem
+/pfd "We're losing mobile users at checkout. What's failing?"
+
+# Run the full derivation protocol on any design problem
+/pfd "Run the derivation protocol on our onboarding flow"
+```
+
+**Mode 1: Evaluation.** Walk an existing design through the 5 layers. Each layer validates or flags. Works on URLs, screenshots, mockups, HTML files, copy, emails, pitches — anything humans perceive.
+
+**Mode 2: Derivation.** Work bottom-up through the 5 layers. Each layer produces a hard requirement. The solution emerges from accumulated constraints — not intuition, not competitive copying, not what the HiPPO wants. This is the mode that generates answers you wouldn't have reached by instinct.
+
+Rule Zero: do not propose any solution until all 5 layers are analyzed. The right answer is the only one that survives all five filters.
+
+---
+
+## What's in the Repo
+
+```
+framework/           The complete PFD framework (v3.5, 82 citations)
+  PERCEPTION-FIRST-DESIGN.md
+  ADHD-CURB-CUT.md   ADHD and autism as diagnostic instruments, not disclaimers
+
+corpus/              The evaluation engine
+  core/              Rubric, constraints, psychology reference, output schema
+  heuristics/        26 rules across 5 layers with psychology citations
+  design-systems/    Tailwind, WordPress, Shopify detection profiles
+  worked-examples/   7 calibrated examples from terrible (18/100) to excellent (92/100)
+
+skill/               Claude Code skill + commands
+  skills/pfd/        The PFD skill (derivation protocol, layer summaries)
+  commands/          /pfd and /pfd-audit commands
+```
+
+> The framework is open. The calibration is earned.
+>
+> This repo contains the full evaluation engine. [Forge](https://forge.aurochs.agency) adds the correction layer and 15 years of practitioner calibration. You build your own correction layer by running evaluations, reviewing the output critically, and recording where the system got it wrong. A dozen corrections transforms accuracy from LLM-baseline to practitioner-grade.
+
+---
+
+## ADHD and the Curb-Cut Effect
+
+I designed this framework with autism and ADHD as diagnostic instruments. The cognitive constraints I design around are constraints every user has. Mine are just louder.
+
+A page that overloads an ADHD user's working memory is overloading everyone's. The ADHD user just notices first. Same principle as curb cuts: built for the constrained case, better for everyone.
+
+Full write-up: [framework/ADHD-CURB-CUT.md](framework/ADHD-CURB-CUT.md)
+
+---
 
 ## The Book
 
 *Make Me Think: Perception-First Design for the Post-Usability Era* by Stefan Kovalik. 12 chapters at [aurochs.agency/writing/make-me-think/](https://aurochs.agency/writing/make-me-think/). The framework is the reference; the book is the story.
 
-## Cognitive Constraint Design
-
-The meta-framework bridging PFD with other domains. Cognitive constraints are design material, not obstacles to work around. PFD applies this to interfaces. The same principle applies to ADHD-AI workflows, spatial tools, and voice models.
+---
 
 ## Citation
 
 ```
 Kovalik, S. (2024-2026). Perception-First Design: A cognitive psychology
-framework for web design. Version 3.4. CC BY-SA 4.0.
+framework for web design. Version 3.5. CC BY-SA 4.0.
 https://github.com/skovalik/perception-first-design
 ```
 
-Machine-readable format: [CITATION.cff](CITATION.cff)
+Machine-readable: [CITATION.cff](CITATION.cff)
 
 ## License
 
 CC BY-SA 4.0. Use, adapt, and build on PFD for any purpose, including commercial, as long as you credit the source and share adaptations under the same license.
 
 "Perception-First Design" is a trademark (Serial 99686343). The methodology is open; the name requires attribution.
-
-## Forge
-
-[Forge](https://forge.aurochs.agency) is the automated PFD evaluation tool. It scans URLs and mockups across all five cognitive layers, produces scored audits with actionable fixes, and applies the correction layer from 15 years of practitioner calibration. Free tier available.
 
 ## Contributing
 

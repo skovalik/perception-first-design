@@ -1,3 +1,15 @@
+---
+name: pfd
+description: >
+  This skill should be used when working on any design, marketing, copywriting, writing, or
+  communication task, including: "run PFD", "apply PFD", "use Perception-First Design", "do a
+  PFD analysis", "run the derivation protocol"; when designing interfaces, landing pages, emails,
+  ads, or visual systems; when writing or reviewing marketing copy, headlines, CTAs, proposals,
+  pitches, or presentations; when evaluating conversion problems, bounce rates, engagement, or
+  persuasion; when doing brand work, content strategy, or any client communication; or whenever
+  cognitive load, first impressions, processing fluency, trust, or decision architecture should
+  inform the work.
+---
 
 # Perception-First Design (PFD) — v0.3.8
 
@@ -139,6 +151,30 @@ Requirements that no proposal satisfies = where the non-obvious solution lives.
 
 ## After Applying PFD
 
+### Insight Log (mandatory, every analysis)
+
+Append an entry to `references/insights-log.md` after every PFD derivation or evaluation:
+
+```markdown
+### YYYY-MM-DD: [Brief description of what was analyzed]
+**Type:** url | text | image | html | css | copy | directory
+**Domain:** [e.g., SaaS landing, ecommerce PDP, email, portfolio, dashboard]
+**Key finding:** [The non-obvious thing PFD surfaced, one sentence]
+**Layer(s):** [Foundation/L1/L2/L3/L4]
+**Promote?:** yes | maybe | no
+**Notes:** [Cross-references, patterns, connections to prior findings]
+```
+
+Do this even for routine analyses. The insight is sometimes in what PFD struggled with, what layer was ambiguous, or what the protocol couldn't handle cleanly.
+
+### Accumulated Learnings (when warranted)
+
+If an insight is marked `Promote?: yes`, add it to `references/accumulated-learnings.md`:
+- If PFD produced a non-obvious insight, log it as a new Learning
+- If a layer's description was insufficient, note what was missing
+- If the derivation protocol needed adjustment, document it
+- Bump patch version in `plugin.json` when learnings change scoring behavior.
+
 ---
 
 ## Reference Files
@@ -175,6 +211,7 @@ The corpus provides:
 
 ## Version History
 
+- **v0.4.0** (2026-04-13): Calibration scaffolding: empty template files for insights-log, accumulated-learnings, and practitioner-corrections in references/. Insight Log protocol added to SKILL.md. YAML frontmatter added for auto-activation. Slots [5] and [8] wired to the new templates while preserving GitHub Issues contribution channel. Reconciles version drift between plugin.json (was 0.3.3) and SKILL.md history (was reporting 0.3.8). Retires the v0.4.0 reservation. Future skill versions increment cleanly from here. Framework v3.5 unchanged.
 - **v0.3.8** (2026-04-02): Unified objective statement added to "What PFD Is": pre-verbal arousal as the explicit goal of the 5-layer stack.
 - **v0.3.7** (2026-03-16): Canonicalized layer numbering: Foundation (L0) → L1 → L2 → L3 → L4. Fixed off-by-one error (was L2-L5). No framework content changed — numbering alignment only.
 - **v0.3.6** (2026-02-26): Learning #16 (near-miss color asymmetry). Framework v3.3: added Bujack et al. 2022 + Brainard 2022 (55 citations). L2 color qualifier (perceptual vs physical space, OKLCH). Design-token linting near-miss severity weighting. Skeptical analysis of "Schrödinger completed" headlines — cite non-additivity finding, not "completed" framing.

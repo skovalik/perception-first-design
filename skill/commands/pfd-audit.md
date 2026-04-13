@@ -19,10 +19,10 @@ $ARGUMENTS — URL or description of the design to evaluate
    - Slot [2]: Read `corpus/core/pfd-layer-rubric.md`
    - Slot [3]: Read `corpus/core/constitutional-constraints.md`
    - Slot [4]: Read `corpus/core/psychology/mvs-psychology-reference.md`
-   - Slot [5]: <!-- Accumulated learnings slot — extend with your own learnings as you use PFD -->
+   - Slot [5]: Read `skill/skills/pfd/references/accumulated-learnings.md` (empty by default; populate as you use PFD, or contribute back via GitHub Issues)
    - Slot [6]: Read `corpus/core/anti-patterns.md`
    - Slot [7]: Read all 5 anchor examples from `corpus/worked-examples/web/example-*.md`
-   - Slot [8]: <!-- Practitioner corrections slot — extend with your own corrections as you use PFD -->
+   - Slot [8]: Read `skill/skills/pfd/references/practitioner-corrections.md` (empty by default; populate as you use PFD, or contribute back via GitHub Issues)
    - Slot [9]: Read `corpus/core/output-schema.md`
 4. If a URL is provided, fetch the page and examine the HTML/CSS
 5. Detect the design system — read the matching profile from `corpus/design-systems/web-frameworks/`

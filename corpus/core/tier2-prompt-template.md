@@ -25,7 +25,9 @@ Read `corpus/core/psychology/mvs-psychology-reference.md`
 Condensed psychology citations for all 5 layers plus ethics. Every violation WHY must trace to a citation from this file. If a claim cannot be traced here, state "practitioner observation."
 
 #### Slot [5]: Accumulated Learnings (~3K tokens)
-<!-- Community accumulated learnings: contribute via GitHub Issues -->
+<!-- Practitioner learnings: load skill/skills/pfd/references/accumulated-learnings.md
+     (empty by default; populate as you use PFD).
+     To contribute learnings back to the framework, use GitHub Issues. -->
 
 Edge cases, domain-specific exceptions, and calibration insights that refine the rubric. Particularly relevant patterns include: experiential self-contradiction, near-miss color asymmetry, iterative regression as deeper visibility, and backend mechanics surfaced as frontend tiers.
 
@@ -45,7 +47,9 @@ Read ALL 5 anchor examples in this order:
 These are the primary anti-leniency defense. Calibrate every score against these anchors. If your evaluation resembles the "good" anchor, scores should be 65-75 — not 80+.
 
 #### Slot [8]: Recent Corrections — Few-Shot Calibration (~1-2K tokens)
-<!-- Practitioner corrections: contribute via GitHub Issues -->
+<!-- Practitioner corrections: load skill/skills/pfd/references/practitioner-corrections.md
+     (empty by default; populate as you use PFD).
+     To contribute corrections back to the framework, use GitHub Issues. -->
 
 Few-shot calibration data: what the LLM scored, what the practitioner corrected it to, and why. Internalize the correction patterns — they represent the practitioner's actual scoring distribution.
 

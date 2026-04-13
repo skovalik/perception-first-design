@@ -208,6 +208,11 @@ skill/               Claude Code skill + commands
 > critically, and recording where the system got it wrong. A dozen
 > corrections transforms accuracy from LLM-baseline to
 > practitioner-grade.
+>
+> Templates are included in `skill/skills/pfd/references/`:
+> `insights-log.md`, `accumulated-learnings.md`, and
+> `practitioner-corrections.md` ship empty, yours to populate. The
+> skill's Insight Log protocol shows the format.
 
 ---
 

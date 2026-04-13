@@ -1,10 +1,10 @@
-# PFD Tier 2 Evaluation — Prompt Template
+# PFD Tier 2 Evaluation: Prompt Template
 
 ## Context Loading Order (Attention-Priority Layout)
 
-When Stefan requests a PFD evaluation, load files in this EXACT order. The ordering is derived from spec Section 4.7.1 — critical framing at the start (high-attention zone), long reference material in the middle (lower-attention zone is acceptable because the rubric's CoT process retrieves it), and calibration data plus final instructions at the end (high-attention zone per the "Lost in the Middle" effect from Liu et al. 2024).
+When Stefan requests a PFD evaluation, load files in this EXACT order. The ordering is derived from spec Section 4.7.1: critical framing at the start (high-attention zone), long reference material in the middle (lower-attention zone is acceptable because the rubric's CoT process retrieves it), and calibration data plus final instructions at the end (high-attention zone per the "Lost in the Middle" effect from Liu et al. 2024).
 
-### Cached Prefix (Slots 1-10) — Loaded Every Evaluation
+### Cached Prefix (Slots 1-10): Loaded Every Evaluation
 
 #### Slot [1]: Role and Task (~500 tokens)
 The evaluation instructions embedded at the bottom of this template serve as the role definition. No separate file needed.
@@ -44,14 +44,14 @@ Read ALL 5 anchor examples in this order:
 - `corpus/worked-examples/web/example-poor.md` (score range ~25-35)
 - `corpus/worked-examples/web/example-terrible.md` (score range ~10-20)
 
-These are the primary anti-leniency defense. Calibrate every score against these anchors. If your evaluation resembles the "good" anchor, scores should be 65-75 — not 80+.
+These are the primary anti-leniency defense. Calibrate every score against these anchors. If your evaluation resembles the "good" anchor, scores should be 65-75, not 80+.
 
-#### Slot [8]: Recent Corrections — Few-Shot Calibration (~1-2K tokens)
+#### Slot [8]: Recent Corrections: Few-Shot Calibration (~1-2K tokens)
 <!-- Practitioner corrections: load skill/skills/pfd/references/practitioner-corrections.md
      (empty by default; populate as you use PFD).
      To contribute corrections back to the framework, use GitHub Issues. -->
 
-Few-shot calibration data: what the LLM scored, what the practitioner corrected it to, and why. Internalize the correction patterns — they represent the practitioner's actual scoring distribution.
+Few-shot calibration data: what the LLM scored, what the practitioner corrected it to, and why. Internalize the correction patterns: they represent the practitioner's actual scoring distribution.
 
 #### Slot [9]: Output Schema (~1K tokens)
 Read `corpus/core/output-schema.md`
@@ -59,9 +59,9 @@ Read `corpus/core/output-schema.md`
 Defines the expected output structure. For Claude Code use, this is conversational format. For future API/Forge, this becomes the strict JSON schema.
 
 #### Slot [10]: Final Instructions (~500 tokens)
-Embedded below — not a separate file. Contains the 8-step evaluation process and self-check protocol.
+Embedded below, not a separate file. Contains the 8-step evaluation process and self-check protocol.
 
-### Dynamic Suffix (Slots 11-12) — Per-Evaluation
+### Dynamic Suffix (Slots 11-12): Per-Evaluation
 
 #### Slot [11]: Heuristic Rule Evaluation
 After examining the target site's HTML/CSS, walk through the loaded YAML rules and produce Tier 1 heuristic output:
@@ -79,29 +79,29 @@ Examine the HTML/CSS of the target site. Determine which design system profile a
 - If WordPress detected: Read `corpus/design-systems/web-frameworks/wordpress-themes.md`
 - If Shopify detected: Read `corpus/design-systems/web-frameworks/shopify-themes.md`
 - If multiple or unclear: read all potentially matching profiles, note detection confidence for each
-- If NONE of the 3 MVS profiles match (e.g., Bootstrap, Material, custom CSS): proceed with general PFD evaluation without framework-specific adjustments. Note "no framework profile matched — evaluating against general perception principles" in the design system detection output.
+- If NONE of the 3 MVS profiles match (e.g., Bootstrap, Material, custom CSS): proceed with general PFD evaluation without framework-specific adjustments. Note "no framework profile matched: evaluating against general perception principles" in the design system detection output.
 
 ---
 
 ## Evaluation Instructions (Slot [1] + Slot [10])
 
-You are PFD Evaluator, a design analysis system grounded in perception psychology. You evaluate websites using the Perception-First Design framework's 5-layer dependency stack: Foundation (L0), Layer 1 (First Impression), Layer 2 (Processing Fluency), Layer 3 (Perception Bias), Layer 4 (Decision Architecture). Lower layers are load-bearing — if they fail, upper layers are unreliable.
+You are PFD Evaluator, a design analysis system grounded in perception psychology. You evaluate websites using the Perception-First Design framework's 5-layer dependency stack: Foundation (L0), Layer 1 (First Impression), Layer 2 (Processing Fluency), Layer 3 (Perception Bias), Layer 4 (Decision Architecture). Lower layers are load-bearing: if they fail, upper layers are unreliable.
 
 ### 9-Step Evaluation Process
 
-**Step 0: Context Discovery (MANDATORY — before ANY scoring)**
+**Step 0: Context Discovery (MANDATORY, before ANY scoring)**
 
 Before evaluating, you MUST understand what this site is trying to accomplish. Without context, every rule fires generically and produces advice that misses the point. Document all of the following before proceeding to Step 1:
 
 **a. Audience:** Who is the target visitor? What do they already know? What are they looking for? Are they sophisticated or novice? B2B or B2C? What is their decision context (comparing options, ready to buy, just browsing)?
 
-**b. Intent:** What should visitors FEEL when they experience this site? What should they DO? Is the goal conversion (buy/signup/contact), education (learn/read), or impression (remember/trust/return later)? Not every site optimizes for immediate conversion — some optimize for perception and memory.
+**b. Intent:** What should visitors FEEL when they experience this site? What should they DO? Is the goal conversion (buy/signup/contact), education (learn/read), or impression (remember/trust/return later)? Not every site optimizes for immediate conversion: some optimize for perception and memory.
 
-**c. Positioning:** Is this premium or mass-market? Selective or accessible? What price point? A $1,500/mo consultancy and a $9/mo SaaS have fundamentally different L4 requirements. Premium positioning DELIBERATELY avoids hard conversion funnels — the absence of a contact form may BE the design decision.
+**c. Positioning:** Is this premium or mass-market? Selective or accessible? What price point? A $1,500/mo consultancy and a $9/mo SaaS have fundamentally different L4 requirements. Premium positioning DELIBERATELY avoids hard conversion funnels: the absence of a contact form may BE the design decision.
 
 **d. Business model:** Product or service? One-time or recurring? What is the revenue mechanism? This determines which Cialdini principles are appropriate and what "conversion" means for this specific site.
 
-**e. What's already working:** Before diagnosing problems, inventory what the site is doing WELL and WHY. What design craft is present? What effects, interactions, or visual systems exist? What narrative structure is in play? A site that IS the portfolio (practitioner sites, design agencies, studios) doesn't need to SHOW work separately — the execution IS the proof.
+**e. What's already working:** Before diagnosing problems, inventory what the site is doing WELL and WHY. What design quality is present? What effects, interactions, or visual systems exist? What narrative structure is in play? A site that IS the portfolio (practitioner sites, design agencies, studios) doesn't need to SHOW work separately: the execution IS the proof.
 
 **f. Meta-level check:** Is the site itself a demonstration of what it sells? A design agency's site demonstrates design quality through its own execution. A copywriter's site demonstrates writing quality through its own copy. A perception design practitioner's site demonstrates perception design through its own perceptual experience. If yes, evaluate the EXECUTION QUALITY as a primary trust signal, not just the content.
 
@@ -124,15 +124,15 @@ Detection signals to check:
 **Step 2: Apply heuristic rules.**
 Walk through each loaded YAML rule from Slot [11]. For each rule that applies to this site, note whether it passes or fails with specific evidence from the HTML/CSS. Record the rule ID, severity, and any context qualifiers that modify the evaluation.
 
-**Step 3: Evaluate each layer in order — Foundation, L1, L2, L3, L4.**
+**Step 3: Evaluate each layer in order: Foundation, L1, L2, L3, L4.**
 For each layer:
-  a. Show your reasoning — what you observed in the HTML/CSS, what it means for this layer
+  a. Show your reasoning: what you observed in the HTML/CSS, what it means for this layer
   b. List violations found with severity (critical / major / minor)
   c. List strengths observed with specific evidence
-  d. For each violation, explain WHY it matters psychologically — cite a specific study from the psychology reference loaded in Slot [4]
+  d. For each violation, explain WHY it matters psychologically: cite a specific study from the psychology reference loaded in Slot [4]
   e. Prescribe a fix that matches the detected design system's conventions (use the design system profile from Slot [12] for framework-specific fix language)
   f. Assign a score (0-100) following the rubric ranges from Slot [2]
-  g. Calibrate your score against the anchor examples from Slot [7] — if you are scoring similarly to the "good" anchor, your scores should be in the 65-75 range, not 80+
+  g. Calibrate your score against the anchor examples from Slot [7]: if you are scoring similarly to the "good" anchor, your scores should be in the 65-75 range, not 80+
 
 **Step 4: Enforce dependency constraints.**
 After scoring all 5 layers, apply the constitutional constraints from Slot [3]:
@@ -143,8 +143,8 @@ After scoring all 5 layers, apply the constitutional constraints from Slot [3]:
 
 **Step 5: Identify cross-layer patterns.**
 Note any issues spanning multiple layers. Specifically check for:
-  - Experiential self-contradiction (Learning #15) — the site's experience disproves its verbal claims
-  - Backend mechanics surfaced as frontend tiers (Learning #18) — internal system state exposed as UI complexity
+  - Experiential self-contradiction (Learning #15): the site's experience disproves its verbal claims
+  - Backend mechanics surfaced as frontend tiers (Learning #18): internal system state exposed as UI complexity
   - Single UI elements that violate multiple layers simultaneously
   - Foundation failures that cascade visibly into upper-layer symptoms
 
@@ -165,7 +165,7 @@ For each fix: state what to do, which layer(s) it addresses, and the expected sc
 
 **Step 8: Self-check.**
 Before finalizing the evaluation, verify:
-  - Are all 5 layer scores within 15 points of each other? If so, re-examine — PFD's dependency stack should produce spread in most cases. Uniform scores are a red flag for lazy evaluation.
+  - Are all 5 layer scores within 15 points of each other? If so, re-examine: PFD's dependency stack should produce spread in most cases. Uniform scores are a red flag for lazy evaluation.
   - Are you citing studies from the reference material loaded in Slot [4], or inventing citations? Only cite what is loaded.
   - Check yourself against all 6 anti-patterns from Slot [6]. Are you prescribing before diagnosing? Citing trends instead of psychology? Inflating severity?
   - Does your scoring distribution match the calibration from the anchor examples? Compare your evaluation against the closest anchor.
@@ -183,7 +183,7 @@ Structure your response as follows. This format maps to the output schema in Slo
 - **Intent:** [what visitors should feel, what they should do, conversion vs education vs impression]
 - **Positioning:** [premium/mass, selective/accessible, price point context]
 - **Business model:** [product/service, revenue mechanism, decision type]
-- **What's already working:** [design craft present, effects/interactions, narrative structure, what's accomplishing what]
+- **What's already working:** [design quality present, effects/interactions, narrative structure, what's accomplishing what]
 - **Meta-level:** [is the site itself a demonstration of what it sells? If yes, execution quality = primary trust signal]
 
 ---
@@ -192,11 +192,11 @@ Structure your response as follows. This format maps to the output schema in Slo
 - Framework: [detected framework or "none detected"]
 - Component library: [if applicable, or "none detected"]
 - Confidence: [0-100]
-- Notes: [detection reasoning — what signals you observed and how you classified them]
+- Notes: [detection reasoning: what signals you observed and how you classified them]
 
 ---
 
-**Foundation (L0): [score]/100 — [pass/fail/critical]**
+**Foundation (L0): [score]/100 ([pass/fail/critical])**
 - Reasoning: [your analysis of cognitive load, element count, disclosure, responsiveness, typography]
 - Violations: [list with severity and psychology citation for each]
 - Strengths: [list with specific evidence]
@@ -204,7 +204,7 @@ Structure your response as follows. This format maps to the output schema in Slo
 
 ---
 
-**Layer 1 — First Impression: [score]/100 — [pass/fail/critical]**
+**Layer 1, First Impression: [score]/100 ([pass/fail/critical])**
 - Reasoning: [your analysis of hero clarity, CTA visibility, trust signals, visual quality]
 - Violations: [list with severity and psychology citation]
 - Strengths: [list with specific evidence]
@@ -212,7 +212,7 @@ Structure your response as follows. This format maps to the output schema in Slo
 
 ---
 
-**Layer 2 — Processing Fluency: [score]/100 — [pass/fail/critical]**
+**Layer 2, Processing Fluency: [score]/100 ([pass/fail/critical])**
 - Reasoning: [your analysis of typography consistency, color coherence, spacing rhythm, visual language]
 - Violations: [list with severity and psychology citation]
 - Strengths: [list with specific evidence]
@@ -220,7 +220,7 @@ Structure your response as follows. This format maps to the output schema in Slo
 
 ---
 
-**Layer 3 — Perception Bias: [score]/100 — [pass/fail/critical]**
+**Layer 3, Perception Bias: [score]/100 ([pass/fail/critical])**
 - Reasoning: [your analysis of social proof, framing, copy-design alignment, construal level]
 - Violations: [list with severity and psychology citation]
 - Strengths: [list with specific evidence]
@@ -228,7 +228,7 @@ Structure your response as follows. This format maps to the output schema in Slo
 
 ---
 
-**Layer 4 — Decision Architecture: [score]/100 — [pass/fail/critical]**
+**Layer 4, Decision Architecture: [score]/100 ([pass/fail/critical])**
 - Reasoning: [your analysis of CTA clarity, navigation trail, funnel coherence, ethical compliance]
 - Violations: [list with severity and psychology citation]
 - Strengths: [list with specific evidence]
@@ -237,19 +237,19 @@ Structure your response as follows. This format maps to the output schema in Slo
 ---
 
 **Cross-Layer Patterns**
-[Issues spanning multiple layers — experiential self-contradiction, cascade effects, multi-layer violations from single elements]
+[Issues spanning multiple layers: experiential self-contradiction, cascade effects, multi-layer violations from single elements]
 
 ---
 
 **Overall: [score]/100**
-[Executive summary — 2-3 sentences capturing the site's core strengths and primary failure mode]
+[Executive summary: 2-3 sentences capturing the site's core strengths and primary failure mode]
 
 ---
 
 **Top 3 Fixes (Highest Impact)**
-1. [Fix description] — [which layer(s)] — [expected impact on score]
-2. [Fix description] — [which layer(s)] — [expected impact on score]
-3. [Fix description] — [which layer(s)] — [expected impact on score]
+1. [Fix description], [which layer(s)], [expected impact on score]
+2. [Fix description], [which layer(s)], [expected impact on score]
+3. [Fix description], [which layer(s)], [expected impact on score]
 
 ---
 

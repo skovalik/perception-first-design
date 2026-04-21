@@ -39,39 +39,34 @@ You look at a page and you see the layers. Not the colors, not
 the layout, not the copy. The perceptual gates between a human
 and a decision.
 
-You see that the hero is fine but Foundation is broken: too many
-competing elements burning working memory before visitors even
-reach the headline. You see that L2 is leaking trust through
-inconsistent spacing the designer didn't notice but the viewer's
-nervous system did.
+The hero is fine but L0 is broken: too many competing elements
+burning working memory before visitors reach the headline. L2 is
+leaking trust through inconsistent spacing the viewer's nervous
+system notices before the designer does.
 
 You stop guessing. You fix L0 first because Lavie (1995) proved
 that lower-level processing demands eliminate higher-level
-processing capacity. Then L1. Then L2. Each fix compounds upward
-through the stack because each layer resolving its prediction
-errors builds toward the thing every decision actually runs on:
+processing capacity. Then L1. Then L2.
 
-**Pre-verbal arousal.** The viewer's nervous system fires before
-their analytical mind engages. They feel the outcome before they
-evaluate the offer.
+Each fix compounds upward through the stack, toward the thing
+every decision actually runs on: **pre-verbal arousal.** The
+viewer's nervous system fires before their analytical mind
+engages. They feel the outcome before they evaluate the offer.
 
 Damasio (1994) showed the body generating emotional signals that
 bias decisions before conscious deliberation. LeDoux (1996)
-mapped the pathway: emotional response in 12ms, conscious
-evaluation in 200-300ms. The feeling arrives first. Always.
+mapped the pathway: 12ms emotional response, 200-300ms conscious
+evaluation. The feeling arrives first. Always.
 
-Design becomes a lens of empathy to solve with. Not a set of
-business objects to align with the user.
+Design becomes a lens of empathy to solve with, not a set of
+business objects to align with the user. The stakeholder can
+still disagree, but now they're disagreeing with cognitive
+psychology instead of someone's taste.
 
-The business objectives and the human objectives share the same
-framework because the framework IS how people perceive. The
-stakeholder can still disagree, but now they're disagreeing with
-cognitive psychology, not with someone's taste.
-
-**Simply Smart Home.** Revenue tripled. I repositioned "digital
-photo frames" as smart home decor. That perception shift opened
-Disney licensing, Costco pallet placement, and Walmart shelf
-space.
+**Simply Smart Home.** Revenue tripled after I repositioned
+"digital photo frames" as smart home decor. That perception shift
+opened Disney licensing, Costco pallet placement, and Walmart
+shelf space.
 
 **iO Theater.** Online ticket sales went from 50% to 75%. Same
 shows, same theater, same audiences. Different perception of the
@@ -119,7 +114,7 @@ Fix bottom-up. Upstream failures block everything downstream.
 
 | Layer | Gate | What Breaks If It Fails |
 |---|---|---|
-| **Foundation (L0)** | Working memory: 3-5 chunks | Visitor leaves before processing anything. Bandwidth consumed by noise. |
+| **Cognitive Load (L0)** | Working memory: 3-5 chunks | Visitor leaves before processing anything. Bandwidth consumed by noise. |
 | **First Impression (L1)** | 50ms visual verdict | Attention never activates. Everything downstream multiplies by zero. |
 | **Processing Fluency (L2)** | Easy to process = feels true | Trust erodes subconsciously. The visitor can't explain why they don't believe you. |
 | **Perception Bias (L3)** | Users autopilot, rationalize after | You're designing for what users SAY instead of what they DO. The gap is where conversions die. |

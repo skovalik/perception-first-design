@@ -63,11 +63,6 @@ Index: https://aurochs.agency/writing/notes/
 - Skill to Product — https://aurochs.agency/writing/notes/skill-to-product/
   How a 15-year design practice becomes a productized methodology.
 
-## Forge (by Aurochs)
-Forge is an automated design intelligence tool that applies Perception-First Design methodology to scan URLs, screenshots, and mockups across five cognitive layers. It produces scored design audits with actionable fixes.
-- Web app: https://forge.aurochs.agency
-- How it works: https://aurochs.agency/writing/notes/forge-design-intelligence/
-
 ## Open Source
 The PFD framework, Claude Code skill, and evaluation corpus are open-source under CC BY-SA 4.0.
 Repository: https://github.com/skovalik/perception-first-design

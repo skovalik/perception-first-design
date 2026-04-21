@@ -8,7 +8,7 @@ labels: learning
 
 **What did PFD surface that was non-obvious?**
 
-**Which PFD layer(s)?** Foundation / L1 / L2 / L3 / L4
+**Which PFD layer(s)?** L0 / L1 / L2 / L3 / L4 / meta / cross
 
 **Would this change how PFD evaluates similar designs?** yes / maybe / no
 

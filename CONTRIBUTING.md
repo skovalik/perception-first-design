@@ -34,9 +34,14 @@ Changes to the ethical framework's three tests: Alignment, Sincerity, Golden Rul
 
 ## How contributions work
 
-All contributions are licensed under CC BY-SA 4.0. By submitting a pull request, you agree to this. Your name gets added to CONTRIBUTORS.md.
+This project is dual-licensed. By submitting a pull request you agree that:
 
-Learning submissions go through the issue template and I curate them. Not everything gets promoted, but everything gets read.
+- Contributions to `skill/` (code, loaders, scripts) are licensed under **MIT**.
+- Contributions to `framework/`, `corpus/`, and `skill/skills/pfd/references/learnings/` (text, learnings, corpus content, documentation) are licensed under **CC BY-SA 4.0**.
+
+Your name gets added to CONTRIBUTORS.md.
+
+Learning submissions go through the issue template and I curate them. Accepted learnings land as atom files under `skill/skills/pfd/references/learnings/{layer}/l<NNN>-<slug>.md` with YAML frontmatter; see existing atoms for the shape. Not everything gets promoted, but everything gets read.
 
 ## Code of Conduct
 

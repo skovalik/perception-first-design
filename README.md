@@ -17,7 +17,8 @@ pixel.**
 
 Created by Stefan Kovalik / [Aurochs](https://aurochs.agency)
 
-[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
+[![License: MIT](https://img.shields.io/badge/Code-MIT-blue.svg)](skill/LICENSE)
+[![License: CC BY-SA 4.0](https://img.shields.io/badge/Framework-CC_BY--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
 ---
 
@@ -201,18 +202,13 @@ skill/               Claude Code skill + commands
 
 > The framework is open. The calibration is earned.
 >
-> This repo contains the full evaluation engine.
-> [Forge](https://forge.aurochs.agency) adds the correction layer
-> and 15 years of practitioner calibration. You build your own
-> correction layer by running evaluations, reviewing the output
-> critically, and recording where the system got it wrong. A dozen
-> corrections transforms accuracy from LLM-baseline to
-> practitioner-grade.
+> This repo ships 20 curated learnings as atom files under
+> `skill/skills/pfd/references/learnings/`, organized by perceptual
+> layer (`L0/`, `L1/`, `L2/`, `L3/`, `L4/`, `meta/`, `cross/`) with
+> a generated `_index.md` and `_search.json` for lazy-load.
 >
-> Templates are included in `skill/skills/pfd/references/`:
-> `insights-log.md`, `accumulated-learnings.md`, and
-> `practitioner-corrections.md` ship empty, yours to populate. The
-> skill's Insight Log protocol shows the format.
+> Contribute a learning via pull request or the
+> [Learning Submission issue template](.github/ISSUE_TEMPLATE/learning-submission.md).
 
 ---
 
@@ -259,8 +255,8 @@ under `skill/`: **MIT**. See
 [skill/LICENSE](skill/LICENSE) (MIT) and
 [skill/LICENSE-CONTENT](skill/LICENSE-CONTENT) (CC BY-SA 4.0).
 
-Practice exemption: applying PFD in practice — running analyses,
-producing recommendations, delivering client work — does not
+Practice exemption: applying PFD in practice (running analyses,
+producing recommendations, delivering client work) does not
 create a derivative work. Only redistributions or modifications
 of the framework text trigger ShareAlike.
 

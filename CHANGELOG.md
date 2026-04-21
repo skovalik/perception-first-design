@@ -2,13 +2,13 @@
 
 ## Framework v3.6 + Skill v0.5.0 (2026-04-21)
 
-### Framework v3.6 (2026-04-20) — International Citation Expansion
+### Framework v3.6 (2026-04-20): International Citation Expansion
 
 **Added**
 - Methodology Siblings section naming parallel traditions PFD inherits from and stands alongside:
-  - Kansei Engineering (Nagamachi 1995) — Japanese affective engineering methodology
-  - Gestalt psychology (Wertheimer 1923; Metzger 1936) — German perceptual organization tradition
-  - Neuroaesthetics (Skov & Nadal 2020; Leder et al. 2004) — European neural substrate of aesthetic response
+  - Kansei Engineering (Nagamachi 1995): Japanese affective engineering methodology
+  - Gestalt psychology (Wertheimer 1923; Metzger 1936): German perceptual organization tradition
+  - Neuroaesthetics (Skov & Nadal 2020; Leder et al. 2004): European neural substrate of aesthetic response
 - Cultural Calibration meta-rule promoted from footnote to working rule. Western-centric perception science assumptions get flagged when artifact audience is non-Western; calibration priors applied explicitly rather than silently.
 - 7 new layer rules threaded across L0-L4:
   - L0: Hassin (2013) implicit working memory costs; Pessiglione (2007) subliminal reward processing
@@ -16,9 +16,9 @@
   - L2: Forster (2013) conceptual fluency distinct from perceptual fluency
   - L3: Seckler (2015) trust as conjoint perceptual judgment; Hertwig (2009) description-experience gap
   - L4: Trope & Liberman (2010) construal-level theory for decision architecture
-- Citation count: 82 → ~100
+- Citation count: 82 to ~100
 
-### Skill v0.5.0 (2026-04-21) — Sharded Learnings Architecture
+### Skill v0.5.0 (2026-04-21): Sharded Learnings Architecture
 
 **Added**
 - 20 learnings migrated from monolithic `accumulated-learnings.md` to atom files under `references/learnings/` organized by primary layer: `L0/`, `L1/`, `L2/`, `L3/`, `L4/`, `meta/`, `cross/`.
@@ -28,7 +28,7 @@
 
 **License**
 - Dual-licensed: **MIT** (code, scripts, loaders) + **CC BY-SA 4.0** (framework text, learnings, corpus content).
-- Practice exemption explicit in `LICENSE-CONTENT`: applying PFD in practice — running analyses, generating recommendations, delivering client work — does not create a derivative work and is not subject to share-alike. Only redistributions or modifications of the framework text trigger ShareAlike.
+- Practice exemption explicit in `LICENSE-CONTENT`: applying PFD in practice (running analyses, generating recommendations, delivering client work) does not create a derivative work and is not subject to share-alike. Only redistributions or modifications of the framework text trigger ShareAlike.
 
 ## v3.5 (2026-04-02)
 

@@ -4,7 +4,7 @@ about: Propose a new detection rule for the evaluation corpus
 labels: heuristic
 ---
 
-**PFD Layer:** Foundation / L1 / L2 / L3 / L4
+**PFD Layer:** L0 / L1 / L2 / L3 / L4
 
 **Rule name:**
 

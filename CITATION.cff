@@ -13,7 +13,7 @@ authors:
 repository-code: "https://github.com/skovalik/perception-first-design"
 url: "https://aurochs.agency/perception-first-design/"
 abstract: >
-  A five-layer web design methodology grounded in cognitive psychology. Applies
+  A five-layer design methodology grounded in cognitive psychology. Applies
   predictive processing, cognitive load theory, processing fluency, perception
   bias optimization, and decision architecture to how people perceive, process,
   and decide. ~100 peer-reviewed citations from multiple non-overlapping literatures,
@@ -23,7 +23,6 @@ abstract: >
 keywords:
   - perception-first-design
   - cognitive-psychology
-  - web-design
   - ux
   - processing-fluency
   - decision-architecture

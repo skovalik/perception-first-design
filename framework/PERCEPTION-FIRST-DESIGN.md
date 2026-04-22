@@ -3,7 +3,7 @@
 **Author:** Stefan Kovalik
 **Version:** 3.6 (2026-04-20). ~100 citations, international research integration (DE/AT/CH, JP, CN, FR, NL/IL/Scandinavia), Methodology Siblings section (Kansei, Gestalt, neuroaesthetics), Cultural Calibration meta-rule, 7 new layer rules threaded into L0–L4.
 **Purpose:** Source document for book, talks, consulting, workshops, and certification.
-**Copyright:** © 2024–2026 Stefan Kovalik / Aurochs.
+**Copyright:** © 2025–2026 Stefan Kovalik / Aurochs.
 **License:** Framework text licensed under [Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/). Associated code licensed under [MIT](https://opensource.org/licenses/MIT). Perception-First Design™ is a trademark of Stefan Kovalik (USPTO serial 99686343). Contributions welcome; see the public repository for the contribution process.
 
 **Living source of truth.** This document is canonical. When layer descriptions or rule semantics change here, derived documents in the repository should follow:

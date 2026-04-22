@@ -8,7 +8,7 @@
 Stefan Kovalik is the founder of Aurochs, a design, development, and hosting practice applying cognitive psychology to how people perceive, process, and decide. He holds a BA in Psychology from UC Santa Barbara and has 15 years of experience in web design, product design, and creative services. He is the creator of Perception-First Design, a trademarked five-layer methodology grounded in cognitive science research.
 
 ## Perception-First Design (Trademark: Serial 99686343)
-Perception-First Design is a five-layer web design methodology that addresses the unconscious barriers stopping interested visitors from converting. It is grounded in peer-reviewed cognitive psychology research (Kahneman, Cowan, Sweller, Clark, Friston, Treisman) and 15 years of applied design practice.
+Perception-First Design is a five-layer design methodology that addresses the unconscious barriers stopping interested visitors from converting. It is grounded in peer-reviewed cognitive psychology research (Kahneman, Cowan, Sweller, Clark, Friston, Treisman) and 15 years of applied design practice.
 
 The five layers, in dependency order:
 1. Layer 0: The Foundation (Don't Make Me Think) — Working memory holds 3-5 chunks (Cowan 2001, 2010), not Miller's commonly cited 7±2. Every unit of extraneous load your design adds is working memory stolen from the actual task.

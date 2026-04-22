@@ -235,8 +235,8 @@ The framework is the reference; the book is the story.
 ## Citation
 
 ```
-Kovalik, S. (2024-2026). Perception-First Design: A cognitive
-psychology framework for web design. Version 3.6. CC BY-SA 4.0.
+Kovalik, S. (2025-2026). Perception-First Design: A cognitive
+psychology framework for design. Version 3.6. CC BY-SA 4.0.
 https://github.com/skovalik/perception-first-design
 ```
 

@@ -3,32 +3,35 @@
 ## Plugin v0.6.0 (2026-04-27): Marketplace Listing Readiness
 
 **Marketplace packaging**
-- Plugin manifest moved from `skill/plugin.json` to `.claude-plugin/plugin.json` at repo root, per current Claude Code spec.
-- Repo restructured to spec-canonical layout: `skills/`, `commands/`, `scripts/` at repo root. Eliminates the prior nested `skill/skills/` redundancy and obviates plugin.json path overrides.
-- `.claude-plugin/marketplace.json` added at repo root — single-plugin entry with `source: "./"`. Enables self-hosted distribution: `/plugin marketplace add skovalik/perception-first-design && /plugin install perception-first-design@perception-first-design`.
-- Plugin install via marketplace pulls the entire repo, so the `evaluate` command's `corpus/` and `framework/` references resolve correctly in the cached plugin directory.
-- `NOTICE` file at repo root with consolidated trademark + dual-license terms. `LICENSE-CONTENT` (CC BY-SA 4.0) moved from `skill/` to repo root for visibility alongside `LICENSE` (MIT).
+- Repo restructured to spec-canonical layout. `skills/`, `commands/`, `scripts/` now sit at repo root (the nested `skill/skills/` redundancy is gone).
+- Plugin manifest at `.claude-plugin/plugin.json`. Marketplace catalog at `.claude-plugin/marketplace.json` — single-plugin entry, `source: "./"`. Enables self-hosted install: `/plugin marketplace add skovalik/perception-first-design && /plugin install perception-first-design@perception-first-design`.
+- `NOTICE` at repo root with trademark terms, license summary, and explicit permitted/prohibited use examples.
 
-**Commands renamed** (breaking change for existing users)
-- `pfd` → `solve` (Mode 2: derivation). Invocation: `/perception-first-design:solve "design problem here"`.
-- `pfd-audit` → `evaluate` (Mode 1: corpus-backed audit). Invocation: `/perception-first-design:evaluate https://example.com`.
-- Reasoning: cleaner namespacing under `/perception-first-design:`. Verbs describe what the command does.
+**Commands renamed (breaking)**
+- `pfd` → `solve` (Mode 2 — derive a solution from cognitive constraints).
+- `pfd-audit` → `evaluate` (Mode 1 — corpus-backed audit of an existing artifact).
+- Invocation: `/perception-first-design:solve` and `/perception-first-design:evaluate`.
 
-**Mode detection (auto-routing)**
-- SKILL.md now includes Mode Detection rules. Bare invocations (e.g., "PFD this design") inspect input shape and auto-route to Mode 1 (artifact → evaluate) or Mode 2 (problem → solve). Ambiguous cases prompt for disambiguation. Replaces the prior "always prefer Mode 2" rule.
+**Mode detection**
+- SKILL.md now auto-routes bare invocations ("pfd this") to Mode 1 or Mode 2 based on input shape. URL/screenshot/HTML → evaluate; problem statement/design question → solve. Replaces the prior "always Mode 2" default.
+
+**License simplified to single CC-BY-SA-4.0**
+- Was dual `MIT AND CC-BY-SA-4.0`. Now a single license with explicit practice exemption (applying PFD methodology in your work doesn't trigger share-alike).
+- `LICENSE-CONTENT` consolidated into `NOTICE`. `LICENSE` retained as canonical CC-BY-SA-4.0 text.
 
 **Content additions**
-- 9 new atoms from the calibration campaign: l021 (L4 ethics fusion), l022 (L4 symmetry threshold), l023 (falsifiability triad), l024 (AA-constrained token ladder), l025 (cascade-credit), l026 (aesthetic stability as trust producer), l027 (internal acknowledgment signals), l028 (held-decision compounding), l029 (port-don't-install motion audit). Index regenerated to 29 atoms.
-- 4 existing atoms updated with calibration-campaign tags: l010 (constraints are distributions), l011 (visual channel audit), l016 (near-miss color asymmetry), l017 (iterative regression is visibility).
-- `mvs-psychology-reference.md` added to `skills/pfd/references/` for skill-side quick lookup (was corpus-only at `corpus/core/psychology/`).
-- `gen-pfd-index.py` script committed under `scripts/` for atom index regeneration.
+- 9 atoms from the calibration campaign: l021–l029 (L4 ethics fusion, L4 symmetry threshold, falsifiability triad, AA-constrained token ladder, cascade-credit, aesthetic stability, internal acknowledgment signals, held-decision compounding, port-don't-install motion audit). Index regenerated to 29 atoms.
+- 4 atoms updated with calibration-campaign tags: l010, l011, l016, l017.
+- `mvs-psychology-reference.md` added to `skills/pfd/references/` (was corpus-only).
+- `scripts/gen-pfd-index.py` for atom index regeneration.
 
 **Hygiene**
-- `.gitignore` added: protects `CLAUDE.local.md`, `.claude/`, OS noise, Python caches, `*-private*` patterns.
-- Path-conventions clarifier added to SKILL.md header (skill-relative vs plugin-root-relative paths).
-- Fixed SKILL.md private path leak: `Aurochs/docs/PERCEPTION-FIRST-DESIGN-FRAMEWORK.md` → `framework/PERCEPTION-FIRST-DESIGN.md`.
-- Fixed dangling `corpus/core/corrections/` reference in SKILL.md — corrections now live exclusively at `references/practitioner-corrections.md` (single source of truth).
-- Author field updated: `Stefan Kovalik` (was `Stefan Kovalik / Aurochs`), with `email: admin@aurochs.agency` added for marketplace contact.
+- `.gitignore` protects `CLAUDE.local.md`, `.claude/`, OS/editor noise, Python caches.
+- SKILL.md header gained a path-conventions note (skill-relative vs plugin-root-relative).
+- Fixed private path in SKILL.md (`Aurochs/docs/...` → `framework/...`).
+- Fixed dangling `corpus/core/corrections/` reference; corrections live at `references/practitioner-corrections.md` (single source).
+- Atom source-attribution scrub — removed `Aurochs/pfd-campaign/` workspace paths from l021/l028/l029.
+- Author field: added `email: admin@aurochs.agency` for marketplace contact.
 
 ## Framework v3.6 + Skill v0.5.0 (2026-04-21)
 

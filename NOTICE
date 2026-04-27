@@ -8,9 +8,9 @@ LICENSES
 ================================================================================
 
 Code (.claude-plugin/plugin.json, .claude-plugin/marketplace.json,
-skill/commands/, skill/scripts/): MIT License — see LICENSE.
+commands/, scripts/): MIT License — see LICENSE.
 
-Framework text (skill/skills/pfd/SKILL.md, skill/skills/pfd/references/,
+Framework text (skills/pfd/SKILL.md, skills/pfd/references/,
 framework/, corpus/): CC BY-SA 4.0 — see LICENSE-CONTENT.
 
 Applying PFD methodology in practice (consulting, design work, training,

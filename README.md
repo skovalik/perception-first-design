@@ -207,17 +207,18 @@ corpus/              The evaluation engine
   design-systems/    Tailwind, WordPress, Shopify detection profiles
   worked-examples/   7 calibrated examples from terrible (18/100) to excellent (92/100)
 
-skill/               Claude Code skill + commands
-  skills/pfd/        The PFD skill (derivation protocol, layer summaries)
-  skills/pfd/references/learnings/   29 curated learnings sharded by primary layer
-  commands/          /perception-first-design:solve and :evaluate commands
-  scripts/           gen-pfd-index.py (regenerate _index + _search from atoms)
+skills/pfd/          The PFD skill (derivation protocol, layer summaries)
+  references/learnings/    29 curated learnings sharded by primary layer
+
+commands/            /perception-first-design:solve and :evaluate commands
+
+scripts/             gen-pfd-index.py (regenerate _index + _search from atoms)
 ```
 
 > The framework is open. The calibration is earned.
 >
 > This repo ships 29 curated learnings as atom files under
-> `skill/skills/pfd/references/learnings/`, organized by perceptual
+> `skills/pfd/references/learnings/`, organized by perceptual
 > layer (`L0/`, `L1/`, `L2/`, `L3/`, `L4/`, `meta/`, `cross/`) with
 > a generated `_index.md` and `_search.json` for lazy-load.
 >

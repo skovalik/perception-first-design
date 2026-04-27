@@ -7,9 +7,9 @@
 **License:** Framework text licensed under [Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/). Associated code licensed under [MIT](https://opensource.org/licenses/MIT). Perception-First Design™ is a trademark of Stefan Kovalik (USPTO serial 99686343). Contributions welcome; see the public repository for the contribution process.
 
 **Living source of truth.** This document is canonical. When layer descriptions or rule semantics change here, derived documents in the repository should follow:
-- `skill/skills/pfd/SKILL.md` — condensed layer summaries and derivation protocol
-- `skill/skills/pfd/references/accumulated-learnings.md` — pointer to sharded learnings under `references/learnings/`
-- `skill/skills/pfd/references/citation-standards.md` — evidence tiers and verification protocol
+- `skills/pfd/SKILL.md` — condensed layer summaries and derivation protocol
+- `skills/pfd/references/accumulated-learnings.md` — pointer to sharded learnings under `references/learnings/`
+- `skills/pfd/references/citation-standards.md` — evidence tiers and verification protocol
 
 ---
 

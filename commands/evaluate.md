@@ -13,16 +13,16 @@ $ARGUMENTS — URL, HTML, screenshot, or description of the artifact to evaluate
 
 ## Process
 
-1. Load the PFD skill: Read `skill/skills/pfd/SKILL.md`
+1. Load the PFD skill: Read `skills/pfd/SKILL.md`
 2. Load the Tier 2 evaluation template: Read `corpus/core/tier2-prompt-template.md`
 3. Follow the template's loading sequence IN ORDER:
    - Slot [2]: Read `corpus/core/pfd-layer-rubric.md`
    - Slot [3]: Read `corpus/core/constitutional-constraints.md`
    - Slot [4]: Read `corpus/core/psychology/mvs-psychology-reference.md`
-   - Slot [5]: Read `skill/skills/pfd/references/accumulated-learnings.md` (empty by default; populate as you use PFD, or contribute back via GitHub Issues)
+   - Slot [5]: Read `skills/pfd/references/learnings/_index.md` (sharded learnings index — drill into atoms via `skills/pfd/references/learnings/{layer}/l<NNN>-*.md` as relevant)
    - Slot [6]: Read `corpus/core/anti-patterns.md`
    - Slot [7]: Read all 5 anchor examples from `corpus/worked-examples/web/example-*.md`
-   - Slot [8]: Read `skill/skills/pfd/references/practitioner-corrections.md` (empty by default; populate as you use PFD, or contribute back via GitHub Issues)
+   - Slot [8]: Read `skills/pfd/references/practitioner-corrections.md` (empty by default; populate as you use PFD, or contribute back via GitHub Issues)
    - Slot [9]: Read `corpus/core/output-schema.md`
 4. If a URL is provided, fetch the page and examine the HTML/CSS
 5. Detect the design system — read the matching profile from `corpus/design-systems/web-frameworks/`

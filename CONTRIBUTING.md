@@ -18,7 +18,7 @@ PFD is a living methodology. I built it over 15 years of applied design practice
 
 ## Quality standards
 
-Every claim must trace to a published citation or be explicitly labeled "practitioner observation." This is not optional. PFD distinguishes between established science, theoretical frameworks, and practitioner synthesis (see `skill/skills/pfd/references/citation-standards.md`). Your contribution should do the same.
+Every claim must trace to a published citation or be explicitly labeled "practitioner observation." This is not optional. PFD distinguishes between established science, theoretical frameworks, and practitioner synthesis (see `skills/pfd/references/citation-standards.md`). Your contribution should do the same.
 
 New heuristic rules must follow the YAML schema in `corpus/heuristics/universal/`. Worked examples must follow the format in `corpus/worked-examples/web/`. If you're unsure about format, open an issue first.
 
@@ -36,12 +36,12 @@ Changes to the ethical framework's three tests: Alignment, Sincerity, Golden Rul
 
 This project is dual-licensed. By submitting a pull request you agree that:
 
-- Contributions to `skill/` (code, loaders, scripts) are licensed under **MIT**.
-- Contributions to `framework/`, `corpus/`, and `skill/skills/pfd/references/learnings/` (text, learnings, corpus content, documentation) are licensed under **CC BY-SA 4.0**.
+- Contributions to `commands/`, `scripts/`, and `.claude-plugin/` (code, loaders, scripts) are licensed under **MIT**.
+- Contributions to `framework/`, `corpus/`, and `skills/pfd/references/learnings/` (text, learnings, corpus content, documentation) are licensed under **CC BY-SA 4.0**.
 
 Your name gets added to CONTRIBUTORS.md.
 
-Learning submissions go through the issue template and I curate them. Accepted learnings land as atom files under `skill/skills/pfd/references/learnings/{layer}/l<NNN>-<slug>.md` with YAML frontmatter; see existing atoms for the shape. Not everything gets promoted, but everything gets read.
+Learning submissions go through the issue template and I curate them. Accepted learnings land as atom files under `skills/pfd/references/learnings/{layer}/l<NNN>-<slug>.md` with YAML frontmatter; see existing atoms for the shape. Not everything gets promoted, but everything gets read.
 
 ## Code of Conduct
 

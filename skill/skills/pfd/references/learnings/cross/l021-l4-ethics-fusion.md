@@ -15,10 +15,10 @@ tags:
   - layer-pin
 source: >
   PFD Calibration & Showcase Campaign — n=25 Fortune-500 calibration testing
-  (2026-04 sweep) using `templates/scoring-rubric.md` v1.0. This learning
-  derives from the 5-cancel-flow sub-cluster (eps 06 Adobe, 07 Amazon Prime,
-  13 LinkedIn Premium, 24 Disney+, 25 Netflix) and essay
-  `Aurochs/pfd-campaign/essays/02-five-cancel-flows/essay.md`.
+  (2026-04 sweep) using internal scoring rubric v1.0. This learning derives
+  from the 5-cancel-flow sub-cluster (eps 06 Adobe, 07 Amazon Prime, 13
+  LinkedIn Premium, 24 Disney+, 25 Netflix) and the campaign's
+  five-cancel-flows essay.
 ---
 
 # Learning 21: L4-Ethics Fusion — Decision Architecture and Operational Ethics Resolve to the Same Diagnostic

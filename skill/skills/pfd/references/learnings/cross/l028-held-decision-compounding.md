@@ -14,8 +14,7 @@ tags:
   - duration-encodes-meaning
 source: >
   PFD Calibration & Showcase Campaign — essay 01 (Intentional Minimalism vs
-  Legacy-CMS Drift) at `Aurochs/pfd-campaign/essays/01-intentional-minimalism/essay.md`.
-  Nine-firm investment-firm cluster — Berkshire Hathaway, Benchmark, Union Square
+  Legacy-CMS Drift). Nine-firm investment-firm cluster — Berkshire Hathaway, Benchmark, Union Square
   Ventures, Renaissance Technologies, Elliott Management (held-decision exemplars,
   scoring 70+) vs Kleiner Perkins, Carl Icahn Enterprises, Pershing Square,
   AQR Capital (drift exemplars, scoring 40–55). Cross-references Wikipedia ep 09

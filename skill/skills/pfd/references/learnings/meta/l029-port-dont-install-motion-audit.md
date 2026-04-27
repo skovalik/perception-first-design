@@ -15,8 +15,8 @@ tags:
   - hidden-defaults
 source: >
   PFD Calibration & Showcase Campaign — n=25 Fortune-500 calibration testing
-  (2026-04 sweep). Distribution-level finding from
-  `Aurochs/pfd-campaign/qa/LIBRARY-OPPORTUNITIES.md`. All 15 reactbits /
+  (2026-04 sweep). Distribution-level finding from the campaign's
+  library-opportunities QA review. All 15 reactbits /
   21st-magic library integrations across 11 episodes were ported to vanilla
   HTML/CSS/JS rather than installed as npm runtime dependencies. Excluded
   components (PFD violations) explicitly catalogued — GridDistortion,

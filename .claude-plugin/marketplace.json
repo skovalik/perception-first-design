@@ -1,0 +1,20 @@
+{
+  "name": "perception-first-design",
+  "owner": {
+    "name": "Stefan Kovalik",
+    "email": "admin@aurochs.agency"
+  },
+  "metadata": {
+    "description": "Perception-First Design — psychology-backed design framework. 5-layer dependency stack derives requirements from cognitive constraints before proposing solutions.",
+    "version": "0.6.0"
+  },
+  "plugins": [
+    {
+      "name": "perception-first-design",
+      "source": "./",
+      "description": "Perception-First Design (PFD) — psychology-backed design framework. Auto-activates on design, marketing, copywriting, and communication tasks. Provides /perception-first-design:solve (derive a solution from cognitive constraints) and /perception-first-design:evaluate (corpus-backed audit of an existing artifact). Mode auto-detection routes bare 'pfd this' invocations correctly.",
+      "category": "design",
+      "tags": ["design", "ux", "marketing", "copywriting", "conversion", "psychology", "cognitive-science"]
+    }
+  ]
+}

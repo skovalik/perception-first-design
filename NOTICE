@@ -1,0 +1,50 @@
+Perception-First Design
+Copyright 2024-2026 Stefan Kovalik / Aurochs
+
+This product is distributed under a dual license:
+
+================================================================================
+LICENSES
+================================================================================
+
+Code (.claude-plugin/plugin.json, .claude-plugin/marketplace.json,
+skill/commands/, skill/scripts/): MIT License — see LICENSE.
+
+Framework text (skill/skills/pfd/SKILL.md, skill/skills/pfd/references/,
+framework/, corpus/): CC BY-SA 4.0 — see LICENSE-CONTENT.
+
+Applying PFD methodology in practice (consulting, design work, training,
+client engagements, building products with PFD principles) does not create
+a derivative of the framework text and is not subject to CC BY-SA share-alike.
+You can apply PFD commercially without any obligations on your work product.
+Share-alike attaches only to adaptations of the framework text itself when
+rewritten, translated, or redistributed.
+
+================================================================================
+TRADEMARK
+================================================================================
+
+"Perception-First Design" and "PFD" (as used to describe the design
+methodology documented in this repository) are trademarks of Stefan Kovalik.
+
+U.S. Trademark Serial No. 99686343 (filed 2026-03-06).
+
+License grants do not include trademark rights. Specifically:
+
+1. You MAY use this plugin and the methodology it documents for any purpose
+   permitted by the applicable license, including commercial use.
+
+2. You MAY refer to "Perception-First Design" or "PFD" in good faith to
+   describe your use of the methodology (e.g., "I applied Perception-First
+   Design to this audit").
+
+3. You MAY NOT use "Perception-First Design" or "PFD" as the name or material
+   branding of a commercial product, service, consulting offering, certification
+   program, or derivative framework without prior written permission from the
+   trademark holder.
+
+4. You MAY fork and modify the methodology under the applicable license, but
+   derivative works that materially alter the framework must be distributed
+   under a different name.
+
+For trademark licensing inquiries, contact: admin@aurochs.agency

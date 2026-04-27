@@ -141,23 +141,36 @@ git clone https://github.com/skovalik/perception-first-design.git
 
 ### In Claude Code
 
-Automated design thinking. The PFD skill runs the full
-derivation protocol on anything humans perceive: interfaces,
-landing pages, emails, ads, pitches, onboarding flows,
-documentation.
+Automated design thinking. The PFD skill runs on anything humans
+perceive: interfaces, landing pages, emails, ads, pitches,
+onboarding flows, documentation.
+
+**Install via your own marketplace** (no review required):
 
 ```bash
-# Audit a live site, full 5-layer perception analysis
-/pfd-audit https://example.com
+/plugin marketplace add skovalik/perception-first-design
+/plugin install perception-first-design@perception-first-design
+```
 
-# Derive a design solution from cognitive constraints
-/pfd "Should we use a modal or inline expansion for the pricing FAQ?"
+**Or via the official Anthropic marketplace** (when listed):
 
-# Diagnose a conversion problem
-/pfd "We're losing mobile users at checkout. What's failing?"
+```bash
+/plugin install perception-first-design@claude-plugins-official
+```
 
-# Run the full derivation protocol on any design problem
-/pfd "Run the derivation protocol on our onboarding flow"
+After install, use the skill in three ways:
+
+```bash
+# Bare invocation — auto-detects mode from input
+"PFD this landing page: https://example.com"     # → evaluate (URL = artifact)
+"Run PFD on our onboarding flow design problem"  # → solve (problem = derivation)
+
+# Force Mode 2 (solve) — derives a solution from cognitive constraints
+/perception-first-design:solve "Should we use a modal or inline expansion for the pricing FAQ?"
+/perception-first-design:solve "We're losing mobile users at checkout. What's failing?"
+
+# Force Mode 1 (evaluate) — corpus-backed audit of an existing artifact
+/perception-first-design:evaluate https://example.com
 ```
 
 **Mode 1: Evaluation.** Walk an existing design through the 5
@@ -180,6 +193,10 @@ five filters.
 ## What's in the Repo
 
 ```
+.claude-plugin/      Plugin manifest + marketplace catalog
+  plugin.json        Metadata (name, version, license, keywords, path overrides)
+  marketplace.json   Self-hosted marketplace entry pointing at this repo
+
 framework/           The complete PFD framework (v3.6, ~100 citations)
   PERCEPTION-FIRST-DESIGN.md
   ADHD-CURB-CUT.md   ADHD and autism as diagnostic instruments, not disclaimers
@@ -192,12 +209,14 @@ corpus/              The evaluation engine
 
 skill/               Claude Code skill + commands
   skills/pfd/        The PFD skill (derivation protocol, layer summaries)
-  commands/          /pfd and /pfd-audit commands
+  skills/pfd/references/learnings/   29 curated learnings sharded by primary layer
+  commands/          /perception-first-design:solve and :evaluate commands
+  scripts/           gen-pfd-index.py (regenerate _index + _search from atoms)
 ```
 
 > The framework is open. The calibration is earned.
 >
-> This repo ships 20 curated learnings as atom files under
+> This repo ships 29 curated learnings as atom files under
 > `skill/skills/pfd/references/learnings/`, organized by perceptual
 > layer (`L0/`, `L1/`, `L2/`, `L3/`, `L4/`, `meta/`, `cross/`) with
 > a generated `_index.md` and `_search.json` for lazy-load.

@@ -17,8 +17,7 @@ pixel.**
 
 Created by Stefan Kovalik / [Aurochs](https://aurochs.agency)
 
-[![License: MIT](https://img.shields.io/badge/Code-MIT-blue.svg)](skill/LICENSE)
-[![License: CC BY-SA 4.0](https://img.shields.io/badge/Framework-CC_BY--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
+[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
 ---
 
@@ -264,19 +263,22 @@ Machine-readable: [CITATION.cff](CITATION.cff)
 
 ## License
 
-Dual license. Framework text, learnings, corpus content, and
-documentation: **CC BY-SA 4.0**. Skill code, loaders, and scripts
-under `skill/`: **MIT**. See
-[skill/LICENSE](skill/LICENSE) (MIT) and
-[skill/LICENSE-CONTENT](skill/LICENSE-CONTENT) (CC BY-SA 4.0).
+**CC BY-SA 4.0.** See [LICENSE](LICENSE).
 
-Practice exemption: applying PFD in practice (running analyses,
-producing recommendations, delivering client work) does not
-create a derivative work. Only redistributions or modifications
-of the framework text trigger ShareAlike.
+**Practice exemption:** applying PFD in practice — running
+analyses, producing recommendations, delivering client work,
+designing products with PFD principles — does not create a
+derivative work and is not subject to share-alike. You can
+apply PFD commercially without any obligations on your work
+product. Only redistributions or modifications of the
+framework text itself trigger share-alike.
 
-"Perception-First Design" is a trademark (Serial 99686343). The
-methodology is open; the name requires attribution.
+"Perception-First Design" is a trademark (USPTO Serial 99686343).
+The methodology is open; the name requires attribution and may
+not be used as the brand of a commercial product, service, or
+certification without permission.
+
+See [NOTICE](NOTICE) for full terms.
 
 ## Contributing
 

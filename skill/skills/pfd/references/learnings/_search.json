@@ -80,6 +80,114 @@
     "path": "cross/l019-multi-artifact-engagement-field.md"
   },
   {
+    "id": "l021",
+    "title": "L4-Ethics Fusion",
+    "layer": "cross",
+    "secondary_layers": [
+      "L4",
+      "meta"
+    ],
+    "date": "2026-04-24",
+    "updated": null,
+    "contributor": "Stefan Kovalik",
+    "related": [
+      "l014",
+      "l015",
+      "l022",
+      "l025"
+    ],
+    "tags": [
+      "l4-ethics-fusion",
+      "decision-architecture",
+      "operational-ethics",
+      "cancel-flow",
+      "regulatory-convergence",
+      "layer-pin"
+    ],
+    "path": "cross/l021-l4-ethics-fusion.md"
+  },
+  {
+    "id": "l025",
+    "title": "Cascade-Credit",
+    "layer": "cross",
+    "secondary_layers": [
+      "L1",
+      "L2",
+      "L3",
+      "meta"
+    ],
+    "date": "2026-04-24",
+    "updated": null,
+    "contributor": "Stefan Kovalik",
+    "related": [
+      "l015",
+      "l016",
+      "l021"
+    ],
+    "tags": [
+      "cascade-credit",
+      "layer-dependency",
+      "predictive-trust-prior",
+      "inverse-cascade",
+      "polish-as-extraction-fuel",
+      "validation-needed"
+    ],
+    "path": "cross/l025-cascade-credit.md"
+  },
+  {
+    "id": "l026",
+    "title": "Aesthetic Stability as Trust Producer",
+    "layer": "cross",
+    "secondary_layers": [
+      "L1",
+      "L3",
+      "meta"
+    ],
+    "date": "2026-04-25",
+    "updated": null,
+    "contributor": "Stefan Kovalik",
+    "related": [
+      "l011",
+      "l015",
+      "l025"
+    ],
+    "tags": [
+      "aesthetic-stability",
+      "trust-producer",
+      "long-tenured-references",
+      "predictive-prior",
+      "floor-case",
+      "validation-needed"
+    ],
+    "path": "cross/l026-aesthetic-stability-as-trust-producer.md"
+  },
+  {
+    "id": "l028",
+    "title": "Held-Decision Compounding",
+    "layer": "cross",
+    "secondary_layers": [
+      "L3",
+      "L1",
+      "meta"
+    ],
+    "date": "2026-04-25",
+    "updated": null,
+    "contributor": "Stefan Kovalik",
+    "related": [
+      "l015",
+      "l025",
+      "l026"
+    ],
+    "tags": [
+      "held-decision-compounding",
+      "temporal-axis",
+      "longitudinal-trust",
+      "minimalism",
+      "duration-encodes-meaning"
+    ],
+    "path": "cross/l028-held-decision-compounding.md"
+  },
+  {
     "id": "l018",
     "title": "Backend Mechanics Surfaced as Frontend Complexity Invert Their Intent",
     "layer": "L0",
@@ -113,7 +221,7 @@
       "L2"
     ],
     "date": "2026-02-19",
-    "updated": null,
+    "updated": "2026-04-25",
     "contributor": "Stefan Kovalik",
     "related": [],
     "tags": [
@@ -121,7 +229,8 @@
       "bertin",
       "pre-attentive",
       "audit",
-      "diagnostic-tool"
+      "diagnostic-tool",
+      "density-instrumentation"
     ],
     "path": "L1/l011-visual-channel-audit.md"
   },
@@ -151,7 +260,7 @@
     "layer": "L2",
     "secondary_layers": [],
     "date": "2026-02-26",
-    "updated": null,
+    "updated": "2026-04-25",
     "contributor": "Stefan Kovalik",
     "related": [],
     "tags": [
@@ -161,9 +270,65 @@
       "OKLCH",
       "design-tokens",
       "bujack-2022",
-      "brainard-2022"
+      "brainard-2022",
+      "tri-axis-expansion",
+      "pre-attentive-priority",
+      "brand-prior-reassignment",
+      "iso-styling"
     ],
     "path": "L2/l016-near-miss-color-asymmetry.md"
+  },
+  {
+    "id": "l024",
+    "title": "AA-Constrained Token Ladder",
+    "layer": "L2",
+    "secondary_layers": [
+      "meta"
+    ],
+    "date": "2026-04-24",
+    "updated": null,
+    "contributor": "Stefan Kovalik",
+    "related": [
+      "l011",
+      "l013",
+      "l016"
+    ],
+    "tags": [
+      "aa-constrained-token-ladder",
+      "wcag-aa",
+      "design-system-tokens",
+      "contrast-discipline",
+      "by-construction",
+      "brand-color-variants"
+    ],
+    "path": "L2/l024-aa-constrained-token-ladder.md"
+  },
+  {
+    "id": "l023",
+    "title": "Falsifiability Triad",
+    "layer": "L3",
+    "secondary_layers": [
+      "L2",
+      "L4"
+    ],
+    "date": "2026-04-24",
+    "updated": null,
+    "contributor": "Stefan Kovalik",
+    "related": [
+      "l015",
+      "l016",
+      "l021",
+      "l022"
+    ],
+    "tags": [
+      "falsifiability-triad",
+      "honest-claim",
+      "l3-positive-shape",
+      "perception-bias-replacement",
+      "sincerity-test",
+      "verifiable-copy"
+    ],
+    "path": "L3/l023-falsifiability-triad.md"
   },
   {
     "id": "l003",
@@ -219,6 +384,31 @@
       "expert-client-gap"
     ],
     "path": "L4/l008-epistemic-asymmetry.md"
+  },
+  {
+    "id": "l022",
+    "title": "L4 Symmetry Threshold",
+    "layer": "L4",
+    "secondary_layers": [
+      "meta"
+    ],
+    "date": "2026-04-24",
+    "updated": null,
+    "contributor": "Stefan Kovalik",
+    "related": [
+      "l021",
+      "l014",
+      "l016"
+    ],
+    "tags": [
+      "l4-symmetry-threshold",
+      "cancel-clicks-ratio",
+      "path-symmetry",
+      "numeric-hard-fail",
+      "regulator-validated",
+      "cancel-flow"
+    ],
+    "path": "L4/l022-l4-symmetry-threshold.md"
   },
   {
     "id": "l001",
@@ -311,14 +501,15 @@
     "layer": "meta",
     "secondary_layers": [],
     "date": "2026-02-19",
-    "updated": null,
+    "updated": "2026-04-25",
     "contributor": "Stefan Kovalik",
     "related": [],
     "tags": [
       "constraints-as-distributions",
       "neurodivergence",
       "calibration",
-      "population-science"
+      "population-science",
+      "score-band-tri-cluster"
     ],
     "path": "meta/l010-constraints-are-distributions.md"
   },
@@ -347,7 +538,7 @@
     "layer": "meta",
     "secondary_layers": [],
     "date": "2026-03-10",
-    "updated": null,
+    "updated": "2026-04-25",
     "contributor": "Stefan Kovalik",
     "related": [
       "l006"
@@ -357,7 +548,8 @@
       "regression",
       "impasse",
       "forge",
-      "ralph-loop"
+      "ralph-loop",
+      "measurement-artifact-taxonomy"
     ],
     "path": "meta/l017-iterative-regression-is-visibility.md"
   },
@@ -389,5 +581,58 @@
       "weird-bias"
     ],
     "path": "meta/l020-international-citation-expansion.md"
+  },
+  {
+    "id": "l027",
+    "title": "Internal-Acknowledgment Signals",
+    "layer": "meta",
+    "secondary_layers": [
+      "L3",
+      "L4"
+    ],
+    "date": "2026-04-25",
+    "updated": null,
+    "contributor": "Stefan Kovalik",
+    "related": [
+      "l014",
+      "l015",
+      "l017"
+    ],
+    "tags": [
+      "internal-acknowledgment",
+      "forensic-evidence",
+      "engineering-as-diagnosis",
+      "escape-hatch",
+      "telemetry-as-ia",
+      "audit-methodology"
+    ],
+    "path": "meta/l027-internal-acknowledgment-signals.md"
+  },
+  {
+    "id": "l029",
+    "title": "Port-Don't-Install Motion Audit",
+    "layer": "meta",
+    "secondary_layers": [
+      "L2",
+      "L4"
+    ],
+    "date": "2026-04-25",
+    "updated": null,
+    "contributor": "Stefan Kovalik",
+    "related": [
+      "l011",
+      "l013",
+      "l014",
+      "l024"
+    ],
+    "tags": [
+      "port-dont-install",
+      "motion-audit",
+      "library-adoption",
+      "prefers-reduced-motion",
+      "engineering-discipline",
+      "hidden-defaults"
+    ],
+    "path": "meta/l029-port-dont-install-motion-audit.md"
   }
 ]

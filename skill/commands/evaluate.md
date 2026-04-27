@@ -1,15 +1,15 @@
 ---
-name: pfd-audit
-description: Run a full PFD corpus-backed evaluation on a URL or HTML. Loads the complete heuristic rules, design system profiles, and psychology corpus for a deep perception analysis.
+name: evaluate
+description: Evaluate an artifact (URL, HTML, screenshot, copy) with Perception-First Design. Mode 1 corpus-backed evaluation that loads heuristic rules, design system profiles, worked examples, and the psychology corpus to produce a layered scoring with citations.
 ---
 
-# PFD Audit — Corpus-Backed Evaluation
+# PFD Evaluate — Corpus-Backed Evaluation
 
 Run a full Perception-First Design evaluation using the PFD corpus.
 
 ## Input
 
-$ARGUMENTS — URL or description of the design to evaluate
+$ARGUMENTS — URL, HTML, screenshot, or description of the artifact to evaluate
 
 ## Process
 
@@ -36,4 +36,4 @@ $ARGUMENTS — URL or description of the design to evaluate
    - If the site uses a framework with a CDN (Tailwind, Bootstrap), include the CDN link so the HTML renders correctly when opened in a browser
    - Save to `corpus/validation/mvs-results/[site-name]-fixes.html`
    - This is the "what it would look like" artifact — compare original vs rebuilt to validate whether the fixes actually improve the design
-9. After evaluation + rebuild, document findings for future reference
+9. After evaluation + rebuild, log findings per the SKILL.md Insight Log protocol

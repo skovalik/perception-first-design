@@ -1,0 +1,38 @@
+# perception-first-design — gitignore
+
+# Project-local Claude instructions (Claude Code auto-loads CLAUDE.local.md
+# alongside CLAUDE.md but never commits it). Use this file for private
+# guardrails — client names, sensitivity rules, paths to private working data.
+CLAUDE.local.md
+*.local.md
+
+# Per-project Claude state Claude Code may write here.
+.claude/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Python tooling cache
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+
+# Node tooling cache
+node_modules/
+.next/
+.cache/
+
+# Local marketplace test artifacts
+.claude-plugin/cache/
+
+# Generic private working files
+*-private.md
+*-private/
+.private/

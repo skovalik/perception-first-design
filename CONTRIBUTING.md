@@ -34,10 +34,9 @@ Changes to the ethical framework's three tests: Alignment, Sincerity, Golden Rul
 
 ## How contributions work
 
-This project is dual-licensed. By submitting a pull request you agree that:
+This project is licensed under **CC BY-SA 4.0**. By submitting a pull request you agree that your contribution — text, code, scripts, learnings, atom content, anything — is licensed under CC BY-SA 4.0.
 
-- Contributions to `commands/`, `scripts/`, and `.claude-plugin/` (code, loaders, scripts) are licensed under **MIT**.
-- Contributions to `framework/`, `corpus/`, and `skills/pfd/references/learnings/` (text, learnings, corpus content, documentation) are licensed under **CC BY-SA 4.0**.
+The license includes a practice exemption: applying PFD methodology in your work (consulting, design work, training, building products with PFD principles) does not create a derivative and is not subject to share-alike. See `NOTICE` for the full terms. Share-alike attaches only when you adapt, rewrite, translate, or redistribute the framework text itself.
 
 Your name gets added to CONTRIBUTORS.md.
 

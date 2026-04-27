@@ -1,50 +1,100 @@
 Perception-First Design
-Copyright 2024-2026 Stefan Kovalik / Aurochs
-
-This product is distributed under a dual license:
+Copyright 2025-2026 Stefan Kovalik / Aurochs
 
 ================================================================================
-LICENSES
+LICENSE
 ================================================================================
 
-Code (.claude-plugin/plugin.json, .claude-plugin/marketplace.json,
-commands/, scripts/): MIT License — see LICENSE.
+Licensed under the Creative Commons Attribution-ShareAlike 4.0 International
+License (CC BY-SA 4.0). See LICENSE.
 
-Framework text (skills/pfd/SKILL.md, skills/pfd/references/,
-framework/, corpus/): CC BY-SA 4.0 — see LICENSE-CONTENT.
+  - Full text: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+  - Summary:   https://creativecommons.org/licenses/by-sa/4.0/
 
-Applying PFD methodology in practice (consulting, design work, training,
-client engagements, building products with PFD principles) does not create
-a derivative of the framework text and is not subject to CC BY-SA share-alike.
+You may use, share, and adapt this work for any purpose, including commercial,
+provided you:
+
+  1. Attribute the work to Stefan Kovalik / Aurochs.
+  2. License derivatives under CC BY-SA 4.0 as well (share-alike).
+  3. Indicate any changes you made.
+
+================================================================================
+PRACTICE EXEMPTION (IMPORTANT)
+================================================================================
+
+Applying the PFD methodology in your work — running analyses, generating
+recommendations, delivering client work, designing products with PFD principles,
+running PFD-informed audits, training your team in PFD, or building tools that
+use PFD as one input among many — DOES NOT create a derivative of this text and
+is NOT subject to CC BY-SA share-alike.
+
 You can apply PFD commercially without any obligations on your work product.
-Share-alike attaches only to adaptations of the framework text itself when
-rewritten, translated, or redistributed.
+
+The share-alike requirement only attaches when you adapt, rewrite, translate,
+or redistribute the framework text itself (this is a derivative work of the
+text). Examples:
+
+  - Translating SKILL.md to another language → derivative; must be CC BY-SA 4.0
+  - Republishing the framework as a book → derivative; must be CC BY-SA 4.0
+  - Forking the repo and modifying the framework → derivative; must be CC BY-SA 4.0
+  - Running PFD on a client engagement → NOT a derivative; no obligation
+  - Building a product informed by PFD principles → NOT a derivative; no obligation
+  - Citing PFD in your blog post → NOT a derivative; standard attribution
+
+This follows the Scrum Guide's licensing precedent: open methodology with
+structural protection against commercial fork-and-rebrand, but practitioners
+applying the methodology in their own work owe nothing back.
 
 ================================================================================
 TRADEMARK
 ================================================================================
 
-"Perception-First Design" and "PFD" (as used to describe the design
-methodology documented in this repository) are trademarks of Stefan Kovalik.
+"Perception-First Design" and "PFD" (as used to describe the design methodology
+documented in this repository) are trademarks of Stefan Kovalik.
 
 U.S. Trademark Serial No. 99686343 (filed 2026-03-06).
 
-License grants do not include trademark rights. Specifically:
+The license grant does not include trademark rights. Specifically:
 
-1. You MAY use this plugin and the methodology it documents for any purpose
-   permitted by the applicable license, including commercial use.
+YOU MAY:
 
-2. You MAY refer to "Perception-First Design" or "PFD" in good faith to
-   describe your use of the methodology (e.g., "I applied Perception-First
-   Design to this audit").
+  1. Use this plugin and the methodology it documents for any purpose
+     permitted by the license, including commercial use.
 
-3. You MAY NOT use "Perception-First Design" or "PFD" as the name or material
-   branding of a commercial product, service, consulting offering, certification
-   program, or derivative framework without prior written permission from the
-   trademark holder.
+  2. Refer to "Perception-First Design" or "PFD" in good faith to describe
+     your use of the methodology. EXAMPLES OF PERMITTED USE:
+       - "I applied Perception-First Design to audit our checkout flow."
+       - "Our team uses PFD methodology for design reviews."
+       - "This blog post explains how Perception-First Design analyzes
+          pre-verbal arousal."
+       - "We're hiring designers familiar with Perception-First Design."
 
-4. You MAY fork and modify the methodology under the applicable license, but
-   derivative works that materially alter the framework must be distributed
-   under a different name.
+  3. Fork and modify the methodology under the license, provided derivative
+     works that materially alter the framework are distributed under a
+     different name (see #4).
 
-For trademark licensing inquiries, contact: admin@aurochs.agency
+YOU MAY NOT:
+
+  4. Use "Perception-First Design" or "PFD" as the name or material branding
+     of a commercial product, service, consulting offering, certification
+     program, or derivative framework without prior written permission.
+     EXAMPLES OF USE REQUIRING PERMISSION:
+       - "Acme Corp Perception-First Design Certification Program"
+       - "PFD Pro Tools — the official PFD design suite"
+       - "PFD-Certified Designer" (as a credential you offer)
+       - A plugin, tool, or service named "Perception-First Design [X]"
+       - A consultancy branded as "PFD Consulting" or "PFD Studios"
+       - A book titled "Perception-First Design [Subtitle]"
+
+For trademark licensing inquiries: admin@aurochs.agency
+
+================================================================================
+ATTRIBUTION (RECOMMENDED FORMAT)
+================================================================================
+
+When citing or attributing PFD in your work:
+
+> Perception-First Design™ by Stefan Kovalik / Aurochs.
+> https://aurochs.agency/perception-first-design · CC BY-SA 4.0
+
+For academic citations, see CITATION.cff.

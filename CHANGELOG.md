@@ -12,6 +12,23 @@
 - Trade-offs are folded into the relevant consequence as sub-findings, never as separate consequences. Bidirectional layer effects must be surfaced when present (e.g., phishing volume drops while per-incident severity rises).
 - Integrative compounds are checked by default after the layer cascade: social aggregation (backlash, viral discussion, regulatory action), lock-in asymmetry (substitute behaviors persisting after rollback), and ecosystem cascade (downstream products, derivatives, integrations). Letter-labeled (A, B, C) to distinguish from numbered layer cascade.
 
+**Per-consequence output format (four structural elements)**
+- **Heading** with abstract analytical title and bracketed layer tag (`## N. [Title] [Layer]` or `[Layer A × Layer B]` for cross-cutting).
+- **Italic concrete subtitle** directly under the heading. Plain-language summary readers without PFD context can follow. Non-negotiable. Three layers of meaning visible at a scan: heading framing, italic plain-language summary, bracket framework anchor.
+- **Body** with mechanism prose plus "What happens:" prediction line incorporating stress-test findings.
+- **Citations** line at end of body. Format: `Author (Year) for [reason]; ...` listing 1-3 strongest supporting works from the framework's research base. Applied predictions (no direct citation) are tagged transparently rather than fabricated.
+
+**Closing cue**
+- Each mode ends with a single italic line inviting deeper paths. Mode-conditional content:
+  - analyze: `*Initial findings. Ralph Loop a consequence, cite further, switch to solve / evaluate, or ask any follow-up to dig deeper.*`
+  - solve: `*Initial findings. Ralph Loop a requirement, cite further, switch to analyze / evaluate, or ask any follow-up to dig deeper.*`
+  - evaluate: `*Initial findings. Ralph Loop a layer score, cite further, switch to solve / analyze, or ask any follow-up to dig deeper.*`
+- Single italic line, no bullet menu, no "Say: [phrase]" scaffolding. R1 (working memory load at the most depleted moment) and R4 (resists survey-driven format expansion) constrain the format.
+
+**Solve protocol updates**
+- Each requirement (R1-R5) now includes a `**Citations:**` line listing 1-2 strongest supporting works.
+- Solve protocol gets an Output Closing step ending with the mode-conditional closing cue.
+
 **Mode detection extended**
 - Bare-skill activation now routes hypothetical / mechanism / behavioral phrasing to Mode 3 (analyze) automatically. Trigger phrases include "what happens if", "why is X working", "what would change", "imagine we replace", "what's the effect of".
 - Edge cases documented: URL plus hypothetical routes to analyze (the question dominates the artifact); URL with no question routes to evaluate; problem plus hypothetical phrasing routes to analyze.

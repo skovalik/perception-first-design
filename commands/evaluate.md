@@ -36,4 +36,10 @@ $ARGUMENTS — URL, HTML, screenshot, or description of the artifact to evaluate
    - If the site uses a framework with a CDN (Tailwind, Bootstrap), include the CDN link so the HTML renders correctly when opened in a browser
    - Save to `corpus/validation/mvs-results/[site-name]-fixes.html`
    - This is the "what it would look like" artifact — compare original vs rebuilt to validate whether the fixes actually improve the design
-9. After evaluation + rebuild, log findings per the SKILL.md Insight Log protocol
+9. After evaluation + rebuild, log findings per the SKILL.md Insight Log protocol.
+
+End the output with a single italic line:
+
+> *Initial findings. Ralph Loop a layer score, cite further, switch to solve / analyze, or ask any follow-up to dig deeper.*
+
+Non-negotiable. Single italic line, no bullet menu.

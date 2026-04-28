@@ -168,6 +168,7 @@ For each layer (L0 → L1 → L2 → L3 → L4):
   b. State the violation (how current design fails this constraint)
   c. Derive the REQUIREMENT (what design MUST do — not "should")
   d. Label it R[n]
+  e. Include a `**Citations:**` line listing 1-2 strongest supporting works from the framework's research base. Format: `Author (Year) for [reason]` with semicolons between multiple.
 
 ### Step 3 — Accumulate Requirements
 List R1-R5. All non-negotiable. Solution must satisfy ALL simultaneously.
@@ -182,6 +183,13 @@ Check existing proposals against full requirement set. Note failures.
 
 ### Step 6 — Identify the Gap
 Requirements that no proposal satisfies = where the non-obvious solution lives.
+
+### Output Closing
+End the output with a single italic line:
+
+> *Initial findings. Ralph Loop a requirement, cite further, switch to analyze / evaluate, or ask any follow-up to dig deeper.*
+
+Non-negotiable. Single italic line, no bullet menu.
 
 ---
 
@@ -221,8 +229,21 @@ Other compounds may emerge through the cascade. Look for them. Tag with `[Cross-
 ### Step 5 — Format output
 - **Title:** the question
 - **Subtitle:** "X layer-cascade consequences, Y integrative compounds." Concrete counts.
-- **Layer cascade:** 5 numbered consequences in cascade order, layer-tagged headings (`## N. [Title] [Layer]` or `## N. [Title] [Layer A × Layer B]`), mechanism prose plus "What happens:" prediction.
-- **Integrative compounds:** separate section after the layer cascade, letter-labeled (A, B, C, ...), each with `[Cross-layer ...]` tag, mechanism plus "What happens:" prediction.
+
+Each consequence (numbered or lettered) has four structural elements:
+1. **Heading** with abstract analytical title and bracketed layer tag (`## N. [Title] [Layer]` or `## N. [Title] [Layer A × Layer B]`)
+2. **Italic concrete subtitle** directly under the heading. Plain-language summary of what the consequence is, no framework jargon. Readers without PFD context understand the consequence from this line alone.
+3. **Body** with mechanism prose plus "What happens:" prediction.
+4. **Citations** line at end of body. `**Citations:** Author (Year) for [reason]; Author (Year) for [reason].` 1-3 strongest supporting works from the framework's research base. When applied prediction without direct citation: "Applied prediction; no direct framework citation. Closest adjacent: [related citation]."
+
+Subtitle and Citations are both non-negotiable.
+
+- **Layer cascade:** 5 numbered consequences in cascade order, four-element structure above.
+- **Integrative compounds:** separate section, letter-labeled (A, B, C, ...), `[Cross-layer ...]` heading tag, same four-element structure.
+- **Closing cue:** End the output with a single italic line:
+  > *Initial findings. Ralph Loop a consequence, cite further, switch to solve / evaluate, or ask any follow-up to dig deeper.*
+
+  Single line, italic, on its own. Non-negotiable. No menu expansion.
 
 ---
 
@@ -240,6 +261,9 @@ Other compounds may emerge through the cascade. Look for them. Tag with `[Cross-
 | One-way effects when trade-offs exist | Misses bidirectional layer behavior; phishing-as-uniform-rise example |
 | Treating layers as siloed in analysis | Misses integrative compounds (backlash, lock-in asymmetry, ecosystem cascade) |
 | Shallow per-consequence depth in analysis | Single sentences read correct but bland; the depth bar is multi-paragraph stress-tested findings |
+| Heading without italic concrete subtitle | Abstract titles are not scannable; readers without framework context need the plain-language line to follow the analysis |
+| Missing Citations line per consequence or requirement | Output reads as opinion when it should anchor to evidence; framework's research base is its credibility |
+| Closing cue expanded into a bullet menu | Loads WM at the most depleted moment of the output; invites survey-driven format creep; closing cue is one italic line, never a list |
 
 ---
 

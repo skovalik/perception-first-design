@@ -70,8 +70,41 @@ Add integrative consequences in their own section after the 5 layer-cascade cons
 
 - **Title:** the question.
 - **Subtitle:** "X layer-cascade consequences, Y integrative compounds." Concrete counts.
-- **Layer cascade:** 5 numbered consequences in cascade order, layer-tagged headings, mechanism prose plus "What happens:" prediction.
-- **Integrative compounds:** separate section, letter-labeled (A, B, C, ...), each with `[Cross-layer ...]` tag, mechanism plus "What happens:" prediction.
+
+Each consequence (numbered or lettered) MUST have four structural elements in this order:
+
+1. **Heading.** `## N. [Abstract analytical title] [Layer Name]` for layer-cascade consequences (numbered 1-5). `## A. [Abstract analytical title] [Cross-layer ...]` for integrative compounds (letter-labeled A, B, C). The title carries the analytical framing. Cross-cutting consequences use `[Layer A × Layer B]` notation.
+2. **Italic concrete subtitle.** One line in italics directly under the heading. Plain-language summary of what the consequence actually is, without framework jargon. A reader who does not know PFD should understand the consequence from the subtitle alone.
+3. **Body.** Mechanism prose plus a "What happens:" prediction line that incorporates stress-test findings from Step 2.
+4. **Citations.** A "**Citations:**" line at the end of the body, formatted as "Author (Year) for [reason]" with semicolons separating multiple citations. List the 1-3 strongest supporting works from the framework's research base (`framework/PERCEPTION-FIRST-DESIGN.md`). When a consequence is an applied prediction without direct framework citation, state that transparently: "**Citations:** Applied prediction; no direct framework citation. Closest adjacent: [related citation]."
+
+The italic subtitle is non-negotiable. The Citations line is non-negotiable. Subtitle gives plain-language scanability; citations anchor findings to evidence base. Three layers of meaning visible at a scan: heading (framing), italic line (plain-language summary), bracket tag (framework anchor).
+
+**Example shape (consequence 1 from a "remove URL bar from Chrome" analysis):**
+
+```markdown
+## 1. Working memory hits both axes simultaneously [Cognitive Load]
+*Users have to hold "where am I" and "what tabs were open" in their heads instead of in the UI.*
+
+The URL bar is a memory prosthesis. The user's working memory does not have to hold "where am I" because the bar holds it. Tabs are a parallel-task prosthesis: each open tab externalizes "this thing I was also working on." Remove both and both move into the head.
+
+For light users this is invisible for weeks. For power users running 5+ context-switching tasks, working memory lands at the 4-5 chunk Cowan ceiling almost immediately.
+
+**What happens:** Light users do not notice. Power users hit the ceiling within a session and start dropping context. Frustration starts at 30 minutes. Cohort retention drops from the power-user end first.
+
+**Citations:** Cowan (2001, 2010) for working memory capacity ~3-5 chunks; Hassin et al. (2009) for WM cost of unconscious processing.
+```
+
+The italic line ("Users have to hold...") is the subtitle. The Citations line at the end anchors the finding. Reader can scan the subtitle and What happens line, treat the body as optional depth, and trust the framework anchor via citations.
+
+**Output structure:**
+- **Layer cascade:** 5 numbered consequences in cascade order, each with the four-element structure above.
+- **Integrative compounds:** separate section after the layer cascade, letter-labeled (A, B, C, ...), each with the same four-element structure but using `[Cross-layer ...]` tags in the heading.
+- **Closing cue:** End the entire output with a single italic line on its own:
+
+  > *Initial findings. Ralph Loop a consequence, cite further, switch to solve / evaluate, or ask any follow-up to dig deeper.*
+
+  The cue signals the output is not exhaustive and names four follow-up paths in passing. No bullet menu, no scaffolding, no "Say: [phrase]" examples. Single italic line. Non-negotiable.
 
 ## Anti-patterns specific to analyze
 
@@ -80,6 +113,9 @@ Add integrative consequences in their own section after the 5 layer-cascade cons
 - **One-way effects when trade-offs exist.** "Phishing went UP" was wrong; "phishing TRADED OFF" was right. Check Step 3 ruthlessly, especially on Decision Architecture and Perception Bias consequences.
 - **Shallow per-consequence depth.** A single sentence per consequence is insufficient. Each consequence must surface stress-tested findings across at least two of the four Step 2 dimensions.
 - **Skipping cross-cutting tags.** Cross-cutting consequences (Layer A × Layer B) are real and must be tagged when they emerge. Phishing as a finding lives at Decision Architecture × Perception Bias; the social backlash compound lives across all five layers.
+- **Heading without italic concrete subtitle.** The abstract analytical title is necessary but not sufficient. Without the italic plain-language summary, readers without framework context cannot scan the output. Every consequence (numbered AND lettered) needs the subtitle line.
+- **Missing Citations line per consequence.** Each consequence anchors to the framework's research base. Without citations, the output reads as opinion. When no direct citation exists, say so transparently rather than omitting.
+- **Expanding the closing cue back into a menu.** The cue is one italic line. Adding bullet points, "Say: [phrase]" examples, or longer descriptions violates R1 (working memory load at the most depleted moment) and R4 (resists survey-driven format expansion). The temptation will be to "make it more useful"; resist.
 
 ## After analysis
 

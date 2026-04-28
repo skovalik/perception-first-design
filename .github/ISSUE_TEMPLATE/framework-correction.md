@@ -12,4 +12,4 @@ labels: correction
 
 **Suggested correction (with citation if applicable):**
 
-**Evidence tier:** Established science / Theoretical framework / Practitioner observation
+**Evidence tier:** Established science / Theoretical framework / Practitioner observation / Applied prediction

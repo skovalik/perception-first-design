@@ -14,6 +14,7 @@ PFD's credibility depends on honest sourcing. Load this file when presenting PFD
    - **Hard science:** Cowan 2001, Lindgaard 2006, Reber & Schwarz 1999 → verified experiments
    - **Theoretical frameworks:** Clark 2013, Friston 2010 → influential models, not settled law
    - **Practitioner observations:** Stefan's case studies, accumulated learnings → documented experience, not controlled experiments
+   - **Applied predictions:** consequences derivable from framework mechanisms when no direct citation supports the specific finding → tag transparently with closest adjacent citation per `commands/analyze.md`. Example: search-engine self-tax from removing the URL bar lives at Decision Architecture × Perception Bias but no direct study quantifies it
    - **Design heuristics:** "2 fonts max," "3-4 colors" → professional rules of thumb, not science
 
 ---

@@ -151,18 +151,18 @@ After install, use the skill in four ways:
 "Run PFD on our onboarding flow design problem"  # → solve (problem = derivation)
 "What happens if we remove the URL bar from Chrome?"  # → analyze (hypothetical)
 
-# Force Mode 2 (solve) — derives a solution from cognitive constraints
+# Force Mode 2 (solve): derives a solution from cognitive constraints
 /perception-first-design:solve "Should we use a modal or inline expansion for the pricing FAQ?"
 /perception-first-design:solve "We're losing mobile users at checkout. What's failing?"
 
-# Force Mode 1 (evaluate) — corpus-backed audit of an existing artifact
+# Force Mode 1 (evaluate): corpus-backed audit of an existing artifact
 /perception-first-design:evaluate https://example.com
 
-# Force Mode 3 (analyze) — descriptive cascade for hypotheticals and mechanism questions
+# Force Mode 3 (analyze): descriptive cascade for hypotheticals and mechanism questions
 /perception-first-design:analyze "What happens if Twitter removes the like button?"
 /perception-first-design:analyze "Why does dark mode feel premium even when contrast is worse?"
 
-# Composite — run all three modes on the same input
+# Composite: run all three modes on the same input
 /perception-first-design:all "We're considering removing the URL bar. Run the full PFD treatment."
 ```
 

@@ -325,7 +325,9 @@ Full framework: `framework/PERCEPTION-FIRST-DESIGN.md` (~870 lines, ~100 citatio
 
 ## Corpus-Backed Evaluation (v1)
 
-When performing a PFD evaluation (Mode 1: Checklist or Mode 2: Derivation), load the corpus for deeper analysis:
+When performing a Mode 1 evaluation, load the corpus for deeper analysis. Mode 2 (solve) optionally loads design-system profiles and practitioner corrections for constraint-setting. Mode 3 (analyze) operates on natural-language input and does not require corpus loading.
+
+For Mode 1 evaluation:
 
 1. Read `corpus/core/tier2-prompt-template.md` for the evaluation protocol
 2. Follow the loading sequence in the template (rubric -> constraints -> corrections -> design system profile -> heuristic rules -> worked examples)

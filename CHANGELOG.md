@@ -1,5 +1,33 @@
 # Changelog
 
+## Plugin v0.7.0 (2026-04-28): Mode 3 Analysis + Composite Runner
+
+**New commands**
+- `/perception-first-design:analyze` — Mode 3 descriptive analysis. Walks the 5 layers as predictive lenses to enumerate cascading consequences, trade-offs, and integrative compounds. Use for hypotheticals ("what happens if X"), mechanism questions ("why does X work"), and behavioral observations ("users say X but do Y, why"). Produces results, not recommendations. Cognitive contract is descriptive, not prescriptive.
+- `/perception-first-design:all` — Composite runner. Runs analyze, solve, and evaluate on the same input. Three full outputs side-by-side, one per cognitive contract. No synthesis section; the three views sit independently.
+
+**Analysis Protocol**
+- 5 numbered layer-cascade consequences are non-negotiable, one per layer in cascade order (Cognitive Load, First Impression, Processing Fluency, Perception Bias, Decision Architecture).
+- Each consequence must surface stress-tested findings across at least two of four dimensions: user-population variation (novice, power, accessibility, device, demographics), adjacent infrastructure (extensions, APIs, automation, dependent products, regulated surfaces), precedents (similar changes attempted elsewhere, with outcomes), and time structure (immediate, short, long).
+- Trade-offs are folded into the relevant consequence as sub-findings, never as separate consequences. Bidirectional layer effects must be surfaced when present (e.g., phishing volume drops while per-incident severity rises).
+- Integrative compounds are checked by default after the layer cascade: social aggregation (backlash, viral discussion, regulatory action), lock-in asymmetry (substitute behaviors persisting after rollback), and ecosystem cascade (downstream products, derivatives, integrations). Letter-labeled (A, B, C) to distinguish from numbered layer cascade.
+
+**Mode detection extended**
+- Bare-skill activation now routes hypothetical / mechanism / behavioral phrasing to Mode 3 (analyze) automatically. Trigger phrases include "what happens if", "why is X working", "what would change", "imagine we replace", "what's the effect of".
+- Edge cases documented: URL plus hypothetical routes to analyze (the question dominates the artifact); URL with no question routes to evaluate; problem plus hypothetical phrasing routes to analyze.
+- Three-way ambiguity prompt added when input does not clearly hit one bucket.
+
+**SKILL.md updates**
+- "The Two Modes" section renamed "The Three Modes" with Mode 3 description added.
+- New section "The Analysis Protocol" parallel to the existing Derivation Protocol.
+- Anti-patterns table extended with four analyze-specific entries: slipping into solve mode during analysis, one-way effects when trade-offs exist, treating layers as siloed in analysis, shallow per-consequence depth.
+
+**Calibration**
+- Spec calibrated against the URL-bar/Chrome thought experiment that produced an expert "wow" reaction in the v2.1 era. v0.6.0 solve compressed that question to a verdict; v0.7.0 analyze produces the descriptive cascade the question actually warranted. The calibration target was the depth bar where expert reviewers recognize their own conclusions in the output, not just plausible-sounding labels.
+
+**Breaking changes**
+- None. Analyze and all are additive. Solve and evaluate behavior unchanged from v0.6.0.
+
 ## Plugin v0.6.0 (2026-04-27): Marketplace Listing Readiness
 
 **Marketplace packaging**

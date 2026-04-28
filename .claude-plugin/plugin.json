@@ -1,6 +1,6 @@
 {
   "name": "perception-first-design",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Perception-First Design (PFD) — psychology-backed design framework. 5-layer dependency stack derives requirements from cognitive constraints before proposing solutions. Auto-activates on design, marketing, copywriting, and communication tasks.",
   "author": {
     "name": "Stefan Kovalik",

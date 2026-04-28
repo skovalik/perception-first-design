@@ -11,7 +11,7 @@ description: >
   inform the work.
 ---
 
-# Perception-First Design (PFD): v0.6.0
+# Perception-First Design (PFD): v0.7.0
 
 **Author:** Stefan Kovalik / Aurochs
 **Framework version:** 3.6 (2026-04-20). ~100 citations, international research integration, Methodology Siblings section, Cultural Calibration meta-rule, 7 new layer rules across L0–L4
@@ -31,13 +31,16 @@ Applies to anything that communicates with humans: interfaces, landing pages, em
 
 ---
 
-## The Two Modes
+## The Three Modes
 
 **Mode 1: PFD Evaluation (Checklist)**
 Walk an existing design through the 5 layers. Each layer validates or flags. Good for quick audits.
 
 **Mode 2: PFD Derivation (Generative)**
 Work bottom-up through the 5 layers. Each layer produces a hard REQUIREMENT. The solution emerges from the accumulated constraints — not from intuition or domain convention.
+
+**Mode 3: PFD Analysis (Descriptive)**
+Walk the 5 layers as predictive lenses, not as constraints. Output cascading consequences, trade-offs, and integrative compounds. Good for hypothetical change questions ("what happens if X"), mechanism questions ("why does X work"), and behavioral observations ("users say X but do Y, why"). Produces results, not recommendations. The cognitive contract is descriptive, not prescriptive.
 
 ### Mode Detection (Auto)
 
@@ -56,12 +59,27 @@ When the skill activates without an explicit command (e.g., "pfd this", "run PFD
 - A diagnosis request ("we're losing users at checkout — why?")
 - Phrases: "should we", "how do we", "what would be the right...", "design a", "solve this"
 
+**Mode 3 — Analysis**, when the input IS a hypothetical, mechanism, or observation:
+- A hypothetical change ("what happens if we remove X")
+- A mechanism question ("why does this work", "how does this trick work")
+- A behavioral observation to explain ("users say X but do Y")
+- A counterfactual or thought experiment about an existing system
+- Phrases: "what happens if", "why is X working", "what would change", "imagine we replace", "what's the effect of"
+
 **Ambiguous? Ask once:**
-> "Want me to evaluate something existing or solve from scratch? (URL/screenshot = evaluate; problem/goal = solve)"
+> "Three options: evaluate something existing (URL/screenshot), solve a design problem (goal/question), or analyze a mechanism or hypothetical (what-happens-if / why). Which?"
+
+**Edge cases:**
+- URL plus hypothetical ("here's the page, what happens if we remove the nav?") routes to Analysis. The hypothetical is the work; the URL is just context.
+- Problem plus hypothetical phrasing ("we're considering removing X, what would happen?") routes to Analysis. Hypothetical phrasing dominates.
+- URL with no question routes to Evaluation by default.
+- The question shape overrides artifact-based routing when a question is in the prompt.
 
 **Forced via command:**
 - `/perception-first-design:solve` — always Mode 2 (derive a solution)
 - `/perception-first-design:evaluate` — always Mode 1 (audit an artifact)
+- `/perception-first-design:analyze` — always Mode 3 (descriptive cascade)
+- `/perception-first-design:all` — composite, run all three modes on the same input
 
 ---
 
@@ -167,6 +185,47 @@ Requirements that no proposal satisfies = where the non-obvious solution lives.
 
 ---
 
+## The Analysis Protocol
+
+**Rule Zero:** Walk the 5 layers as descriptive lenses, not as constraints. Produce results, not recommendations. Do not slip into solve mode.
+
+### Step 1 — Restate the question
+State the change, mechanism, or counterfactual being analyzed. Ground it in concrete terms. Avoid restating it as a problem to solve.
+
+### Step 2 — Walk each layer bottom-up as a descriptive lens
+For each layer (Cognitive Load → First Impression → Processing Fluency → Perception Bias → Decision Architecture):
+  a. State the layer's psychological reality (the constraint)
+  b. Trace what the change does to perception or cognition at this layer
+  c. Stress-test the consequence against four dimensions (each consequence must surface findings from at least two of these, ideally all four):
+    - **User-population variation** (novice, power, accessibility, device, demographics)
+    - **Adjacent infrastructure** (extensions, APIs, automation, dependent products, integrations, regulated surfaces)
+    - **Precedents** (has a similar change been attempted elsewhere? what was the outcome?)
+    - **Time structure** (immediate / short / long: seconds-minutes, days-weeks, months-years)
+  d. Output: mechanism prose plus a "What happens:" prediction line that incorporates the stress-test findings.
+
+Produce one consequence per layer. Five layer-cascade consequences are non-negotiable.
+
+### Step 3 — Check for trade-offs
+Does the change push the layer in only one direction, or in both? When a layer pushes both directions, fold the trade-off into the consequence as a sub-finding (not as a separate consequence).
+
+Example: phishing risk in a "remove URL bar" analysis is bidirectional. Volume drops; per-incident severity rises. Net depends on which dominates. Do not assert one-way effects when trade-offs exist.
+
+### Step 4 — Check for integrative compounds
+What happens when consequences compound across layers? Three patterns to check by default:
+  - **Social aggregation** (individual experiences aggregating into collective signals: backlash, viral discussion, regulatory action). Always check when consumer-facing. Surface in temporal waves if the cascade is multi-stage.
+  - **Lock-in asymmetry** (substitute behaviors locking in faster than re-introduction reverses them). Always check when behavior change is involved. Recovery is rarely symmetric with disruption.
+  - **Ecosystem cascade** (downstream products, derivatives, integrations inheriting the change). Always check when the artifact is platform-level.
+
+Other compounds may emerge through the cascade. Look for them. Tag with `[Cross-layer + Social Aggregation]`, `[Cross-layer]`, or other appropriate cross-cutting label. Letter-label them (A, B, C) to distinguish from the numbered layer cascade.
+
+### Step 5 — Format output
+- **Title:** the question
+- **Subtitle:** "X layer-cascade consequences, Y integrative compounds." Concrete counts.
+- **Layer cascade:** 5 numbered consequences in cascade order, layer-tagged headings (`## N. [Title] [Layer]` or `## N. [Title] [Layer A × Layer B]`), mechanism prose plus "What happens:" prediction.
+- **Integrative compounds:** separate section after the layer cascade, letter-labeled (A, B, C, ...), each with `[Cross-layer ...]` tag, mechanism plus "What happens:" prediction.
+
+---
+
 ## Anti-Patterns
 
 | Anti-Pattern | Why It Fails |
@@ -177,6 +236,10 @@ Requirements that no proposal satisfies = where the non-obvious solution lives.
 | Checklist mode (evaluating post-hoc) | Refines but doesn't generate |
 | Skipping layers | Dependency stack violation |
 | Soft requirements ("should" not "must") | Lets solutions slide past gaps |
+| Slipping into solve mode during analysis | Produces recommendations when the question wanted results; descriptive contract violated |
+| One-way effects when trade-offs exist | Misses bidirectional layer behavior; phishing-as-uniform-rise example |
+| Treating layers as siloed in analysis | Misses integrative compounds (backlash, lock-in asymmetry, ecosystem cascade) |
+| Shallow per-consequence depth in analysis | Single sentences read correct but bland; the depth bar is multi-paragraph stress-tested findings |
 
 ---
 
@@ -261,6 +324,7 @@ The corpus provides:
 
 ## Version History
 
+- **v0.7.0** (2026-04-28): Mode 3 (Analysis) added. New commands `/perception-first-design:analyze` (descriptive cascade for hypotheticals, mechanism questions, behavioral observations) and `/perception-first-design:all` (composite three-mode runner). Analysis Protocol formalized: 5 layer-cascade consequences with per-consequence stress-testing across four dimensions (user-population variation, adjacent infrastructure, precedents, time structure), plus integrative compounds (social aggregation, lock-in asymmetry, ecosystem cascade) and folded trade-offs. Mode detection extended: bare-skill activation now routes "what happens if X", "why is X working", and similar phrasing to Mode 3. SKILL.md "Two Modes" section renamed "Three Modes." Four anti-patterns added covering analyze-specific failure modes (slipping into solve mode, one-way effects when trade-offs exist, treating layers as siloed in analysis, shallow per-consequence depth). Spec calibrated against the URL-bar/Chrome thought experiment that produced an expert "wow" reaction in the v2.1 era; v0.6.0 solve compressed that question to a verdict, v0.7.0 analyze produces the descriptive cascade the question actually warranted.
 - **v0.6.0** (2026-04-27): Marketplace-listing readiness. Plugin manifest at `.claude-plugin/plugin.json` (repo root) with spec-canonical component layout (`skills/`, `commands/`, `scripts/` at root — no nested `skill/` subdirectory). Marketplace catalog at `.claude-plugin/marketplace.json` enables self-hosted distribution alongside official Anthropic submission. Commands renamed: `pfd` → `solve` (Mode 2 derivation), `pfd-audit` → `evaluate` (Mode 1 corpus-backed audit) under `/perception-first-design:` namespace. Mode detection rules added — bare skill activation auto-routes between solve and evaluate based on input shape. 9 new atoms added (l021-l029) from the calibration campaign; `_index.md` regenerated to 29 atoms. `mvs-psychology-reference.md` added to skill references for skill-side quick lookup. License simplified to single CC BY-SA 4.0 with practice exemption (was dual MIT + CC BY-SA). NOTICE file at repo root with trademark terms + permitted/prohibited use examples. `.gitignore` for OS noise + private working files. Path conventions clarified. Corrections live in `references/practitioner-corrections.md` (single source of truth).
 - **v0.5.0** (2026-04-21): Sharded learnings architecture. Migrated 20 accumulated learnings from monolithic `accumulated-learnings.md` to atom files under `references/learnings/` organized by primary layer (L0/L1/L2/L3/L4/meta/cross). Generated `_index.md` (human-readable) + `_search.json` (machine-readable) from atom YAML frontmatter via `scripts/gen-pfd-index.py`. SKILL.md loader updated for lazy-load — index-first scan, atoms read on demand. Scales to 1000+ learnings without per-activation cost blowup. Monolithic file retained as pointer for external-link compatibility. Framework v3.6 unchanged.
 - **v0.4.0** (2026-04-20): Framework v3.6: international citation expansion. 17 new citations across 6 research traditions (DE/AT/CH, JP, CN, FR, NL/IL/Scandinavia). New Methodology Siblings section (Kansei/Nagamachi, Gestalt/Wertheimer+Metzger, neuroaesthetics/Skov+Nadal+Leder). Cultural Calibration meta-rule: architecture universal, calibration cultural; validate L1 and L3 against target-market users before cross-regional rollout. Seven new layer rules threaded into L0–L4 as active framework rules, not footnotes. Pre-verbal arousal empirical backbone strengthened (Hassin 2013, Pessiglione 2007, Mori 1970). Learning #20 added: International citation expansion. Master doc: 817 → 872 lines.

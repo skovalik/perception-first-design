@@ -62,20 +62,6 @@ business objects to align with the user. The stakeholder can
 still disagree, but now they're disagreeing with cognitive
 psychology instead of someone's taste.
 
-**Simply Smart Home.** Revenue tripled after I repositioned
-"digital photo frames" as smart home decor. That perception shift
-opened Disney licensing, Costco pallet placement, and Walmart
-shelf space.
-
-**iO Theater.** Online ticket sales went from 50% to 75%. Same
-shows, same theater, same audiences. Different perception of the
-buying experience.
-
-**Vacuum Sealers Unlimited.** Revenue 4x over ten years. No
-redesign. Incremental optimization, compounding trust.
-
-Same products. Different perception.
-
 ---
 
 ### The Ralph Loop
@@ -157,12 +143,13 @@ onboarding flows, documentation.
 /plugin install perception-first-design@claude-plugins-official
 ```
 
-After install, use the skill in three ways:
+After install, use the skill in four ways:
 
 ```bash
 # Bare invocation — auto-detects mode from input
 "PFD this landing page: https://example.com"     # → evaluate (URL = artifact)
 "Run PFD on our onboarding flow design problem"  # → solve (problem = derivation)
+"What happens if we remove the URL bar from Chrome?"  # → analyze (hypothetical)
 
 # Force Mode 2 (solve) — derives a solution from cognitive constraints
 /perception-first-design:solve "Should we use a modal or inline expansion for the pricing FAQ?"
@@ -170,6 +157,13 @@ After install, use the skill in three ways:
 
 # Force Mode 1 (evaluate) — corpus-backed audit of an existing artifact
 /perception-first-design:evaluate https://example.com
+
+# Force Mode 3 (analyze) — descriptive cascade for hypotheticals and mechanism questions
+/perception-first-design:analyze "What happens if Twitter removes the like button?"
+/perception-first-design:analyze "Why does dark mode feel premium even when contrast is worse?"
+
+# Composite — run all three modes on the same input
+/perception-first-design:all "We're considering removing the URL bar. Run the full PFD treatment."
 ```
 
 **Mode 1: Evaluation.** Walk an existing design through the 5
@@ -183,9 +177,19 @@ accumulated constraints, not intuition, not competitive copying,
 not what the HiPPO wants. This is the mode that generates
 answers you wouldn't have reached by instinct.
 
+**Mode 3: Analysis.** Walk the 5 layers as predictive lenses,
+not as constraints. Output cascading consequences, trade-offs,
+and integrative compounds. Good for hypothetical change
+questions ("what happens if X"), mechanism questions ("why does
+X work"), and behavioral observations ("users say X but do Y").
+Produces results, not recommendations. The cognitive contract is
+descriptive, not prescriptive.
+
 Rule Zero: do not propose any solution until all 5 layers are
 analyzed. The right answer is the only one that survives all
-five filters.
+five filters. (Analysis follows a parallel rule: walk all 5
+layers as descriptive lenses, then check trade-offs and
+integrative compounds, before treating the cascade as complete.)
 
 ---
 
@@ -209,7 +213,7 @@ corpus/              The evaluation engine
 skills/pfd/          The PFD skill (derivation protocol, layer summaries)
   references/learnings/    29 curated learnings sharded by primary layer
 
-commands/            /perception-first-design:solve and :evaluate commands
+commands/            /perception-first-design: solve, evaluate, analyze, all
 
 scripts/             gen-pfd-index.py (regenerate _index + _search from atoms)
 ```

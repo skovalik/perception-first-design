@@ -433,9 +433,15 @@ product. Only redistributions or modifications of the
 framework text itself trigger share-alike.
 
 "Perception-First Design" is a trademark (USPTO Serial 99686343).
-The methodology is open; the name requires attribution and may
-not be used as the brand of a commercial product, service, or
-certification without permission.
+The methodology is open and I want it used and shared. Please
+credit it.
+
+If you want to use the name commercially (a product, service,
+certification, or branded offering), just email me at
+**stefan@aurochs.agency**. I'm very likely to say yes. I mostly
+want to know who's using it and how.
+
+**Attribution:** *Perception-First Design™ by Stefan Kovalik / Aurochs.*
 
 See [NOTICE](NOTICE) for full terms.
 

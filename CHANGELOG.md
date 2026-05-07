@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+**Contact**
+- Marketplace and trademark-licensing contact email switched from `admin@aurochs.agency` to `stefan@aurochs.agency`. Affects `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, and `NOTICE`. Historical CHANGELOG entry under v0.6.0 left intact as the original record.
+
+**README trademark section softened**
+- Public-facing trademark wording rewritten from gatekeeping ("may not be used as the brand of a commercial product...") to inviting ("I want it used and shared. Email me. I'm very likely to say yes."). Legal text in `NOTICE` unchanged. Recommended attribution format surfaced inline: *Perception-First Design™ by Stefan Kovalik / Aurochs*.
+
 ## Plugin v0.7.0 (2026-04-28): Mode 3 Analysis + Composite Runner
 
 **New commands**

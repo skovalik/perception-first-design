@@ -137,12 +137,6 @@ onboarding flows, documentation.
 /plugin install perception-first-design@perception-first-design
 ```
 
-**Or via the official Anthropic marketplace** (when listed):
-
-```bash
-/plugin install perception-first-design@claude-plugins-official
-```
-
 After install, use the skill in four ways:
 
 ```bash

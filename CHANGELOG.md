@@ -8,6 +8,9 @@
 **README trademark section softened**
 - Public-facing trademark wording rewritten from gatekeeping ("may not be used as the brand of a commercial product...") to inviting ("I want it used and shared. Email me. I'm very likely to say yes."). Legal text in `NOTICE` unchanged. Recommended attribution format surfaced inline: *Perception-First Design™ by Stefan Kovalik / Aurochs*.
 
+**README install instructions cleanup**
+- Removed `/plugin install perception-first-design@claude-plugins-official` block. PFD is submitted on platform.claude.com (status: Published) but not yet merged into the public `anthropics/claude-plugins-official` marketplace catalog, so that command would have failed for users. Self-hosted install via `skovalik/perception-first-design` remains the working path. Will restore once PFD lands in the official marketplace `marketplace.json`.
+
 ## Plugin v0.7.0 (2026-04-28): Mode 3 Analysis + Composite Runner
 
 **New commands**

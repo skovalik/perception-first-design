@@ -24,7 +24,7 @@ Created by Stefan Kovalik / [Aurochs](https://aurochs.agency)
 ## What Changes When You Have This
 
 The stakeholder says make the logo bigger. The VP doesn't like
-blue. The founder's wife thinks the hero needs a video.
+blue. The founder's spouse thinks the hero needs a video.
 
 The designer is either pushing pixels to someone else's vision
 or burning half their time persuading stakeholders why a bad
